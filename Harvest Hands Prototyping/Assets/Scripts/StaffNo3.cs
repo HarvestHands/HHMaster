@@ -169,7 +169,21 @@ public class StaffNo3 : NetworkBehaviour
                     //spawn collider
                     GameObject WaterDrip = (GameObject)Instantiate(Resources.Load("PuddlePrefab"), ChosenObj.transform.position, ChosenObj.transform.rotation);
 
-                }                
+                }
+                else if (ChosenObj.tag == "Scythe")
+                {
+                    Scythe scythe = ChosenObj.GetComponent<Scythe>();
+                    Debug.Log("Scythe");
+                    //play particle && enable emision
+
+                    //play anim
+                    CmdSwingScythe(ChosenObj.GetComponent<Pickupable>().netId);
+                    //spawn collider
+                    scythe.ActivateCutting();
+                    scythe.Invoke("DeactiveCutting", 1.5f);
+
+
+                }
             }
 
             if (ChosenObj.tag == "Seed")
@@ -217,6 +231,17 @@ public class StaffNo3 : NetworkBehaviour
 
     [Command]
     void CmdTipBucket(NetworkInstanceId id)
+    {
+        var o = ClientScene.FindLocalObject(id);
+        o.GetComponent<Pickupable>().anim.SetTrigger("play");
+        //o.GetComponent<Water>().GetComponent<ParticleSystem>().CmdPlayParticles();
+        o.GetComponent<Water>().pouringParticleSystem.CmdPlayParticles();
+        //o.GetComponent<Water>().RpcPlayParticles();
+
+    }
+
+    [Command]
+    void CmdSwingScythe(NetworkInstanceId id)
     {
         var o = ClientScene.FindLocalObject(id);
         o.GetComponent<Pickupable>().anim.SetTrigger("play");

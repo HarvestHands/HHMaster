@@ -86,6 +86,12 @@ public class Plantscript : NetworkBehaviour
     public MeshRenderer meshRenderer;
     public SkinnedMeshRenderer skinnedMeshRenderer;
     public MeshFilter meshFilter;
+        
+    public ParticleSystemScript plantingParticles;
+    public ParticleSystemScript leafFallParticleSystem;
+    public GameObject plantedParticles;
+    public GameObject leafFallParticles;
+    public float particlePlayDuration = 1f;
 
 
     // Use this for initialization
@@ -102,6 +108,11 @@ public class Plantscript : NetworkBehaviour
         {
             renderer.material = dryMaterial;
         }
+
+        GameObject plantParticles = (GameObject)Instantiate(plantedParticles, transform.position, transform.rotation);
+        Destroy(plantParticles, particlePlayDuration);
+
+        //plantingParticles.PlayParticles();
     }
 
     public override void OnStartClient()
@@ -184,6 +195,22 @@ public class Plantscript : NetworkBehaviour
     [Command]
     public void CmdHarvest()
     {
+        //GameObject leaffall = (GameObject)Instantiate(leafFallParticles, transform.position, transform.rotation);
+        //Destroy(leaffall, particlePlayDuration);
+
+        if (!isAlive)
+        {
+            Destroy(gameObject);
+            //leafFallParticleSystem.CmdPlayParticles();
+            //leafFallParticleSystem.RpcPlayParticlesForTime();
+            //Debug.Log(leafFallParticleSystem);
+            //disable plant functionality while particles play
+            //meshRenderer.enabled = false;
+            //skinnedMeshRenderer.enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+            return;
+        }
+
         if (isAlive && daySinceLastHarvest >= daysBetweenHarvest)
         {
             //create produce
@@ -204,10 +231,16 @@ public class Plantscript : NetworkBehaviour
 
         if (harvestsToRemove < 1)
         {
-
+            isAlive = false;
             GetComponentInParent<SoilScript>().occupied = false;
             //destroy self
             Destroy(gameObject);
+            //leafFallParticleSystem.CmdPlayParticles();
+
+            //disable plant functionality while particles play
+            //meshRenderer.enabled = false;
+            //skinnedMeshRenderer.enabled = false;
+            //GetComponent<BoxCollider>().enabled = false;
         }
         else
         {
@@ -252,4 +285,4 @@ public class Plantscript : NetworkBehaviour
         }
     }
 
-}
+    }

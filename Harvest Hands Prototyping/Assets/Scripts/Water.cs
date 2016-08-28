@@ -8,6 +8,9 @@ public class Water : NetworkBehaviour
 {
             
     public GameObject BucketWater;
+    public ParticleSystemScript pouringParticleSystem;
+    public ParticleSystemScript drippingParticleSystem;
+    public float particlePlayDuration;
 
     [Tooltip("Current water level")]
     [SyncVar]
@@ -21,25 +24,22 @@ public class Water : NetworkBehaviour
     [SyncVar]
     public float waterfill = 3.0f;
 
+    public GameObject refillParticles;
+
     // Use this for initialization
     void Start ()
-    {       
-        //BucketWater = GameObject.Find("WaterInBucket");
-        //BucketWater = transform.GetChild(0).gameObject;
-	}
+    {
+        if (waterlevel <= 0)
+            drippingParticleSystem.StopParticles();
+    }
 
    
 	
 	// Update is called once per frame
 	void Update ()
     {
-               
-        
 
     }
-
-
-
 
     void OnCollisionEnter(Collision coll)
     {
@@ -48,6 +48,8 @@ public class Water : NetworkBehaviour
             waterlevel = waterfill;
             BucketWater.SetActive(true);
             AdjustWaterLevel();
+            GameObject refillSplash = (GameObject)Instantiate(refillParticles, transform.position, transform.rotation);
+            Destroy(refillSplash, 2);
         }
 
         if (coll.gameObject.tag == "Plant")
@@ -56,35 +58,43 @@ public class Water : NetworkBehaviour
         }  
     }
 
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.tag == "Plant")
-        {
-            //Debug.Log("Watered");
-
-            if (waterlevel > 0)
-            {                
-                Plantscript plant = col.gameObject.GetComponent<Plantscript>();
-                if (plant.isAlive)
-                {
-                    if (!plant.isWatered)
-                    {
-                        plant.isWatered = true;
-                        waterlevel -= waterdrain;
-                        AdjustWaterLevel();
-                        //if bucket is empty
-                        if (waterlevel <= 0)
-                        {
-                            BucketWater.SetActive(false);
-                        }
-                    }
-                }
-            }
-        }
-    }
+    //void OnTriggerEnter(Collider col)
+    //{
+    //    if (col.gameObject.tag == "Plant")
+    //    {
+    //        //Debug.Log("Watered");
+    //
+    //        if (waterlevel > 0)
+    //        {                
+    //            Plantscript plant = col.gameObject.GetComponent<Plantscript>();
+    //            if (plant.isAlive)
+    //            {
+    //                if (!plant.isWatered)
+    //                {
+    //                    plant.isWatered = true;
+    //                    waterlevel -= waterdrain;
+    //                    AdjustWaterLevel();
+    //                    //if bucket is empty
+    //                    if (waterlevel <= 0)
+    //                    {
+    //                        BucketWater.SetActive(false);
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
 
     void AdjustWaterLevel()
     {
+        if (waterlevel <= 0)
+        {
+            drippingParticleSystem.StopParticles();
+        }
+        else
+        {
+            drippingParticleSystem.PlayParticles();
+        }
         if (waterlevel > 0 && waterlevel <= 1)
         {
             Vector3 tmpPos = BucketWater.transform.localPosition; // Store all Vector3
@@ -103,21 +113,12 @@ public class Water : NetworkBehaviour
 
         if (waterlevel > 2 && waterlevel <= 3)
         {
-
-
-
-
             Vector3 tmpPos = BucketWater.transform.localPosition; // Store all Vector3
             tmpPos.y = 0.7f; // example assign individual fox Y axe
             BucketWater.transform.localPosition = tmpPos; // Assign back all Vector3
-
-
             //BucketWater.transform.position.Set(BucketWater.transform.position.x, 0.7f, BucketWater.transform.position.z);
-
-
-
         }
     }
-
+    
 
 }
