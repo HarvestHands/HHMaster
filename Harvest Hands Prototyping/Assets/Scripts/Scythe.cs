@@ -25,10 +25,10 @@ public class Scythe : MonoBehaviour
                 {
                     if (plant.ReadyToHarvest)
                     {
-                        Debug.Log("Calling cmdharvest");
                         plant.CmdHarvest();
                         GameObject leaffall = (GameObject)Instantiate(plant.leafFallParticles, plant.transform.position, plant.transform.rotation);
                         Destroy(leaffall, plant.particlePlayDuration);
+                        Debug.Log("Calling cmdharvest");
                     }
                 }
             }
@@ -47,6 +47,8 @@ public class Scythe : MonoBehaviour
         isCutting = false;
         CutArea.enabled = false;
     }
+
+    
 
 
 }

@@ -195,9 +195,6 @@ public class Plantscript : NetworkBehaviour
     [Command]
     public void CmdHarvest()
     {
-        //GameObject leaffall = (GameObject)Instantiate(leafFallParticles, transform.position, transform.rotation);
-        //Destroy(leaffall, particlePlayDuration);
-
         if (!isAlive)
         {
             Destroy(gameObject);
@@ -283,6 +280,13 @@ public class Plantscript : NetworkBehaviour
             skinnedMeshRenderer.material = dryMaterial;
             renderer.material = dryMaterial;
         }
+    }
+
+    [ClientRpc]
+    public void RpcSpawnLeafFall()
+    {
+        GameObject leaffall = (GameObject)Instantiate(leafFallParticles, transform.position, transform.rotation);
+        Destroy(leaffall, particlePlayDuration);
     }
 
     }
