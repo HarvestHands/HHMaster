@@ -208,8 +208,9 @@ public class StaffNo3 : NetworkBehaviour
                 //SeedType.text = "None";
 
 
-                SeedType.text = ChosenObj.GetComponent<SeedScript>().plantPrefab.ToString();
-
+                //SeedType.text = ChosenObj.GetComponent<SeedScript>().plantPrefab.ToString();
+                //SeedType.text = ChosenObj.GetComponent<SeedScript>().plantPrefab.plantName;
+                SeedType.text = ChosenObj.GetComponent<SeedScript>().plantPrefab.GetComponent<Plantscript>().plantName;
             }
 
             if (ChosenObj.tag != "Seed")

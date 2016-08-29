@@ -9,7 +9,7 @@ public class SeedScript : NetworkBehaviour
     public int NumberOfSeeds = 1;
     [Tooltip("What the seed plants.")]
     public GameObject plantPrefab;
-
+    
 	// Use this for initialization
 	void Start () {
 	

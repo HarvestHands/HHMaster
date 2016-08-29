@@ -19,6 +19,7 @@ public class Plantscript : NetworkBehaviour
         Berry,
         Creeper,
     }
+        
 
     [System.Serializable]
     public class MeshState
@@ -27,9 +28,11 @@ public class Plantscript : NetworkBehaviour
         public Material material;
     }
 
+    public string plantName = "plantname";
+
     public PlantType currentPlantType = PlantType.Root;
     public PlantState currentPlantState = PlantState.Sapling;
-
+    
     [Header("Plant life")]
 
     [SyncVar]

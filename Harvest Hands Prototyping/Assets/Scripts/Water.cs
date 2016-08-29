@@ -48,7 +48,7 @@ public class Water : NetworkBehaviour
             waterlevel = waterfill;
             BucketWater.SetActive(true);
             AdjustWaterLevel();
-            GameObject refillSplash = (GameObject)Instantiate(refillParticles, transform.position, transform.rotation);
+            GameObject refillSplash = (GameObject)Instantiate(refillParticles, transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
             Destroy(refillSplash, 2);
         }
 
