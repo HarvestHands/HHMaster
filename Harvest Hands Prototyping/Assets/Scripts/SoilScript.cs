@@ -19,7 +19,7 @@ public class SoilScript : NetworkBehaviour {
     {
         base.OnStartClient();
         dayNightController = GameObject.FindGameObjectWithTag("GameManager").GetComponent<DayNightController>();
-        //GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<MeshRenderer>().enabled = false;
 
         List<SoilScript> nearbySoil = new List<SoilScript>();
         Collider[] colliders = Physics.OverlapSphere(transform.position, neighbourDetectionRadius);
