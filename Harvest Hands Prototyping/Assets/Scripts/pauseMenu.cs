@@ -4,8 +4,9 @@ using System.Collections;
 
 public class pauseMenu : MonoBehaviour {
 
-    public GameObject pauseCanvas;
+  /*  public GameObject pauseCanvas;
     public bool isPaused;
+	public GameObject localPlayer;
 
 	// Use this for initialization
 	void Start () {
@@ -18,9 +19,9 @@ public class pauseMenu : MonoBehaviour {
         if (Input.GetKeyDown("escape") && isPaused == false)
         {
 
-          //  Time.timeScale = 0.0f;
-            pauseCanvas.GetComponent<Canvas>().enabled = true;
+            //Time.timeScale = 0.0f;
             isPaused = true;
+			localPlayer.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController> ().allowInput = false;
 
         }
 
@@ -31,16 +32,16 @@ public class pauseMenu : MonoBehaviour {
             pauseCanvas.GetComponent<Canvas>().enabled = false;
             isPaused = false;
 
-        }*/
+        }
 	}
 
     public void unPause()
     {
 
-        //Time.timeScale = 1.0f;
+       // Time.timeScale = 1.0f;
         pauseCanvas.GetComponent<Canvas>().enabled = false;
         isPaused = false;
-
+		localPlayer.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController> ().allowInput = true;
     }
 
     public void menuButton()
@@ -56,4 +57,5 @@ public class pauseMenu : MonoBehaviour {
         Application.Quit();
 
     }
+    */
 }

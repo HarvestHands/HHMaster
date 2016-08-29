@@ -29,6 +29,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
 
+		public GameObject gameManager;
+		public bool allowInput = true;
+
         private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
@@ -57,11 +60,20 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
 
+			//if (gameManager.GetComponent<pauseMenu> ().isPaused == true) {
+			//	m_Camera.enabled = true;
+			//}
+
             if(!isLocalPlayer)
             {
                 m_Camera.enabled = false;
             }
-        }
+		/*	if (isLocalPlayer) 
+			{
+				GameObject.Find ("GameManager").GetComponent<pauseMenu> ().localPlayer = gameObject;
+				Debug.Log ("localplayer set");
+			}
+       */ }
 
 
         // Update is called once per frame
@@ -71,6 +83,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
+			if (!allowInput)
+				return;
 
             RotateView();
             // the jump state needs to read here to make sure it is not missed
