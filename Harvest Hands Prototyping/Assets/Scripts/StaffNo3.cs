@@ -114,6 +114,8 @@ public class StaffNo3 : NetworkBehaviour
                         //check that another player isn't holding the object
                         if (!ChosenObj.GetComponent<Pickupable>().beingHeld)
                         {
+                            //ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+                            //CmdAssignAuthority();
                             objectheld = true;
 
 
@@ -138,8 +140,8 @@ public class StaffNo3 : NetworkBehaviour
         else if (ChosenObj == null)
         {
             objectheld = false;
-            SeedNumber.text = "None";
-            SeedType.text = "None";
+            SeedNumber.text = "";
+            SeedType.text = "";
         }
         else
         {
@@ -162,12 +164,17 @@ public class StaffNo3 : NetworkBehaviour
                 if (ChosenObj.tag == "Bucket")
                 {
                     Debug.Log("Bucket");
-                    //play particle && enable emmision
+                    Water water = ChosenObj.GetComponent<Water>();
+                    if (water.waterlevel > 0)
+                    {
+                        water.waterlevel -= water.waterdrain;
+                        //play particle && enable emmision
 
-                    //play anim
-                    CmdTipBucket(ChosenObj.GetComponent<Pickupable>().netId);
-                    //spawn collider
-                    GameObject WaterDrip = (GameObject)Instantiate(Resources.Load("PuddlePrefab"), ChosenObj.transform.position, ChosenObj.transform.rotation);
+                        //play anim
+                        CmdTipBucket(ChosenObj.GetComponent<Pickupable>().netId);
+                        //spawn collider
+                        GameObject WaterDrip = (GameObject)Instantiate(Resources.Load("PuddlePrefab"), ChosenObj.transform.position, ChosenObj.transform.rotation);
+                    }
 
                 }
                 else if (ChosenObj.tag == "Scythe")
@@ -207,8 +214,8 @@ public class StaffNo3 : NetworkBehaviour
 
             if (ChosenObj.tag != "Seed")
             {
-                SeedNumber.text = "None";
-                SeedType.text = "None";
+                SeedNumber.text = "";
+                SeedType.text = "";
             }
 
 
@@ -279,8 +286,8 @@ public class StaffNo3 : NetworkBehaviour
             ChosenObj.GetComponent<Pickupable>().beingHeld = false;
             ChosenObj = null;
         }
-        SeedNumber.text = "None";
-        SeedType.text = "None";
+        SeedNumber.text = "";
+        SeedType.text = "";
         //Debug.Log("inside rpc");        
         carriedItemID = NetworkInstanceId.Invalid;
         objectheld = false;
@@ -312,6 +319,13 @@ public class StaffNo3 : NetworkBehaviour
         ChosenObj.GetComponent<Pickupable>().beingHeld = false;
         objectheld = false;
         ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
+    }
+
+
+    [Command]
+    public void CmdAssignAuthority()
+    {
+        ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToServer);
     }
 
 }
