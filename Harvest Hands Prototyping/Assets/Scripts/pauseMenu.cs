@@ -4,6 +4,8 @@ using System.Collections;
 
 public class pauseMenu : MonoBehaviour {
 
+	public GameObject lookingAtNow;
+
   /*  public GameObject pauseCanvas;
     public bool isPaused;
 	public GameObject localPlayer;
@@ -12,6 +14,10 @@ public class pauseMenu : MonoBehaviour {
 	void Start () {
 	
 	}
+
+	*/
+
+	/*
 	
 	// Update is called once per frame
 	void Update () {
