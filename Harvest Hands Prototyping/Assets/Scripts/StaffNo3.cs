@@ -22,14 +22,18 @@ public class StaffNo3 : NetworkBehaviour
     float timeLeft;
     
     public GameObject ChosenObj;
-
-    [SyncVar]
-    public float throwforce = 500f;
+    
+    
     [SyncVar]
     public float GrabDistance = 3.0f;
     [SyncVar]
     public NetworkInstanceId carriedItemID = NetworkInstanceId.Invalid;
-    
+
+    public float throwforce = 100;
+    public float throwForceMin = 100f;
+    public float throwForceMax = 600f;
+    public float throwMaxChargeTime = 2;
+
     [Command]
     void CmdPickedUp(NetworkInstanceId pickedUpItemID)
     {
@@ -50,7 +54,7 @@ public class StaffNo3 : NetworkBehaviour
     void Start()
     {
         //initialize the gameobjects here
-
+        throwforce = throwForceMin;
         StaffGrabber = transform.FindChild("FirstCamera").FindChild("Staff Grabber").gameObject;
         objectheld = false;
         timeLeft = 0.02f;
@@ -59,7 +63,7 @@ public class StaffNo3 : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if (!isLocalPlayer)
         {
             if (!objectheld)
@@ -94,7 +98,7 @@ public class StaffNo3 : NetworkBehaviour
                 }
             }
             return;
-        }       
+        }                       
 
         if (objectheld == false)
         {
@@ -112,14 +116,14 @@ public class StaffNo3 : NetworkBehaviour
                         //    ChosenObj = Hit.collider.gameObject;
                         //Debug.Log(ChosenObj.GetComponent<Pickupable>().beingHeld);
                         //check that another player isn't holding the object
-                        if (!ChosenObj.GetComponent<Pickupable>().beingHeld)
+                        if (!ChosenObj.GetComponent<Pickupable>().BeingHeld)
                         {
                             //ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
                             //CmdAssignAuthority();
                             objectheld = true;
 
 
-                            ChosenObj.GetComponent<Pickupable>().beingHeld = true;
+                            ChosenObj.GetComponent<Pickupable>().BeingHeld = true;
                             //Debug.Log(ChosenObj.GetComponent<Pickupable>().beingHeld);
                             ChosenObj.GetComponent<Rigidbody>().useGravity = false;
                             carriedItemID = ChosenObj.GetComponent<NetworkIdentity>().netId;
@@ -153,63 +157,21 @@ public class StaffNo3 : NetworkBehaviour
             ChosenObj.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
             timeLeft -= Time.deltaTime;
-
-
+            
             Quaternion grabbedRotation = StaffGrabber.transform.rotation;
             ChosenObj.GetComponent<Rigidbody>().MoveRotation(grabbedRotation * Quaternion.Euler(objectXRotation, objectYRotation, 0));
-            // ChosenObj.GetComponent<Animator>().SetBool("play", false);
-            //  anim.SetBool("play", false);
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (ChosenObj.tag == "Bucket")
-                {
-                    Debug.Log("Bucket");
-                    Water water = ChosenObj.GetComponent<Water>();
-                    if (water.waterlevel > 0)
-                    {
-                        water.waterlevel -= water.waterdrain;
-                        //play particle && enable emmision
-
-                        //play anim
-                        CmdTipBucket(ChosenObj.GetComponent<Pickupable>().netId);
-                        //spawn collider
-                        GameObject WaterDrip = (GameObject)Instantiate(Resources.Load("PuddlePrefab"), ChosenObj.transform.position, ChosenObj.transform.rotation);
-                    }
-
-                }
-                else if (ChosenObj.tag == "Scythe")
-                {
-                    Scythe scythe = ChosenObj.GetComponent<Scythe>();
-                    Debug.Log("Scythe");
-                    //play particle && enable emision
-
-                    //play anim
-                    CmdSwingScythe(ChosenObj.GetComponent<Pickupable>().netId);
-                    //spawn collider
-                    scythe.ActivateCutting();
-                    scythe.Invoke("DeactiveCutting", 1.5f);
-
-
-                }
+                
             }
 
             if (ChosenObj.tag == "Seed")
             {
-                //var SeedNumber = GameObject.Find("SeedNumber");
-                //var NumberText = SeedNumber.GetComponent<Text>();
-
                 var ChosenSeed = ChosenObj.GetComponent<SeedScript>();
-
-                //NumberText.text = ChosenSeed.NumberOfSeeds.ToString();
                 
                 SeedNumber.text = ChosenSeed.NumberOfSeeds.ToString();
-
-                //SeedNumber.text = "None";
-                //SeedType.text = "None";
-
-
-                //SeedType.text = ChosenObj.GetComponent<SeedScript>().plantPrefab.ToString();
-                //SeedType.text = ChosenObj.GetComponent<SeedScript>().plantPrefab.plantName;
+                
                 SeedType.text = ChosenObj.GetComponent<SeedScript>().plantPrefab.GetComponent<Plantscript>().plantName;
             }
 
@@ -220,18 +182,24 @@ public class StaffNo3 : NetworkBehaviour
             }
 
 
-
+            if (Input.GetMouseButton(1))
+            {
+                throwforce += ((throwForceMax - throwForceMin) / throwMaxChargeTime) * Time.deltaTime;
+                throwforce = Mathf.Clamp(throwforce, throwForceMin, throwForceMax);
+            }
             //if object held , drops the object
             if (Input.GetMouseButtonDown(0))
             {                
                 CmdDropped();
                 CmdNullChosen();
+                throwforce = throwForceMin;
             }
             //if object held , throws the object
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonUp(1))
             {
-                CmdThrowed();
+                CmdThrowed(throwforce);
                 CmdNullChosen();
+                throwforce = throwForceMin;
             }
             RotateObject();
         }
@@ -284,7 +252,7 @@ public class StaffNo3 : NetworkBehaviour
     {
         if (ChosenObj != null)
         {
-            ChosenObj.GetComponent<Pickupable>().beingHeld = false;
+            ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
             ChosenObj = null;
         }
         SeedNumber.text = "";
@@ -306,18 +274,18 @@ public class StaffNo3 : NetworkBehaviour
     {
         ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         carriedItemID = NetworkInstanceId.Invalid;
-        ChosenObj.GetComponent<Pickupable>().beingHeld = false;
+        ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
         objectheld = false;
         ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
     }
 
     [Command]
-    void CmdThrowed()
+    void CmdThrowed(float _throwForce)
     {
         ChosenObj.GetComponent<Rigidbody>().useGravity = true;
-        ChosenObj.GetComponent<Rigidbody>().AddForce(transform.forward * throwforce);
+        ChosenObj.GetComponent<Rigidbody>().AddForce(StaffGrabber.transform.forward * _throwForce);
         carriedItemID = NetworkInstanceId.Invalid;
-        ChosenObj.GetComponent<Pickupable>().beingHeld = false;
+        ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
         objectheld = false;
         ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
     }

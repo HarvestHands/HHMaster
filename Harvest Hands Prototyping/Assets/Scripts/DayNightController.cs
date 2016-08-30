@@ -30,6 +30,7 @@ public class DayNightController : NetworkBehaviour
 
     private NetworkStartPosition[] spawnPoints;
     private ShopScript shop;
+    public MushroomSpawner[] mushroomSpawners;
 
     [SerializeField]
     [Tooltip("Score lost per player that died")]
@@ -46,6 +47,7 @@ public class DayNightController : NetworkBehaviour
         sunInitialIntensity = sun.intensity;
         spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         shop = FindObjectOfType<ShopScript>();
+        mushroomSpawners = FindObjectsOfType<MushroomSpawner>();
     }
 
     // Update is called once per frame
@@ -77,8 +79,10 @@ public class DayNightController : NetworkBehaviour
                 //ingameDay++;
                 //CmdUpdatePlants();
                 CmdCheckPlayersSafe();
+
                 Invoke("RespawnDeadPlayers", nightPauseLength / 2);
-                Invoke("CmdUpdateNightStuff", nightPauseLength);
+                Invoke("CmdUpdateNightStuff", nightPauseLength / 2);
+                Invoke("CmdSetTimeOfDayMorning", nightPauseLength);
             }
         }
 
@@ -92,8 +96,7 @@ public class DayNightController : NetworkBehaviour
         CmdUpdatePlants();
         CmdSetTimeOfDayMorning();
         CmdIncrementDay();
-        //RespawnDeadPlayers();
-        RpcSyncTimeOfDay(currentTimeOfDay);
+        CmdUpdateMushroomSpawners();
     }
 
     void UpdateSun()
@@ -269,6 +272,7 @@ public class DayNightController : NetworkBehaviour
     void CmdSetTimeOfDayMorning()
     {
         currentTimeOfDay = startDayAt;
+        RpcSyncTimeOfDay(currentTimeOfDay);
     }
 
     [Command]
@@ -284,4 +288,15 @@ public class DayNightController : NetworkBehaviour
     {
         currentTimeOfDay = _timeOfDay;
     }
+
+    [Command]
+    void CmdUpdateMushroomSpawners()
+    {
+        foreach(MushroomSpawner spawner in mushroomSpawners)
+        {
+            spawner.AttemptSpawn();
+        }
+    }
+
+
 }
