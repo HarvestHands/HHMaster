@@ -5,7 +5,6 @@ public class Mushroom : MonoBehaviour
 {
     public int score = 3;
 
-
     [HideInInspector]
     public GameObject mushroomSpawner;
     
@@ -21,7 +20,18 @@ public class Mushroom : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        GetComponent<Pickupable>().onPickedUp += WasPickedUp;
+        if (mushroomSpawner != null)
+        {
+            GetComponent<Pickupable>().onPickedUp += WasPickedUp;
+            Debug.Log(name);
+        }
+        
+        else
+        {
+            Debug.Log("Hehe xd");
+            return;
+        }
+
     }
 	
 }
