@@ -45,7 +45,7 @@ public class MushroomSpawner : NetworkBehaviour
                     return;
                 }
                 float randNum = Random.Range(0, 100);
-                float spwn = 0 ;
+                float spwn = 0;
                 int mushIndex = 0;
                 for (int i = 0; i < mushrooms.Count; ++i)
                 {
@@ -53,7 +53,7 @@ public class MushroomSpawner : NetworkBehaviour
                     if (spwn >= randNum)
                     {
                         mushIndex = i;
-                    Debug.Log("spawn: " + spwn + " < randnum" + randNum + " --- i = " + i);
+                        Debug.Log("spawn: " + spwn + " < randnum" + randNum + " --- i = " + i);
                         break;
                     }
 
@@ -64,11 +64,13 @@ public class MushroomSpawner : NetworkBehaviour
                 newMush.GetComponent<Mushroom>().mushroomSpawner = gameObject;
                 NetworkServer.Spawn(newMush);
                 canSpawn = false;
-            Debug.Log(randNum + " = Mushroom: " + mushIndex);
+                //Debug.Log(randNum + " = Mushroom: " + mushIndex);
             }
         }
         else
-            Debug.Log("Canspawn = false");
+        {
+            //Debug.Log("Canspawn = false");
+        }
     }
 
 

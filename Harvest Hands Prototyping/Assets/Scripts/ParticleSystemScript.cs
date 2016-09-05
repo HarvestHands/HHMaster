@@ -14,16 +14,13 @@ public class ParticleSystemScript : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        Debug.Log(name + "particlesystem start");
         if (multiParticlePrefab != null)
         {
-            Debug.Log(name + " multiParticlePrefab != null");
+            
             List<ParticleSystem> childParticleSystems = new List<ParticleSystem>(GetComponentsInChildren<ParticleSystem>());
-            Debug.Log(name + " childParticleSystems length = " + childParticleSystems.Count);
             foreach(ParticleSystem particleSyst in childParticleSystems)
             {
                 particleSystems.Add(particleSyst);
-                Debug.Log(name + " Particle System added - " + particleSystems.Count);
             }
         }
 

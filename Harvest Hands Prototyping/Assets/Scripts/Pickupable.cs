@@ -25,6 +25,7 @@ public class Pickupable : NetworkBehaviour
         }
     }
 
+    [SerializeField]
     [SyncVar]
     private bool beingHeld;
     [SyncVar]
