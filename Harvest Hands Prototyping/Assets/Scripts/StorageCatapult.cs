@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class StorageCatapult : NetworkBehaviour
 {
@@ -17,19 +18,28 @@ public class StorageCatapult : NetworkBehaviour
     BankScript farmbank;
 
     public float scoreMultiplier = 1;
+    public Text priceText;
+    private int expectedIncome = 0;
+
+    public List<GameObject> catapultCrates;
     public List<GameObject> loadedObjects;
     public int maxCrates = 8;
 
-    
+    void Start()
+    {
+        loadedObjects = new List<GameObject>();
+    }
 
     // Use this for initialization
     public override void OnStartClient()
     {
         base.OnStartClient();
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        //shop = gameManager.GetComponent<ShopScript>();
         farmbank = gameManager.GetComponent<BankScript>();
-        loadedObjects = new List<GameObject>();
+        foreach (GameObject crate in catapultCrates)
+        {
+            crate.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -42,23 +52,17 @@ public class StorageCatapult : NetworkBehaviour
     {
         if (col.gameObject.CompareTag("Produce"))
         {
-            //Make Command?
-            PlantProduce produce = col.gameObject.GetComponent<PlantProduce>();
-            //shop.Score += produce.score;
-            farmbank.Score += produce.score;
-            Destroy(produce.gameObject);
+            if (loadedObjects.Count >= maxCrates)
+                return;
+
+            CmdAddCrate(col.GetComponent<NetworkIdentity>().netId);
         }
-        //else if (col.gameObject.CompareTag("Mushroom"))
-        //{
-        //    Mushroom mushroom = col.gameObject.GetComponent<Mushroom>();
-        //    farmbank.Score += mushroom.score;
-        //    Destroy(mushroom.gameObject);
-        //}
     }
 
     [Command]
     void CmdAddCrate(NetworkInstanceId id)
     {
+        //Check if room for crate
         if (loadedObjects.Count < maxCrates)
         {
             GameObject crateObject = NetworkServer.FindLocalObject(id);
@@ -69,7 +73,52 @@ public class StorageCatapult : NetworkBehaviour
     [ClientRpc]
     void RpcAddCrate(NetworkInstanceId id)
     {
-        GameObject crateObject = ClientScene.FindLocalObject(id);
+        //Add crate to loadedObjects list
+        PlantProduce produceObject = ClientScene.FindLocalObject(id).GetComponent<PlantProduce>();
+        int crateIndex = loadedObjects.Count;
+        loadedObjects.Add(produceObject.gameObject);
 
+        //Set and active crate in catapult
+        catapultCrates[crateIndex].SetActive(true);
+        CatapultCrate crateScript = catapultCrates[crateIndex].GetComponent<CatapultCrate>();
+        crateScript.nameText.text = produceObject.produceName;
+        crateScript.amountText.text = produceObject.ProduceAmount.ToString();
+
+        //Update sign
+        expectedIncome += produceObject.ProduceAmount * produceObject.score;
+        priceText.text = "$" + expectedIncome.ToString();
+
+        //Deactive actual crate
+        produceObject.gameObject.SetActive(false);                
+    }
+
+    [Command]
+    public void CmdEmptyCatapult()
+    {
+        foreach(GameObject sellingObj in loadedObjects)
+        {
+            PlantProduce produce = sellingObj.GetComponent<PlantProduce>();
+            farmbank.Score += produce.score * produce.ProduceAmount;
+        }
+        RpcEmptyCatapultLists();
+    }
+
+    [ClientRpc]
+    void RpcEmptyCatapultLists()
+    {
+        foreach(GameObject crate in loadedObjects)
+        {
+            if (crate != null)
+                Destroy(crate);
+        }
+        loadedObjects = new List<GameObject>();
+
+        foreach (GameObject crate in catapultCrates)
+        {
+            crate.SetActive(false);
+        }
+
+        expectedIncome = 0;
+        priceText.text = "$" + expectedIncome.ToString();
     }
 }

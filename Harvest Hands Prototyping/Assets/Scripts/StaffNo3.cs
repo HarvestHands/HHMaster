@@ -15,7 +15,8 @@ public class StaffNo3 : NetworkBehaviour
     [SyncVar]
     RaycastHit Hit;
     
-    GameObject StaffGrabber;    
+    GameObject StaffGrabber;
+    GameObject pullBackPosition;
     [SyncVar]
     bool objectheld;
 
@@ -56,6 +57,7 @@ public class StaffNo3 : NetworkBehaviour
         //initialize the gameobjects here
         throwforce = throwForceMin;
         StaffGrabber = transform.FindChild("FirstCamera").FindChild("Staff Grabber").gameObject;
+        pullBackPosition = transform.FindChild("FirstCamera").FindChild("PullBackPosition").gameObject;
         objectheld = false;
         timeLeft = 0.02f;
     }
@@ -75,6 +77,7 @@ public class StaffNo3 : NetworkBehaviour
 
 
                     ChosenObj.GetComponent<Rigidbody>().useGravity = false;
+                    //ChosenObj.GetComponent<Rigidbody>().isKinematic = true;
                     objectheld = true;
                 }
             }
@@ -128,6 +131,8 @@ public class StaffNo3 : NetworkBehaviour
                             ChosenObj.GetComponent<Rigidbody>().useGravity = false;
                             carriedItemID = ChosenObj.GetComponent<NetworkIdentity>().netId;
 
+                            //ChosenObj.GetComponent<Rigidbody>().isKinematic = true;
+
                             CmdPickedUp(carriedItemID);
 
                         }
@@ -151,7 +156,19 @@ public class StaffNo3 : NetworkBehaviour
         {
             // staffmove();
             ChosenObj.GetComponent<Rigidbody>().MovePosition(StaffGrabber.transform.position);
-            
+
+
+            float posRatio = throwforce / (throwForceMax - throwForceMin);
+            Vector3 idealPos = Vector3.Lerp(StaffGrabber.transform.position, pullBackPosition.transform.position, posRatio);
+
+            ChosenObj.GetComponent<Rigidbody>().MovePosition(idealPos);
+
+            //float posRatio = throwforce / (throwForceMax - throwForceMin);
+            //Vector3 
+            //Vector3 pullbackDir = new Vector3(pullBackPosition.transform.position - StaffGrabber.transform.position);
+
+            // Vector3 idealPos = new Vector3(StaffGrabber)
+
             ChosenObj.GetComponent<Rigidbody>().useGravity = false;
             ChosenObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
             ChosenObj.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
@@ -275,6 +292,7 @@ public class StaffNo3 : NetworkBehaviour
         ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         carriedItemID = NetworkInstanceId.Invalid;
         ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
+        //ChosenObj.GetComponent<Rigidbody>().isKinematic = false;
         objectheld = false;
         ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
     }

@@ -14,6 +14,8 @@ public class SoilScript : NetworkBehaviour {
     public float neighbourDetectionRadius = 1.0f;
     public SoilScript[] neighbourSoil;
 
+    public GameObject plantedPlant;
+
     // Use this for initialization
     public override void OnStartClient()
     {
@@ -59,6 +61,8 @@ public class SoilScript : NetworkBehaviour {
         //Add plant to server
         NetworkServer.Spawn(myNewPlant);
         myNewPlant.GetComponent<Plantscript>().CmdSwapPlantGraphics(stage);
+
+        plantedPlant = myNewPlant;
     }
 
 

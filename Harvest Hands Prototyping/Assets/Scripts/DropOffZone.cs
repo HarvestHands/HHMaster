@@ -15,7 +15,6 @@ public class DropOffZone : NetworkBehaviour
     {
         base.OnStartClient();
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
-        //shop = gameManager.GetComponent<ShopScript>();
         farmbank = gameManager.GetComponent<BankScript>();
     }
 	
@@ -31,7 +30,7 @@ public class DropOffZone : NetworkBehaviour
             //Make Command?
             PlantProduce produce = col.gameObject.GetComponent<PlantProduce>();
             //shop.Score += produce.score;
-            farmbank.Score += produce.score;// * produce.ProduceAmount;
+            farmbank.Score += produce.score * produce.ProduceAmount;
             Destroy(produce.gameObject);
         }
         //else if (col.gameObject.CompareTag("Mushroom"))

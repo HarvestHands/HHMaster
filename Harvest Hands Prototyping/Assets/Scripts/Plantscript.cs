@@ -201,12 +201,8 @@ public class Plantscript : NetworkBehaviour
         if (!isAlive)
         {
             Destroy(gameObject);
-            //leafFallParticleSystem.CmdPlayParticles();
-            //leafFallParticleSystem.RpcPlayParticlesForTime();
-            //Debug.Log(leafFallParticleSystem);
-            //disable plant functionality while particles play
-            //meshRenderer.enabled = false;
-            //skinnedMeshRenderer.enabled = false;
+            GetComponentInParent<SoilScript>().occupied = false;
+            GetComponentInParent<SoilScript>().plantedPlant = null;
             GetComponent<BoxCollider>().enabled = false;
             return;
         }
@@ -233,6 +229,7 @@ public class Plantscript : NetworkBehaviour
         {
             isAlive = false;
             GetComponentInParent<SoilScript>().occupied = false;
+            GetComponentInParent<SoilScript>().plantedPlant = null;
             //destroy self
             Destroy(gameObject);
             //leafFallParticleSystem.CmdPlayParticles();

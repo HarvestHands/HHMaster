@@ -31,6 +31,7 @@ public class DayNightController : NetworkBehaviour
     private NetworkStartPosition[] spawnPoints;
     private ShopScript shop;
     public MushroomSpawner[] mushroomSpawners;
+    public StorageCatapult storageCatapult;
 
     [SerializeField]
     [Tooltip("Score lost per player that died")]
@@ -74,10 +75,6 @@ public class DayNightController : NetworkBehaviour
             if (!nightTimeCheckDone)
             {
                 nightTimeCheckDone = true;
-                //currentTimeOfDay = 0;
-                //currentTimeOfDay = startDayAt;
-                //ingameDay++;
-                //CmdUpdatePlants();
                 CmdCheckPlayersSafe();
 
                 Invoke("RespawnDeadPlayers", nightPauseLength / 2);
@@ -97,6 +94,7 @@ public class DayNightController : NetworkBehaviour
         CmdSetTimeOfDayMorning();
         CmdIncrementDay();
         CmdUpdateMushroomSpawners();
+        storageCatapult.CmdEmptyCatapult();
     }
 
     void UpdateSun()
