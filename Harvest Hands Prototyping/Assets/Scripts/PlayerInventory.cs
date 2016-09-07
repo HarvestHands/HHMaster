@@ -23,8 +23,8 @@ public class PlayerInventory : NetworkBehaviour {
         if (isLocalPlayer)
         {
             //playerMoneyText = GetComponentInChildren<Canvas>().GetComponentInChildren<Text>();
-            Debug.Log("FarmBank " + farmBank);
-            Debug.Log("FarmMoneyText " + farmMoneyText);
+            //Debug.Log("FarmBank " + farmBank);
+            //Debug.Log("FarmMoneyText " + farmMoneyText);
             farmBank.localPlayerFarmMoneyText = farmMoneyText;
             farmMoneyText.text = farmBank.Score.ToString();
             GetComponentInChildren<MeshRenderer>().enabled = false;

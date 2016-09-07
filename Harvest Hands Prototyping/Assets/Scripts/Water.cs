@@ -58,43 +58,40 @@ public class Water : NetworkBehaviour
         }  
     }
 
-    //void OnTriggerEnter(Collider col)
-    //{
-    //    if (col.gameObject.tag == "Plant")
-    //    {
-    //        //Debug.Log("Watered");
-    //
-    //        if (waterlevel > 0)
-    //        {                
-    //            Plantscript plant = col.gameObject.GetComponent<Plantscript>();
-    //            if (plant.isAlive)
-    //            {
-    //                if (!plant.isWatered)
-    //                {
-    //                    plant.isWatered = true;
-    //                    waterlevel -= waterdrain;
-    //                    AdjustWaterLevel();
-    //                    //if bucket is empty
-    //                    if (waterlevel <= 0)
-    //                    {
-    //                        BucketWater.SetActive(false);
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Plant")
+        {
+            //Debug.Log("Watered");
+    
+            if (waterlevel > 0)
+            {                
+                Plantscript plant = col.gameObject.GetComponent<Plantscript>();
+                if (plant.isAlive)
+                {
+                    if (!plant.isWatered)
+                    {
+                        plant.isWatered = true;
+                        waterlevel -= waterdrain;
+                        AdjustWaterLevel();                        
+                    }
+                }
+            }
+        }
+    }
 
     void AdjustWaterLevel()
     {
         if (waterlevel <= 0)
         {
             drippingParticleSystem.StopParticles();
+            BucketWater.SetActive(false);
         }
         else
         {
             drippingParticleSystem.PlayParticles();
         }
+
         if (waterlevel > 0 && waterlevel <= 1)
         {
             Vector3 tmpPos = BucketWater.transform.localPosition; // Store all Vector3
@@ -109,8 +106,6 @@ public class Water : NetworkBehaviour
             BucketWater.transform.localPosition = tmpPos; // Assign back all Vector3
             // BucketWater.transform.position.Set(BucketWater.transform.position.x,0.5f,BucketWater.transform.position.z);
         }
-
-
         if (waterlevel > 2 && waterlevel <= 3)
         {
             Vector3 tmpPos = BucketWater.transform.localPosition; // Store all Vector3

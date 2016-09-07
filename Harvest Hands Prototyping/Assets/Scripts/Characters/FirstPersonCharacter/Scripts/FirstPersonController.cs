@@ -111,7 +111,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void Respawn(Vector3 newPos)
         {
             transform.position = newPos;                   
-            Debug.Log("respawning at: " + newPos);            
+            //Debug.Log("respawning at: " + newPos);            
         }
         
 

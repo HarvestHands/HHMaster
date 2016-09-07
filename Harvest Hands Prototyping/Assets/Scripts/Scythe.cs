@@ -4,21 +4,22 @@ using System.Collections;
 
 public class Scythe : MonoBehaviour
 {
-    public bool isCutting = false;
-    public BoxCollider CutArea;
+    //public bool isCutting = false;
+    //public BoxCollider CutArea;
 
     void Start()
     {
-        if (!isCutting)
-        {
-            CutArea.enabled = false;
-        }
+        //if (!isCutting)
+        //{
+        //    CutArea.enabled = false;
+        //}
+        
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (isCutting)
-        {
+        //if (isCutting)
+        //{
             if (col.gameObject.CompareTag("Plant"))
             {
                 Plantscript plant = col.gameObject.GetComponent<Plantscript>();
@@ -32,21 +33,21 @@ public class Scythe : MonoBehaviour
                     }
                 }
             }
-        }
+        //}
     }
 
     //[Command]
-    public void ActivateCutting()
-    {
-        isCutting = true;
-        CutArea.enabled = true;
-    }
-
-    public void DeactiveCutting()
-    {
-        isCutting = false;
-        CutArea.enabled = false;
-    }
+    //public void ActivateCutting()
+    //{
+    //    isCutting = true;
+    //    CutArea.enabled = true;
+    //}
+    //
+    //public void DeactiveCutting()
+    //{
+    //    isCutting = false;
+    //    CutArea.enabled = false;
+    //}
 
     
 
