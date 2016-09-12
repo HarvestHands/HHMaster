@@ -5,13 +5,14 @@ using System.Collections;
 public class waterBox : MonoBehaviour {
 
 	public GameObject underWaterUI;
-	public float drownTimer = 20f;
+	public float drownTimer = 10f;
 	public Slider oxySlider;
 	public GameObject spawnPoint;
+	public GameObject player;
 
 	void Start(){
 
-		oxySlider.maxValue = 20f;
+		oxySlider.maxValue = 10f;
 
 	}
 
@@ -21,6 +22,9 @@ public class waterBox : MonoBehaviour {
 
 			underWaterUI.GetComponent<Canvas> ().enabled = true;
 		} 
+			
+		//GameObject.GetComponent<FirstPersonController> ().walkSpeed;
+		//GameObject.GetComponent<FirstPersonController> ().runSpeed;
 
 		drownTimer -= Time.deltaTime;
 		if (drownTimer < 0) {
@@ -37,6 +41,6 @@ public class waterBox : MonoBehaviour {
 
 		underWaterUI.GetComponent<Canvas> ().enabled = false;
 
-		drownTimer = 20f;
+		drownTimer = 10f;
 	}
 }
