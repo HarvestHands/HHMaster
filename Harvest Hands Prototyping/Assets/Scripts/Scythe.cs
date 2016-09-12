@@ -9,47 +9,41 @@ public class Scythe : MonoBehaviour
 
     void Start()
     {
-        //if (!isCutting)
-        //{
-        //    CutArea.enabled = false;
-        //}
-        
+        SaveAndLoad.SaveEvent += SaveFunction;
+    }
+    void OnDestroy()
+    {
+        SaveAndLoad.SaveEvent -= SaveFunction;
     }
 
     void OnTriggerEnter(Collider col)
-    {
-        //if (isCutting)
-        //{
-            if (col.gameObject.CompareTag("Plant"))
+    {   
+        if (col.gameObject.CompareTag("Plant"))
+        {
+            Plantscript plant = col.gameObject.GetComponent<Plantscript>();
             {
-                Plantscript plant = col.gameObject.GetComponent<Plantscript>();
+                if (plant.ReadyToHarvest)
                 {
-                    if (plant.ReadyToHarvest)
-                    {
-                        plant.CmdHarvest();
-                        GameObject leaffall = (GameObject)Instantiate(plant.leafFallParticles, plant.transform.position, plant.transform.rotation);
-                        Destroy(leaffall, plant.particlePlayDuration);
-                        Debug.Log("Calling cmdharvest");
-                    }
+                    plant.CmdHarvest();
+                    GameObject leaffall = (GameObject)Instantiate(plant.leafFallParticles, plant.transform.position, plant.transform.rotation);
+                    Destroy(leaffall, plant.particlePlayDuration);
+                    Debug.Log("Calling cmdharvest");
                 }
             }
-        //}
+        }       
     }
 
-    //[Command]
-    //public void ActivateCutting()
-    //{
-    //    isCutting = true;
-    //    CutArea.enabled = true;
-    //}
-    //
-    //public void DeactiveCutting()
-    //{
-    //    isCutting = false;
-    //    CutArea.enabled = false;
-    //}
+    public void SaveFunction(object sender, string args)
+    {
+        SavedScythe scythe = new SavedScythe();
+        scythe.PosX = transform.position.x;
+        scythe.PosY = transform.position.y;
+        scythe.PosZ = transform.position.z;
 
-    
+        SaveAndLoad.localData.savedScythe.Add(scythe);
+    }
+
+
 
 
 }

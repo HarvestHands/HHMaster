@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Mushroom : MonoBehaviour
+public class Mushroom : NetworkBehaviour
 {
     //public int score = 3;
 
@@ -30,8 +31,36 @@ public class Mushroom : MonoBehaviour
         Debug.Log("Mushroom Picked Up!", gameObject);
         if (mushroomSpawner != null)
         {
+            CmdNullSpawner(mushroomSpawner.GetComponent<NetworkInstanceId>());
             mushroomSpawner.GetComponent<MushroomSpawner>().canSpawn = true;
         }
     }
 
+    [Command]
+    void CmdNullSpawner(NetworkInstanceId id)
+    {
+        MushroomSpawner spawner =  NetworkServer.FindLocalObject(id).GetComponent<MushroomSpawner>();
+        spawner.canSpawn = true;
+        mushroomSpawner = null;
+        GetComponent<PlantProduce>().CmdAddSaveEvent();
+    }
+
+    public void SaveFunction(object sender, string args)
+    {
+        if (mushroomSpawner != null)
+            return;
+        PlantProduce produce = GetComponent<PlantProduce>();
+
+        SavedProduce savedProduce = new SavedProduce();
+        savedProduce.PosX = transform.position.x;
+        savedProduce.PosY = transform.position.y;
+        savedProduce.PosZ = transform.position.z;
+        savedProduce.produceName = produce.produceName;
+        savedProduce.produceAmount = produce.ProduceAmount;
+        savedProduce.scoure = produce.score;
+
+        SaveAndLoad.localData.savedProduce.Add(savedProduce);
+    }
+
 }
+

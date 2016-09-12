@@ -16,7 +16,12 @@ public class BankScript : NetworkBehaviour
 
     void Start()
     {
-        
+        SaveAndLoad.SaveEvent += SaveFunction;
+    }
+
+    void OnDestroy()
+    {
+        SaveAndLoad.SaveEvent -= SaveFunction;
     }
 
     void Update()
@@ -54,6 +59,19 @@ public class BankScript : NetworkBehaviour
         ClientScene.FindLocalObject(playerId).GetComponent<PlayerInventory>().money += amount;
     }
 
+    public void SaveFunction(object sender, string args)
+    {
+        SavedGameManager GM = new SavedGameManager();
+        //Day Night Controller
+        DayNightController DNC = GetComponent<DayNightController>();
+        GM.ingameDay = DNC.ingameDay;
+        GM.currentTimeOfDay = DNC.currentTimeOfDay;
+        GM.dayNightCheckDone = DNC.nightTimeCheckDone;
+        //Bank
+        GM.score = Score;
+
+        SaveAndLoad.localData.savedGameManager.Add(GM);
+    }
 
 
 }

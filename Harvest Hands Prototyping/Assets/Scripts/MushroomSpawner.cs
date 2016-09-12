@@ -16,15 +16,20 @@ public class MushroomSpawner : NetworkBehaviour
     public float chanceToSpawn = 40;
     [SyncVar]
     public bool canSpawn = true;
+    private GameObject lastSpawned;
 
 	// Use this for initialization
 	void Start ()
     {
-	
-	}
-	
-	// Update is called once per frame
-	void Update ()
+        SaveAndLoad.SaveEvent += SaveFunction;
+    }
+    void OnDestroy()
+    {
+        SaveAndLoad.SaveEvent -= SaveFunction;
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
 	    if (Input.GetKeyDown(KeyCode.T))
         {
@@ -63,6 +68,7 @@ public class MushroomSpawner : NetworkBehaviour
                 GameObject newMush = (GameObject)Instantiate(mushrooms[mushIndex].mushroom, transform.position, transform.rotation);
                 newMush.GetComponent<Mushroom>().mushroomSpawner = gameObject;
                 NetworkServer.Spawn(newMush);
+                lastSpawned = newMush;
                 canSpawn = false;
                 //Debug.Log(randNum + " = Mushroom: " + mushIndex);
             }
@@ -71,6 +77,19 @@ public class MushroomSpawner : NetworkBehaviour
         {
             //Debug.Log("Canspawn = false");
         }
+    }
+
+    public void SaveFunction(object sender, string args)
+    {
+        //SavedProduce produce = new SavedProduce();
+        //produce.PosX = transform.position.x;
+        //produce.PosY = transform.position.y;
+        //produce.PosZ = transform.position.z;
+        //produce.produceName = produceName;
+        //produce.produceAmount = ProduceAmount;
+        //produce.scoure = score;
+        //
+        //SaveAndLoad.localData.savedProduce.Add(produce);
     }
 
 

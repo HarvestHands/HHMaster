@@ -29,11 +29,16 @@ public class Water : NetworkBehaviour
     // Use this for initialization
     void Start ()
     {
+        SaveAndLoad.SaveEvent += SaveFunction;
+
         if (waterlevel <= 0)
             drippingParticleSystem.StopParticles();
     }
 
-   
+    void OnDestroy()
+    {
+        SaveAndLoad.SaveEvent -= SaveFunction;
+    }   
 	
 	// Update is called once per frame
 	void Update ()
@@ -114,6 +119,16 @@ public class Water : NetworkBehaviour
             //BucketWater.transform.position.Set(BucketWater.transform.position.x, 0.7f, BucketWater.transform.position.z);
         }
     }
-    
+
+    public void SaveFunction(object sender, string args)
+    {
+        SavedBucket bucket = new SavedBucket();
+        bucket.PosX = transform.position.x;
+        bucket.PosY = transform.position.y;
+        bucket.PosZ = transform.position.z;
+        bucket.waterLevel = waterlevel;
+
+        SaveAndLoad.localData.savedBuckets.Add(bucket);
+    }
 
 }

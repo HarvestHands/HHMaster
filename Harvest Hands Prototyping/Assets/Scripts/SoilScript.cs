@@ -33,10 +33,16 @@ public class SoilScript : NetworkBehaviour {
             }
         }
         neighbourSoil = nearbySoil.ToArray();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        SaveAndLoad.SaveEvent += SaveFunction;
+    }
+
+    void OnDestroy()
+    {
+        SaveAndLoad.SaveEvent -= SaveFunction;
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 
@@ -63,6 +69,43 @@ public class SoilScript : NetworkBehaviour {
         myNewPlant.GetComponent<Plantscript>().CmdSwapPlantGraphics(stage);
 
         plantedPlant = myNewPlant;
+    }
+
+    public void SaveFunction(object sender, string args)
+    {
+        SavedSoil soil = new SavedSoil();
+        soil.PosX = transform.position.x;
+        soil.PosY = transform.position.y;
+        soil.PosZ = transform.position.z;
+        soil.occupied = occupied;
+
+        if (plantedPlant != null)
+        {
+            Plantscript plant = plantedPlant.GetComponent<Plantscript>();
+            if (plant != null)
+            {
+                soil.plantedPlant.plantState = plant.currentPlantState;
+                soil.plantedPlant.plantType = plant.currentPlantType;
+                soil.plantedPlant.plantName = plant.plantName;
+                soil.plantedPlant.readyToHarvest = plant.ReadyToHarvest;
+                soil.plantedPlant.isWatered = plant.isWatered;
+                soil.plantedPlant.isAlive = plant.isAlive;
+                soil.plantedPlant.timeToGrow = plant.TimeToGrow;
+                soil.plantedPlant.dryDaysToDie = plant.dryDaysToDie;
+                soil.plantedPlant.harvestsToRemove = plant.harvestsToRemove;
+                soil.plantedPlant.daysBetweenHarvest = plant.daysBetweenHarvest;
+                soil.plantedPlant.daySinceLastHarvest = plant.daySinceLastHarvest;
+                soil.plantedPlant.dayPlanted = plant.dayPlanted;
+            }
+            else
+                Debug.Log("Trying to save plantedPlant without plantscript");
+        }
+        else
+        {
+            soil.plantedPlant = null;
+        }
+
+        SaveAndLoad.localData.savedSoil.Add(soil);
     }
 
 

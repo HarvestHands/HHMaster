@@ -37,7 +37,8 @@ public class DayNightController : NetworkBehaviour
     [Tooltip("Score lost per player that died")]
     int deathPenalty = 0;
 
-    private bool nightTimeCheckDone = false;
+    [HideInInspector]
+    public bool nightTimeCheckDone = false;
     
 
     

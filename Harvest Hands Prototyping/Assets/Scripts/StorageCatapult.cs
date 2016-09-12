@@ -28,6 +28,12 @@ public class StorageCatapult : NetworkBehaviour
     void Start()
     {
         loadedObjects = new List<GameObject>();
+        SaveAndLoad.SaveEvent += SaveFunction;
+    }
+
+    void OnDestroy()
+    {
+        SaveAndLoad.SaveEvent -= SaveFunction;
     }
 
     // Use this for initialization
@@ -121,4 +127,16 @@ public class StorageCatapult : NetworkBehaviour
         expectedIncome = 0;
         priceText.text = "$" + expectedIncome.ToString();
     }
+
+    public void SaveFunction(object sender, string args)
+    {
+        SavedCatapult catapult = new SavedCatapult();
+        catapult.PosX = transform.position.x;
+        catapult.PosY = transform.position.y;
+        catapult.PosZ = transform.position.z;
+        catapult.loadedObjects = loadedObjects;
+
+        SaveAndLoad.localData.savedCatapult.Add(catapult);
+    }
+
 }

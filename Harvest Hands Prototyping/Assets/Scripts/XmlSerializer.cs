@@ -3,100 +3,140 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Serialization;
-using System.IO;
 
-/*
-[XmlRoot("PlantCollection")]
-public class PlantContainer : MonoBehaviour
-{    
-    [XmlArray("Plants"), XmlArrayItem("Plant")]
-    public PlantData[] plant;
-        
-    public static PlantContainer Load(string path)
-    {
-        XmlSerializer serializer = new XmlSerializer(typeof(PlantContainer));
-        //TextReader textReader = StreamReader(path);
 
-        using (var stream = new FileStream(path, FileMode.Open))
-        {
-            return serializer.Deserialize(stream) as PlantContainer;
-        }
-    }
-    
-    public void Save(string path)
-    {
-        var serializer = new XmlSerializer(typeof(PlantContainer));
-        using (var stream = new FileStream(path, FileMode.Create))
-        {
-            serializer.Serialize(stream, this);
-        }
-    }
+[System.Serializable]
+public class SavedDataList
+{
+    public List<SavedGameManager> savedGameManager = new List<SavedGameManager>();
+    public List<SavedBucket> savedBuckets = new List<SavedBucket>();
+    public List<SavedScythe> savedScythe = new List<SavedScythe>();
+    public List<SavedCatapult> savedCatapult = new List<SavedCatapult>();
+    //public List<SavedCatapultCrate> savedCatapultCrate = new List<SavedCatapultCrate>();
+    public List<SavedMushroomSpawner> savedMushroomSpawner = new List<SavedMushroomSpawner>();          //MAKE THE SAVE FUNCTION
+    public List<SavedMushroom> savedMushroom = new List<SavedMushroom>();      //Mushroom IS produce
+    public List<SavedProduce> savedProduce = new List<SavedProduce>();         //Mushroom IS produce
+    public List<SavedSoil> savedSoil = new List<SavedSoil>();   //SavedSoil has SavedPlant
+    public List<SavedShredder> savedShredder = new List<SavedShredder>();
+    public List<SavedSeed> savedSeed = new List<SavedSeed>();
+    public List<Debris> savedDebris = new List<Debris>();
 }
 
-public class GameManagerData : MonoBehaviour
+[System.Serializable]
+public class SavedGameManager // Save is in BankScript
 {
-    [XmlAttribute("ingameDay")]
+    //DayNightController
     public int ingameDay;
-    [XmlAttribute("currentTimeOfDay")]
     public float currentTimeOfDay;
-    [XmlAttribute("nightTimeCheckDone")]
-    public bool nightTimeCheckDone;
+    public bool dayNightCheckDone;
 
-    [XmlAttribute("score")]
+    //Bank
     public int score;
-    [XmlAttribute("oldScore")]
-    public int oldScore;
 }
 
-public class SoilData : MonoBehaviour
+[System.Serializable]
+public class SavedBucket
 {
-    //if occupied load next plant data from xml list
-    [XmlAttribute("occupied")]
-    public bool occupied;
+    public float PosX, PosY, PosZ;
+    public float waterLevel;
 }
 
-public class PlantData : MonoBehaviour
+[System.Serializable]
+public class SavedScythe
 {
-    [XmlAttribute("plantName")]
-    public string plantName;
-    [XmlAttribute("plantState")]
-    public Plantscript.PlantState plantState;
-    [XmlAttribute("readyToHarvest")]
-    public bool readyToHarvest;
-    [XmlAttribute("isWatered")]
-    public bool isWatered;
-    [XmlAttribute("isAlive")]
-    public bool isAlive;
-    [XmlAttribute("currentDryStreak")]
-    public int currentDryStreak;
-    [XmlAttribute("dryDays")]
-    public int DryDays;
-    [XmlAttribute("harvestToRemove")]
-    public int harvestsToRemove;
-    [XmlAttribute("daysSinceLastHarvest")]
-    public int daysSinceLastHarvest;
-    [XmlAttribute("dayPlanted")]
-    public int dayPlanted;
+    public float PosX, PosY, PosZ;
 }
 
-public class FarmToolsData : MonoBehaviour
+[System.Serializable]
+public class SavedCatapult                  //TODO
 {
-    
+    public float PosX, PosY, PosZ;
+    //public float expectedIncome;
+    public List<GameObject> loadedObjects;
 }
 
-//public class MoveableObjectData : MonoBehaviour
-//{
-//
-//}
-
-public class ProduceData : MonoBehaviour
+[System.Serializable]
+public class SavedCatapultCrate
 {
-    [XmlAttribute("produceName")]
+    public float PosX, PosY, PosZ;
+}           //TODO IF NEEDED?
+
+[System.Serializable]
+public class SavedMushroomSpawner
+{
+    public float PosX, PosY, PosZ;
+    public bool canSpawn;
+    public string spawnedMushroomName;
+    //list of chances and stuff?
+}
+
+[System.Serializable]
+public class SavedMushroom
+{
+    public float PosX, PosY, PosZ;
+
+}
+
+[System.Serializable]
+public class SavedProduce
+{
+    public float PosX, PosY, PosZ;
     public string produceName;
-    [XmlAttribute("produceAmount")]
-    public int produceAmount;
+    public int produceAmount, scoure;
+
 }
 
-//bucket
+[System.Serializable]
+public class SavedPlant
+{
+    public Plantscript.PlantState plantState;
+    public Plantscript.PlantType plantType;
+    public string plantName;
+    public bool readyToHarvest;
+    public bool isWatered;
+    public bool isAlive;
+    public float timeToGrow;
+    public float dryDaysToDie;
+    public float currentDryStreak;
+    public float dryDays;
+    public int harvestsToRemove;
+    public int daysBetweenHarvest;
+    public int daySinceLastHarvest;
+    public float dayPlanted;
+}
 
-    */
+[System.Serializable]
+public class SavedSoil
+{
+    public float PosX, PosY, PosZ;
+    public bool occupied;
+    public SavedPlant plantedPlant;
+}
+
+[System.Serializable]
+public class SavedShredder
+{
+    public int tier;
+}
+
+[System.Serializable]
+public class SavedSeed
+{
+    public float PosX, PosY, PosZ;
+    public string seedName;
+    public int seedCount;
+}
+
+[System.Serializable]
+public class SavedDebris
+{
+    public float PoxX, PosY, PosZ;
+}
+
+
+
+
+
+
+
+//
