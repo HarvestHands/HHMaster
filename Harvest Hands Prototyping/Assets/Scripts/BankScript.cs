@@ -59,7 +59,7 @@ public class BankScript : NetworkBehaviour
         ClientScene.FindLocalObject(playerId).GetComponent<PlayerInventory>().money += amount;
     }
 
-    public void SaveFunction(object sender, string args)
+    public void SaveFunction()
     {
         SavedGameManager GM = new SavedGameManager();
         //Day Night Controller

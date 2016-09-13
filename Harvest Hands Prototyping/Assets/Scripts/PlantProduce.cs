@@ -20,7 +20,7 @@ public class PlantProduce : NetworkBehaviour
             SaveAndLoad.SaveEvent -= SaveFunction;
     }
 
-    public void SaveFunction(object sender, string args)
+    public void SaveFunction()
     {
         SavedProduce produce = new SavedProduce();
         produce.PosX = transform.position.x;

@@ -27,7 +27,7 @@ public class Shredder : NetworkBehaviour
         if (Input.GetMouseButtonDown(0))
             //if (Input.GetKeyDown(KeyCode.P))
         {
-            Debug.Log("oldtier " + tier);
+            //Debug.Log("oldtier " + tier);
             CmdUpgradeShredder(++tier);
         }
     }
@@ -58,7 +58,7 @@ public class Shredder : NetworkBehaviour
     public void UpdateDebris()
     {
         
-        Debug.Log(debrisList.Count + " debrisListCount");
+        //Debug.Log(debrisList.Count + " debrisListCount");
         foreach (Debris debris in debrisList)
         {
             if (debris == null)
@@ -71,7 +71,7 @@ public class Shredder : NetworkBehaviour
             {
                 if (debris.GetComponent<Pickupable>() != null)
                 {
-                    Debug.Log(name + " tried to add pickupable to " + debris.name + " - (debris) already has pickupable");
+                    //Debug.Log(name + " tried to add pickupable to " + debris.name + " - (debris) already has pickupable");
                     continue;
                 }
                 debris.gameObject.AddComponent<Pickupable>();
@@ -82,7 +82,7 @@ public class Shredder : NetworkBehaviour
     [Command]
     public void CmdUpgradeShredder(int newTier)
     {
-        Debug.Log("Inside UpgradeShredder, new tier = " + newTier);
+        //Debug.Log("Inside UpgradeShredder, new tier = " + newTier);
         RpcUpgradeShredder(newTier);
         tier = newTier;
         if (newTier > Shredder.highestTierShredder)

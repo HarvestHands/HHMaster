@@ -58,13 +58,13 @@ void Start()
 
         resolutions = Screen.resolutions;
 
-        resolutionDrop.options.Clear();
-
-        for(int i = 0; i < resolutions.Length; i++)
-        {
-            resolutionDrop.options[i].text = (resolutions[i]).ToString();
-            resolutionDrop.value = i;
-        }
+        //resolutionDrop.options.Clear();
+        //
+        //for(int i = 0; i < resolutions.Length; i++)
+        //{
+        //    resolutionDrop.options[i].text = (resolutions[i]).ToString();
+        //    resolutionDrop.value = i;
+        //}
 
     }
 

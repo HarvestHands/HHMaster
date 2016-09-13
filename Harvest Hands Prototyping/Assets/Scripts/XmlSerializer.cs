@@ -74,7 +74,8 @@ public class SavedMushroomSpawner
 public class SavedMushroom
 {
     public float PosX, PosY, PosZ;
-
+    public string produceName;
+    public int produceAmount, scoure;
 }
 
 [System.Serializable]
@@ -83,7 +84,6 @@ public class SavedProduce
     public float PosX, PosY, PosZ;
     public string produceName;
     public int produceAmount, scoure;
-
 }
 
 [System.Serializable]
@@ -116,6 +116,7 @@ public class SavedSoil
 [System.Serializable]
 public class SavedShredder
 {
+    public float PosX, PosY, PosZ;
     public int tier;
 }
 

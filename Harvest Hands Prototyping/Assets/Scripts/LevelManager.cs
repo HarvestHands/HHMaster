@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
@@ -24,5 +25,20 @@ public class LevelManager : MonoBehaviour
     {
         LoadedLevel = false;
     }
+
+    public GameObject bucketPrefab;
+    public GameObject scythePrefab;
+    public GameObject catapultPrefab;
+    public GameObject mushroomSpawnerPrefab;
+    public GameObject mushroomPrefab;
+    public GameObject producePrefab;
+    public GameObject soilPrefab;
+    public GameObject shredderPrefab;
+    public GameObject seedPrefab;
+    public GameObject debrisPrefab;
+
+    public List<GameObject> plantPrefabs;
+    public List<GameObject> seedPrefabs;
+    public List<GameObject> mushroomPrefabs;
 
 }

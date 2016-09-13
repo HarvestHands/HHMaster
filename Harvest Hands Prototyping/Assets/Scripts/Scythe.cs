@@ -33,7 +33,7 @@ public class Scythe : MonoBehaviour
         }       
     }
 
-    public void SaveFunction(object sender, string args)
+    public void SaveFunction()
     {
         SavedScythe scythe = new SavedScythe();
         scythe.PosX = transform.position.x;

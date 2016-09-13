@@ -20,7 +20,7 @@ public class Mushroom : NetworkBehaviour
         
         else
         {
-            Debug.Log("Hehe xd");
+            //Debug.Log("Hehe xd");
             return;
         }
 

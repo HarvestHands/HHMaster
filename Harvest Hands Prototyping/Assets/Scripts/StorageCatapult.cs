@@ -128,7 +128,7 @@ public class StorageCatapult : NetworkBehaviour
         priceText.text = "$" + expectedIncome.ToString();
     }
 
-    public void SaveFunction(object sender, string args)
+    public void SaveFunction()
     {
         SavedCatapult catapult = new SavedCatapult();
         catapult.PosX = transform.position.x;

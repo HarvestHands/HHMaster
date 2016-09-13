@@ -9,31 +9,43 @@ public class SaveAndLoad : NetworkBehaviour
 {
     public static SavedDataList localData;
 
-    public delegate void SaveDelegate(object sender, string strng);//, Eventargs args)
+    public delegate void SaveDelegate();
     public static event SaveDelegate SaveEvent;
+    
 
-    public GameObject BucketPrefab;
-
-    void OnLevelWasLoaded()
+    void OnLevelWasLoaded(int levelLoaded)
     {
-        Debug.Log("OnLevelWasLoaded - Loaded a level = " + LevelManager.instance.LoadedLevel);
-
-        if (LevelManager.instance.LoadedLevel)
-        {
-            FireLoadEvent();
-        }
+        
 
     }
 
     // Use this for initialization
     void Start ()
     {
-	
+	    Debug.Log("OnLevelWasLoaded - Loaded a level = " + LevelManager.instance.LoadedLevel);
+
+        if (LevelManager.instance.LoadedLevel)
+        {
+            LoadData();
+            FireLoadEvent();
+        }
 	}
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Debug.Log("Firing Save Event! ");
+            SaveData();
+            Debug.Log("Save Event Finished! ");
+        }
+    }
 	
 
     public void FireSaveEvent()
     {
+        localData = new SavedDataList();
+
         localData.savedGameManager = new List<SavedGameManager>();
         localData.savedBuckets = new List<SavedBucket>();
         localData.savedScythe = new List<SavedScythe>();
@@ -47,8 +59,9 @@ public class SaveAndLoad : NetworkBehaviour
         localData.savedSeed = new List<SavedSeed>();
         
 
-        if (SaveEvent != null)
-            SaveEvent(null, null);
+        
+        SaveEvent();
+        
     }
 
     public void FireLoadEvent()
@@ -99,6 +112,7 @@ public class SaveAndLoad : NetworkBehaviour
 
     public void RemoveDefaultObjects()
     {
+        Debug.Log("Removing Default Objects!");
         //Remove default stuff
         //GameObject gameManager = FindObjectOfType<DayNightController>().gameObject; //Not deleted
         Water[] buckets = FindObjectsOfType<Water>();
@@ -150,7 +164,62 @@ public class SaveAndLoad : NetworkBehaviour
 
     public void GenerateLoadedObjects()
     {
-        
+        Debug.Log("Generating Loaded Objects!");
+        //Load GameManager
+        foreach (SavedGameManager manager in localData.savedGameManager)
+        {
+            SaveAndLoad.LoadGameManager(manager);
+        }
+        //Load Buckets
+        foreach (SavedBucket bucket in localData.savedBuckets)
+        {
+            SaveAndLoad.LoadBucket(bucket);
+        }
+        //Load Scythe
+        foreach (SavedScythe scythe in localData.savedScythe)
+        {
+            SaveAndLoad.LoadScythe(scythe);
+        }
+        //Load Catapult
+        foreach (SavedCatapult catapult in localData.savedCatapult)
+        {
+            SaveAndLoad.LoadCatapult(catapult);
+        }
+        //Load Mushroom Spawners
+        foreach (SavedMushroomSpawner spawner in localData.savedMushroomSpawner)
+        {
+            SaveAndLoad.LoadMushroomSpawner(spawner);
+        }
+        //Load Mushrooms
+        foreach (SavedMushroom mushroom in localData.savedMushroom)
+        {
+            SaveAndLoad.LoadMushroom(mushroom);
+        }
+        //Load Produce
+        foreach (SavedProduce produce in localData.savedProduce)
+        {
+            SaveAndLoad.LoadProduce(produce);
+        }
+        //Load Soil
+        foreach (SavedSoil soil in localData.savedSoil)
+        {
+            SaveAndLoad.LoadSoil(soil);
+        }
+        //Load Shredder
+        foreach (SavedShredder shredder in localData.savedShredder)
+        {
+            SaveAndLoad.LoadShredder(shredder);
+        }
+        //Load Seed
+        foreach (SavedSeed seed in localData.savedSeed)
+        {
+            SaveAndLoad.LoadSeed(seed);
+        }
+        //Load Debris
+        //foreach (SavedDebris debris in localData.savedDebris)
+        //{
+        //    SaveAndLoad.LoadDebris(debris);
+        //}
     }
 
     public static void LoadGameManager(SavedGameManager GM)
@@ -163,9 +232,118 @@ public class SaveAndLoad : NetworkBehaviour
 
         BankScript bank = GameManager.GetComponent<BankScript>();
         bank.Score = GM.score;
+        
     }
 
     public static void LoadBucket(SavedBucket bucket)
+    {
+        GameObject newBucket = Instantiate(LevelManager.instance.bucketPrefab);
+        newBucket.transform.position = new Vector3(bucket.PosX, bucket.PosY, bucket.PosZ);
+        newBucket.GetComponent<Water>().waterlevel = bucket.waterLevel;
+    }
+    
+    public static void LoadScythe(SavedScythe scythe)
+    {
+        GameObject newScythe = Instantiate(LevelManager.instance.scythePrefab);
+        newScythe.transform.position = new Vector3(scythe.PosX, scythe.PosY, scythe.PosZ);        
+    }
+
+    public static void LoadCatapult(SavedCatapult catapult)
+    {
+        GameObject newCatapult = Instantiate(LevelManager.instance.catapultPrefab);
+        newCatapult.transform.position = new Vector3(catapult.PosX, catapult.PosY, catapult.PosZ);
+        newCatapult.GetComponent<StorageCatapult>().loadedObjects = catapult.loadedObjects;
+    }
+
+    public static void LoadMushroomSpawner(SavedMushroomSpawner spawner)
+    {
+        GameObject newSpawner = Instantiate(LevelManager.instance.mushroomSpawnerPrefab);
+        newSpawner.transform.position = new Vector3(spawner.PosX, spawner.PosY, spawner.PosZ);
+        newSpawner.GetComponent<MushroomSpawner>().canSpawn = spawner.canSpawn;
+        //if mushroom != null 
+        if (spawner.canSpawn)
+        {
+            //spawn mushroom
+            GameObject newMushroom = null;
+            foreach (GameObject MushType in LevelManager.instance.mushroomPrefabs)
+            {
+                if (spawner.spawnedMushroomName == MushType.GetComponent<SeedScript>().plantPrefab.GetComponent<Plantscript>().plantName)
+                {
+                    newMushroom = Instantiate(MushType);
+                    break;
+                }
+            }
+            if (newMushroom == null)
+            {
+                Debug.Log("Tried to load mushrrom but did not match any LevelManager.MushroomPrefabs");
+                return;
+            }
+            newMushroom.transform.position = newSpawner.transform.position;
+        }
+    }
+
+    public static void LoadMushroom(SavedMushroom mushroom)
+    {
+        GameObject newMushroom = Instantiate(LevelManager.instance.mushroomPrefab);
+        newMushroom.transform.position = new Vector3(mushroom.PosX, mushroom.PosY, mushroom.PosZ);
+        PlantProduce mushroomPlant = newMushroom.GetComponent<PlantProduce>();
+        mushroomPlant.produceName = mushroom.produceName;
+        mushroomPlant.score = mushroom.scoure;
+        mushroomPlant.ProduceAmount = mushroom.produceAmount;
+    }
+
+    public static void LoadProduce(SavedProduce produce)
+    {
+        GameObject newProduce = Instantiate(LevelManager.instance.producePrefab);
+        newProduce.transform.position = new Vector3(produce.PosX, produce.PosY, produce.PosZ);
+        PlantProduce produceScript = newProduce.GetComponent<PlantProduce>();
+        produceScript.produceName = produce.produceName;
+        produceScript.score = produce.scoure;
+        produceScript.ProduceAmount = produce.produceAmount;
+    }
+
+    public static void LoadSoil(SavedSoil soil)
+    {
+        GameObject newsoil = Instantiate(LevelManager.instance.soilPrefab);
+        newsoil.transform.position = new Vector3(soil.PosX, soil.PosY, soil.PosZ);
+       
+        //if occupied != false 
+        if (soil.occupied)
+        {
+            //spawn plant
+            newsoil.GetComponent<SoilScript>().CreatePlantFromData(soil.plantedPlant);
+        }
+    }
+
+    public static void LoadShredder(SavedShredder shredder)
+    {
+        GameObject newshredder = Instantiate(LevelManager.instance.bucketPrefab);
+        newshredder.transform.position = new Vector3(shredder.PosX, shredder.PosY, shredder.PosZ);
+        newshredder.GetComponent<Shredder>().tier = shredder.tier;
+    }
+
+    public static void LoadSeed(SavedSeed seed)
+    {
+        GameObject newSeed = Instantiate(LevelManager.instance.seedPrefab);
+        foreach (GameObject seedType in LevelManager.instance.seedPrefabs)
+        {
+            if (seed.seedName == seedType.GetComponent<SeedScript>().plantPrefab.GetComponent<Plantscript>().plantName)
+            {
+                newSeed = Instantiate(seedType);
+                break;
+            }
+        }
+        if (newSeed == null)
+        {
+            Debug.Log("Tried to load seed but did not match any LevelManager.SeedTypes");
+            return;
+        }
+
+        newSeed.transform.position = new Vector3(seed.PosX, seed.PosY, seed.PosZ);
+        newSeed.GetComponent<SeedScript>().NumberOfSeeds = seed.seedCount;
+    }
+
+    public static void LoadDebris(SavedDebris debris)
     {
 
     }

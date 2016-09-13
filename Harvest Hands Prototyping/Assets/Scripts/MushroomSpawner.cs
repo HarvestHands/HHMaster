@@ -22,6 +22,8 @@ public class MushroomSpawner : NetworkBehaviour
 	void Start ()
     {
         SaveAndLoad.SaveEvent += SaveFunction;
+        GameObject.Find("GameManager").GetComponent<DayNightController>().mushroomSpawners.Add(this);
+        
     }
     void OnDestroy()
     {
@@ -79,7 +81,7 @@ public class MushroomSpawner : NetworkBehaviour
         }
     }
 
-    public void SaveFunction(object sender, string args)
+    public void SaveFunction()
     {
         //SavedProduce produce = new SavedProduce();
         //produce.PosX = transform.position.x;

@@ -30,7 +30,7 @@ public class DayNightController : NetworkBehaviour
 
     private NetworkStartPosition[] spawnPoints;
     private ShopScript shop;
-    public MushroomSpawner[] mushroomSpawners;
+    public List<MushroomSpawner> mushroomSpawners = new List<MushroomSpawner>();
     public StorageCatapult storageCatapult;
 
     [SerializeField]
@@ -49,7 +49,7 @@ public class DayNightController : NetworkBehaviour
         sunInitialIntensity = sun.intensity;
         spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         shop = FindObjectOfType<ShopScript>();
-        mushroomSpawners = FindObjectsOfType<MushroomSpawner>();
+        //mushroomSpawners = FindObjectsOfType<MushroomSpawner>();
     }
 
     // Update is called once per frame

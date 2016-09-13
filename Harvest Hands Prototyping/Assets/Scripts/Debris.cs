@@ -19,7 +19,7 @@ public class Debris : MonoBehaviour
         //Debug.Log("debrisReqTier = " + requiredShredderTier + " -- Shredder tier = " + shredder.GetComponent<Shredder>().tier);
 
 
-        Debug.Log("highestShredderTier = " + Shredder.highestTierShredder, gameObject);
+        //Debug.Log("highestShredderTier = " + Shredder.highestTierShredder, gameObject);
         //if (shredder.GetComponent<Shredder>().tier >= requiredShredderTier)
         if (Shredder.highestTierShredder >= requiredShredderTier)
         {

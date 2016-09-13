@@ -71,7 +71,7 @@ public class SoilScript : NetworkBehaviour {
         plantedPlant = myNewPlant;
     }
 
-    public void SaveFunction(object sender, string args)
+    public void SaveFunction()
     {
         SavedSoil soil = new SavedSoil();
         soil.PosX = transform.position.x;
@@ -108,6 +108,64 @@ public class SoilScript : NetworkBehaviour {
         SaveAndLoad.localData.savedSoil.Add(soil);
     }
 
+
+    public void CreatePlantFromData(SavedPlant plantToMake)
+    {
+        GameObject myNewPlant = null;
+        foreach (GameObject plantType in LevelManager.instance.plantPrefabs)
+        {
+            if (plantToMake.plantName == plantType.GetComponent<Plantscript>().plantName)
+            {
+                myNewPlant = Instantiate(plantType);
+                break;
+            }
+        }
+        if (myNewPlant == null)
+        {
+            Debug.Log("Tried to load plant but did not match any LevelManager.PlantTypes");
+            return;
+        }
+
+        Plantscript myNewPlantScript = myNewPlant.GetComponent<Plantscript>();
+        myNewPlantScript.currentPlantState = plantToMake.plantState;
+        //created with planttype
+        myNewPlantScript.ReadyToHarvest = plantToMake.readyToHarvest;
+        myNewPlantScript.isWatered = plantToMake.isWatered;
+        myNewPlantScript.isAlive = plantToMake.isAlive;
+        myNewPlantScript.TimeToGrow = plantToMake.timeToGrow;
+        myNewPlantScript.dryDaysToDie = plantToMake.dryDaysToDie;
+        myNewPlantScript.currentDryStreak = plantToMake.currentDryStreak;
+        myNewPlantScript.dryDays = plantToMake.dryDays;
+        myNewPlantScript.harvestsToRemove = plantToMake.harvestsToRemove;
+        myNewPlantScript.daysBetweenHarvest = plantToMake.daysBetweenHarvest;
+        myNewPlantScript.daySinceLastHarvest = plantToMake.daySinceLastHarvest;
+        myNewPlantScript.dayPlanted = plantToMake.dayPlanted;
+        myNewPlantScript.CmdSwapPlantGraphics(myNewPlantScript.currentPlantState);
+        myNewPlantScript.parentNetId = netId;
+
+        myNewPlant.transform.parent = gameObject.transform;
+        myNewPlant.transform.localPosition = plantPrefab.transform.position;
+
+        plantedPlant = myNewPlant;
+    }
+
+    //public class SavedPlant
+    //{
+    //    public Plantscript.PlantState plantState;
+    //    public Plantscript.PlantType plantType;
+    //    public string plantName;
+    //    public bool readyToHarvest;
+    //    public bool isWatered;
+    //    public bool isAlive;
+    //    public float timeToGrow;
+    //    public float dryDaysToDie;
+    //    public float currentDryStreak;
+    //    public float dryDays;
+    //    public int harvestsToRemove;
+    //    public int daysBetweenHarvest;
+    //    public int daySinceLastHarvest;
+    //    public float dayPlanted;
+    //}
 
 }
 

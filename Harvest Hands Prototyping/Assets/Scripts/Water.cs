@@ -120,7 +120,7 @@ public class Water : NetworkBehaviour
         }
     }
 
-    public void SaveFunction(object sender, string args)
+    public void SaveFunction()
     {
         SavedBucket bucket = new SavedBucket();
         bucket.PosX = transform.position.x;
