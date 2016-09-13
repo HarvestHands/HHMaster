@@ -12,7 +12,7 @@ public class waterBox : MonoBehaviour {
 
 	void Start(){
 
-		oxySlider.maxValue = 10f;
+		oxySlider.maxValue = drownTimer;
 
 	}
 
@@ -21,26 +21,29 @@ public class waterBox : MonoBehaviour {
 		if (plr.gameObject.tag == "Player") {
 
 			underWaterUI.GetComponent<Canvas> ().enabled = true;
-		} 
+		
 			
-		//GameObject.GetComponent<FirstPersonController> ().walkSpeed;
-		//GameObject.GetComponent<FirstPersonController> ().runSpeed;
+			//GameObject.GetComponent<FirstPersonController> ().walkSpeed;
+			//GameObject.GetComponent<FirstPersonController> ().runSpeed;
 
-		drownTimer -= Time.deltaTime;
-		if (drownTimer < 0) {
+			drownTimer -= Time.deltaTime;
+			if (drownTimer < 0) {
 
-			plr.transform.position = spawnPoint.transform.position;
-			Debug.Log ("Dead af lol");
+				plr.transform.position = spawnPoint.transform.position;
+				Debug.Log ("Dead af lol");
+
+			}
 
 		}
-
 		oxySlider.value = drownTimer;
 	}
 
 	void OnTriggerExit(Collider plr){
 
-		underWaterUI.GetComponent<Canvas> ().enabled = false;
+		if (plr.gameObject.tag == "Player") {
+			underWaterUI.GetComponent<Canvas> ().enabled = false;
 
-		drownTimer = 10f;
+			drownTimer = oxySlider.maxValue;
+		}
 	}
 }

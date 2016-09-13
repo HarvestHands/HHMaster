@@ -41,7 +41,7 @@ public class Water : NetworkBehaviour
 
     }
 
-    void OnCollisionEnter(Collision coll)
+   /* void OnTriggerEnter(Collider coll)
     {
         if (coll.gameObject.tag == "Water")
         {
@@ -56,7 +56,7 @@ public class Water : NetworkBehaviour
         {
             Debug.Log("Watered by collision");
         }  
-    }
+    }*/
 
     void OnTriggerEnter(Collider col)
     {
@@ -78,6 +78,20 @@ public class Water : NetworkBehaviour
                 }
             }
         }
+
+		if (col.gameObject.tag == "Water")
+		{
+			waterlevel = waterfill;
+			BucketWater.SetActive(true);
+			AdjustWaterLevel();
+			GameObject refillSplash = (GameObject)Instantiate(refillParticles, transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
+			Destroy(refillSplash, 2);
+		}
+
+		if (col.gameObject.tag == "Plant")
+		{
+			Debug.Log("Watered by collision");
+		}  
     }
 
     void AdjustWaterLevel()
