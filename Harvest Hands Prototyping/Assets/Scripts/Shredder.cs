@@ -14,15 +14,21 @@ public class Shredder : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        SaveAndLoad.SaveEvent += SaveFunction;
         if (tier > Shredder.highestTierShredder)
         {
             Shredder.highestTierShredder = tier;
             UpdateDebris();
         }        
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    void OnDestroy()
+    {
+        SaveAndLoad.SaveEvent -= SaveFunction;
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         if (Input.GetMouseButtonDown(0))
             //if (Input.GetKeyDown(KeyCode.P))
@@ -102,5 +108,17 @@ public class Shredder : NetworkBehaviour
             UpdateDebris();
         }
     }
-    
+
+    public void SaveFunction()
+    {
+
+        SavedShredder shredder = new SavedShredder();
+        shredder.PosX = transform.position.x;
+        shredder.PosY = transform.position.y;
+        shredder.PosZ = transform.position.z;
+        shredder.tier = tier;
+
+        SaveAndLoad.localData.savedShredder.Add(shredder);
+    }
+
 }

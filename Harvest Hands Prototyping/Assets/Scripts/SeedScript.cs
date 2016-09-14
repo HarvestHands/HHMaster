@@ -11,15 +11,23 @@ public class SeedScript : NetworkBehaviour
     public GameObject plantPrefab;
     
 	// Use this for initialization
-	void Start () {
-	
-	}
+	void Start ()
+    {
+        SaveAndLoad.SaveEvent += SaveFunction;
+    }
 	
 	// Update is called once per frame
-	void Update () {
-	
-	}    
-   
+	void Update ()
+    {
+
+    }
+
+    void OnDestroy()
+    {
+        if (GetComponent<Mushroom>() == null)
+            SaveAndLoad.SaveEvent -= SaveFunction;
+    }
+
 
     void OnTriggerEnter(Collider col)
     {
@@ -37,6 +45,18 @@ public class SeedScript : NetworkBehaviour
                 }
             }
         }
+    }
+
+    public void SaveFunction()
+    {
+        SavedSeed seed = new SavedSeed();
+        seed.PosX = transform.position.x;
+        seed.PosY = transform.position.y;
+        seed.PosZ = transform.position.z;
+        seed.seedName = plantPrefab.GetComponent<Plantscript>().plantName;
+        seed.seedCount = NumberOfSeeds;
+
+        SaveAndLoad.localData.savedSeed.Add(seed);
     }
 
 }

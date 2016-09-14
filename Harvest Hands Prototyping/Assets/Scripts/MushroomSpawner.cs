@@ -83,15 +83,23 @@ public class MushroomSpawner : NetworkBehaviour
 
     public void SaveFunction()
     {
-        //SavedProduce produce = new SavedProduce();
-        //produce.PosX = transform.position.x;
-        //produce.PosY = transform.position.y;
-        //produce.PosZ = transform.position.z;
-        //produce.produceName = produceName;
-        //produce.produceAmount = ProduceAmount;
-        //produce.scoure = score;
-        //
-        //SaveAndLoad.localData.savedProduce.Add(produce);
+
+        SavedMushroomSpawner spawner = new SavedMushroomSpawner();
+        spawner.PosX = transform.position.x;
+        spawner.PosY = transform.position.y;
+        spawner.PosZ = transform.position.z;
+        spawner.canSpawn = canSpawn;
+        if (!canSpawn)
+        {
+            PlantProduce mushy = lastSpawned.GetComponent<PlantProduce>();
+            spawner.spawnedMushroomName = mushy.produceName;
+        }
+        else
+        {
+            spawner.spawnedMushroomName = null;
+        }
+        
+        SaveAndLoad.localData.savedMushroomSpawner.Add(spawner);
     }
 
 

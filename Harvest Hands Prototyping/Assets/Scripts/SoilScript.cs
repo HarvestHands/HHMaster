@@ -84,6 +84,7 @@ public class SoilScript : NetworkBehaviour {
             Plantscript plant = plantedPlant.GetComponent<Plantscript>();
             if (plant != null)
             {
+                soil.plantedPlant = new SavedPlant();
                 soil.plantedPlant.plantState = plant.currentPlantState;
                 soil.plantedPlant.plantType = plant.currentPlantType;
                 soil.plantedPlant.plantName = plant.plantName;

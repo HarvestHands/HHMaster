@@ -22,12 +22,24 @@ public class SaveAndLoad : NetworkBehaviour
     // Use this for initialization
     void Start ()
     {
+        Debug.Log("LevelManager.instance = " + LevelManager.instance);
 	    Debug.Log("OnLevelWasLoaded - Loaded a level = " + LevelManager.instance.LoadedLevel);
 
         if (LevelManager.instance.LoadedLevel)
         {
             LoadData();
+
             FireLoadEvent();
+            Debug.Log("SavedGameManager.Count = " + localData.savedGameManager.Count);
+            Debug.Log("SavedBuckets.Count = " + localData.savedBuckets.Count);
+            Debug.Log("SavedScythe.Count = " + localData.savedScythe.Count);
+            Debug.Log("SavedCatapult.Count = " + localData.savedCatapult.Count);
+            Debug.Log("SavedMushroomSpawner.Count = " + localData.savedMushroomSpawner.Count);
+            Debug.Log("SavedMushroom.Count = " + localData.savedMushroom.Count);
+            Debug.Log("SavedProduce.Count = " + localData.savedProduce.Count);
+            Debug.Log("SavedSoil.Count = " + localData.savedSoil.Count);
+            Debug.Log("SavedShredder.Count = " + localData.savedShredder.Count);
+            Debug.Log("SavedSeed.Count = " + localData.savedSeed.Count);
         }
 	}
 
@@ -61,7 +73,18 @@ public class SaveAndLoad : NetworkBehaviour
 
         
         SaveEvent();
-        
+
+        Debug.Log("SavedGameManager.Count = " + localData.savedGameManager.Count);
+        Debug.Log("SavedBuckets.Count = " + localData.savedBuckets.Count);
+        Debug.Log("SavedScythe.Count = " + localData.savedScythe.Count);
+        Debug.Log("SavedCatapult.Count = " + localData.savedCatapult.Count);
+        Debug.Log("SavedMushroomSpawner.Count = " + localData.savedMushroomSpawner.Count);
+        Debug.Log("SavedMushroom.Count = " + localData.savedMushroom.Count);
+        Debug.Log("SavedProduce.Count = " + localData.savedProduce.Count);
+        Debug.Log("SavedSoil.Count = " + localData.savedSoil.Count);
+        Debug.Log("SavedShredder.Count = " + localData.savedShredder.Count);
+        Debug.Log("SavedSeed.Count = " + localData.savedSeed.Count);
+
     }
 
     public void FireLoadEvent()
@@ -261,13 +284,13 @@ public class SaveAndLoad : NetworkBehaviour
         newSpawner.transform.position = new Vector3(spawner.PosX, spawner.PosY, spawner.PosZ);
         newSpawner.GetComponent<MushroomSpawner>().canSpawn = spawner.canSpawn;
         //if mushroom != null 
-        if (spawner.canSpawn)
+        if (!spawner.canSpawn)
         {
             //spawn mushroom
             GameObject newMushroom = null;
             foreach (GameObject MushType in LevelManager.instance.mushroomPrefabs)
             {
-                if (spawner.spawnedMushroomName == MushType.GetComponent<SeedScript>().plantPrefab.GetComponent<Plantscript>().plantName)
+                if (spawner.spawnedMushroomName == MushType.GetComponent<PlantProduce>().produceName)
                 {
                     newMushroom = Instantiate(MushType);
                     break;
@@ -317,14 +340,14 @@ public class SaveAndLoad : NetworkBehaviour
 
     public static void LoadShredder(SavedShredder shredder)
     {
-        GameObject newshredder = Instantiate(LevelManager.instance.bucketPrefab);
+        GameObject newshredder = Instantiate(LevelManager.instance.shredderPrefab);
         newshredder.transform.position = new Vector3(shredder.PosX, shredder.PosY, shredder.PosZ);
         newshredder.GetComponent<Shredder>().tier = shredder.tier;
     }
 
     public static void LoadSeed(SavedSeed seed)
     {
-        GameObject newSeed = Instantiate(LevelManager.instance.seedPrefab);
+        GameObject newSeed = null;
         foreach (GameObject seedType in LevelManager.instance.seedPrefabs)
         {
             if (seed.seedName == seedType.GetComponent<SeedScript>().plantPrefab.GetComponent<Plantscript>().plantName)
