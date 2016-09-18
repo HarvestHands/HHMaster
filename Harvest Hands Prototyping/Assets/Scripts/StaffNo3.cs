@@ -60,12 +60,13 @@ public class StaffNo3 : NetworkBehaviour
         pullBackPosition = transform.FindChild("FirstCamera").FindChild("PullBackPosition").gameObject;
         objectheld = false;
         timeLeft = 0.02f;
+     //   GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
         if (!isLocalPlayer)
         {
             if (!objectheld)
@@ -101,7 +102,7 @@ public class StaffNo3 : NetworkBehaviour
                 }
             }
             return;
-        }                       
+        }
 
         if (objectheld == false)
         {
@@ -154,6 +155,9 @@ public class StaffNo3 : NetworkBehaviour
         }
         else
         {
+
+
+
             // staffmove();
             ChosenObj.GetComponent<Rigidbody>().MovePosition(StaffGrabber.transform.position);
 
@@ -174,21 +178,27 @@ public class StaffNo3 : NetworkBehaviour
             ChosenObj.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
             timeLeft -= Time.deltaTime;
-            
+
             Quaternion grabbedRotation = StaffGrabber.transform.rotation;
             ChosenObj.GetComponent<Rigidbody>().MoveRotation(grabbedRotation * Quaternion.Euler(objectXRotation, objectYRotation, 0));
-            
+
+
+
+
+
+
+
             if (Input.GetKeyDown(KeyCode.E))
             {
-                
+
             }
 
             if (ChosenObj.tag == "Seed")
             {
                 var ChosenSeed = ChosenObj.GetComponent<SeedScript>();
-                
+
                 SeedNumber.text = ChosenSeed.NumberOfSeeds.ToString();
-                
+
                 SeedType.text = ChosenObj.GetComponent<SeedScript>().plantPrefab.GetComponent<Plantscript>().plantName;
             }
 
@@ -206,7 +216,7 @@ public class StaffNo3 : NetworkBehaviour
             }
             //if object held , drops the object
             if (Input.GetMouseButtonDown(0))
-            {                
+            {
                 CmdDropped();
                 CmdNullChosen();
                 throwforce = throwForceMin;
@@ -219,9 +229,24 @@ public class StaffNo3 : NetworkBehaviour
                 throwforce = throwForceMin;
             }
             RotateObject();
+
+
+           //  Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+             //   Physics.IgnoreLayerCollision(GameObject.FindGameObjectWithTag("Player").layer, ChosenObj.layer);
+
+
+
+        //    Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+
+
+
+          
+
+               Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+
+          //  Physics.IgnoreLayerCollision(GameObject.FindGameObjectWithTag("Player").layer, ChosenObj.layer);
         }
     }
-
     [Command]
     void CmdTipBucket(NetworkInstanceId id)
     {
