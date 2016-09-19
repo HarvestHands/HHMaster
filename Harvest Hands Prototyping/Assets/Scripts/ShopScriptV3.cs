@@ -11,7 +11,10 @@ public class ShopScriptV3 : MonoBehaviour {
     public GameObject SpC;
 
 
-   public GameObject ItemA;
+    public GameObject saleItemA;
+
+	public GameObject itemForSale;
+	//public GameObject salceItemC;
 
    // [SyncVar]
     public float GrabDistance = 3.0f;
@@ -32,10 +35,11 @@ public class ShopScriptV3 : MonoBehaviour {
         SpawnA = true;
         go = false;
 
-     //   ItemA = GameObject.Find("TestItem");
-        ItemA = GameObject.FindGameObjectWithTag("ShopItemA");
+     // ItemA = GameObject.Find("TestItem");
+        saleItemA = GameObject.FindGameObjectWithTag("ShopItemA");
 
-        Instantiate(Resources.Load("TestItem"), SpA.transform.position, SpA.transform.rotation);
+		Instantiate(Resources.Load("TestItem"), SpA.transform.position, SpA.transform.rotation);
+		//Instantiate(itemForSale, SpA.transform.position, SpA.transform.rotation);
 
         //   ItemA.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
         GameObject.FindGameObjectWithTag("ShopItemA").GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;

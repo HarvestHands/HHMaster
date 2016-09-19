@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class sundial : MonoBehaviour {
 
 	public GameObject GameM;
 
+	public Text time;
+
 	// Use this for initialization
 	void Start () {
+
+		GameM = GameObject.FindGameObjectWithTag ("GameManager");
 	
 	}
 	
@@ -15,7 +20,7 @@ public class sundial : MonoBehaviour {
 
 	//	GameM.GetComponent<DayNightController> ().currentTimeOfDay;
 
-		gameObject.transform.Rotate (Vector3.back * (GameM.GetComponent<DayNightController> ().currentTimeOfDay*10));
+		time.text = (GameM.GetComponent<DayNightController> ().currentTimeOfDay).ToString();
 
 	}
 }
