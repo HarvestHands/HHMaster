@@ -215,25 +215,25 @@ public class DayNightController : NetworkBehaviour
 
         foreach(GameObject player in Players)
         {
-            player.GetComponent<DeathFade>().RpcFadeIn();
+            //player.GetComponent<DeathFade>().RpcFadeIn();
             if (!player.GetComponent<PlayerInventory>().isSafe)
             {
+                player.GetComponent<DeathFade>().RpcFadeIn(false);
                 playersDead++;
                 //int respawnIndex = Random.Range(0, spawnPoints.Length -1);
                 //player.transform.position = spawnPoints[respawnIndex].transform.position;
                 //player.transform.rotation = spawnPoints[respawnIndex].transform.rotation;
                 
             }
+            else
+            {
+                player.GetComponent<DeathFade>().RpcFadeIn(true);
+            }
         }
         int scoreLost = deathPenalty * playersDead;
         //Debug.Log(shop.Score + " - " + scoreLost);
         shop.Score -= scoreLost;
         //Debug.Log(shop.Score);
-        
-        
-
-
-
     }
         
     [ClientRpc]
@@ -250,11 +250,12 @@ public class DayNightController : NetworkBehaviour
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in Players)
         {
-            player.GetComponent<DeathFade>().RpcFadeOut();
+            //player.GetComponent<DeathFade>().RpcFadeOut();
             //if player is NOT safe
             if (!player.GetComponent<PlayerInventory>().isSafe)
             {
                 int respawnIndex = Random.Range(0, spawnPoints.Length - 1);
+                player.GetComponent<DeathFade>().RpcFadeOut(false);
                 //player.transform.position = spawnPoints[respawnIndex].transform.position;
                 //player.transform.rotation = spawnPoints[respawnIndex].transform.rotation;
 
@@ -262,6 +263,10 @@ public class DayNightController : NetworkBehaviour
 
                 //player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().RpcRespawnPlayer(spawnPoints[respawnIndex].transform.position);
 
+            }
+            else
+            {
+                player.GetComponent<DeathFade>().RpcFadeOut(true);
             }
         }
     }

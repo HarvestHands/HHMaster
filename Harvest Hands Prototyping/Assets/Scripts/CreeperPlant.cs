@@ -43,6 +43,7 @@ public class CreeperPlant : MonoBehaviour {
                 Debug.Log("Random Chance = " + chance + " - spread to occupied");
                 if (chance <= spreadToPlantChance)
                 {
+                    Debug.Log("Destroy - " + GetComponentInChildren<Plantscript>().gameObject);
                     Destroy(GetComponentInChildren<Plantscript>().gameObject);
                     soil.CmdPlantSeed(CreeperResource, Plantscript.PlantState.Growing);
                     soil.occupied = true;
