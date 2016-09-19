@@ -109,21 +109,21 @@ public class Water : NetworkBehaviour
         if (waterlevel > 0 && waterlevel <= 1)
         {
             Vector3 tmpPos = BucketWater.transform.localPosition; // Store all Vector3
-            tmpPos.y = 0.2f; // example assign individual fox Y axe
+            tmpPos.y = 0.1f; // example assign individual fox Y axe
             BucketWater.transform.localPosition = tmpPos; // Assign back all Vector3
             //  BucketWater.transform.position.Set(BucketWater.transform.position.x, 0.3f, BucketWater.transform.position.z);
         }
         if (waterlevel > 1 && waterlevel <= 2)
         {            
             Vector3 tmpPos = BucketWater.transform.localPosition; // Store all Vector3
-            tmpPos.y = 0.5f; // example assign individual fox Y axe
+            tmpPos.y = 0.3f; // example assign individual fox Y axe
             BucketWater.transform.localPosition = tmpPos; // Assign back all Vector3
             // BucketWater.transform.position.Set(BucketWater.transform.position.x,0.5f,BucketWater.transform.position.z);
         }
         if (waterlevel > 2 && waterlevel <= 3)
         {
             Vector3 tmpPos = BucketWater.transform.localPosition; // Store all Vector3
-            tmpPos.y = 0.7f; // example assign individual fox Y axe
+            tmpPos.y = 0.5f; // example assign individual fox Y axe
             BucketWater.transform.localPosition = tmpPos; // Assign back all Vector3
             //BucketWater.transform.position.Set(BucketWater.transform.position.x, 0.7f, BucketWater.transform.position.z);
         }
