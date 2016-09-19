@@ -263,12 +263,14 @@ public class SaveAndLoad : NetworkBehaviour
         GameObject newBucket = Instantiate(LevelManager.instance.bucketPrefab);
         newBucket.transform.position = new Vector3(bucket.PosX, bucket.PosY, bucket.PosZ);
         newBucket.GetComponent<Water>().waterlevel = bucket.waterLevel;
+        NetworkServer.Spawn(newBucket);
     }
     
     public static void LoadScythe(SavedScythe scythe)
     {
         GameObject newScythe = Instantiate(LevelManager.instance.scythePrefab);
-        newScythe.transform.position = new Vector3(scythe.PosX, scythe.PosY, scythe.PosZ);        
+        newScythe.transform.position = new Vector3(scythe.PosX, scythe.PosY, scythe.PosZ);
+        NetworkServer.Spawn(newScythe);
     }
 
     public static void LoadCatapult(SavedCatapult catapult)
@@ -276,6 +278,7 @@ public class SaveAndLoad : NetworkBehaviour
         GameObject newCatapult = Instantiate(LevelManager.instance.catapultPrefab);
         newCatapult.transform.position = new Vector3(catapult.PosX, catapult.PosY, catapult.PosZ);
         newCatapult.GetComponent<StorageCatapult>().loadedObjects = catapult.loadedObjects;
+        NetworkServer.Spawn(newCatapult);
     }
 
     public static void LoadMushroomSpawner(SavedMushroomSpawner spawner)
@@ -303,6 +306,7 @@ public class SaveAndLoad : NetworkBehaviour
             }
             newMushroom.transform.position = newSpawner.transform.position;
         }
+        NetworkServer.Spawn(newSpawner);
     }
 
     public static void LoadMushroom(SavedMushroom mushroom)
@@ -313,6 +317,7 @@ public class SaveAndLoad : NetworkBehaviour
         mushroomPlant.produceName = mushroom.produceName;
         mushroomPlant.score = mushroom.scoure;
         mushroomPlant.ProduceAmount = mushroom.produceAmount;
+        NetworkServer.Spawn(newMushroom);
     }
 
     public static void LoadProduce(SavedProduce produce)
@@ -323,6 +328,7 @@ public class SaveAndLoad : NetworkBehaviour
         produceScript.produceName = produce.produceName;
         produceScript.score = produce.scoure;
         produceScript.ProduceAmount = produce.produceAmount;
+        NetworkServer.Spawn(newProduce);
     }
 
     public static void LoadSoil(SavedSoil soil)
@@ -336,6 +342,7 @@ public class SaveAndLoad : NetworkBehaviour
             //spawn plant
             newsoil.GetComponent<SoilScript>().CreatePlantFromData(soil.plantedPlant);
         }
+        NetworkServer.Spawn(newsoil);
     }
 
     public static void LoadShredder(SavedShredder shredder)
@@ -343,6 +350,7 @@ public class SaveAndLoad : NetworkBehaviour
         GameObject newshredder = Instantiate(LevelManager.instance.shredderPrefab);
         newshredder.transform.position = new Vector3(shredder.PosX, shredder.PosY, shredder.PosZ);
         newshredder.GetComponent<Shredder>().tier = shredder.tier;
+        NetworkServer.Spawn(newshredder);
     }
 
     public static void LoadSeed(SavedSeed seed)
@@ -364,6 +372,7 @@ public class SaveAndLoad : NetworkBehaviour
 
         newSeed.transform.position = new Vector3(seed.PosX, seed.PosY, seed.PosZ);
         newSeed.GetComponent<SeedScript>().NumberOfSeeds = seed.seedCount;
+        NetworkServer.Spawn(newSeed);
     }
 
     public static void LoadDebris(SavedDebris debris)

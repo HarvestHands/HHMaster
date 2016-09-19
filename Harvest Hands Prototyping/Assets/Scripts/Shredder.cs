@@ -12,14 +12,15 @@ public class Shredder : NetworkBehaviour
     public ParticleSystemScript shreddedParticles;
     
 	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
         SaveAndLoad.SaveEvent += SaveFunction;
         if (tier > Shredder.highestTierShredder)
         {
             Shredder.highestTierShredder = tier;
             UpdateDebris();
-        }        
+        }
+        shreddedParticles = GetComponent<ParticleSystemScript>();   
 	}
 
     void OnDestroy()

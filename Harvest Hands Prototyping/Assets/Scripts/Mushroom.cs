@@ -10,7 +10,7 @@ public class Mushroom : NetworkBehaviour
     public GameObject mushroomSpawner;
     
     	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
         if (mushroomSpawner != null)
         {

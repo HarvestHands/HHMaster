@@ -12,7 +12,7 @@ public class ParticleSystemScript : NetworkBehaviour
     public bool loop = false;
 
 	// Use this for initialization
-	void Start ()
+	void Awake()
     {
         if (multiParticlePrefab != null)
         {

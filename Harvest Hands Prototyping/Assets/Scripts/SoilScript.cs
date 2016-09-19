@@ -17,9 +17,8 @@ public class SoilScript : NetworkBehaviour {
     public GameObject plantedPlant;
 
     // Use this for initialization
-    public override void OnStartClient()
+    void Awake()
     {
-        base.OnStartClient();
         dayNightController = GameObject.FindGameObjectWithTag("GameManager").GetComponent<DayNightController>();
         GetComponent<MeshRenderer>().enabled = false;
 

@@ -18,8 +18,8 @@ public class MushroomSpawner : NetworkBehaviour
     public bool canSpawn = true;
     private GameObject lastSpawned;
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Awake()
     {
         SaveAndLoad.SaveEvent += SaveFunction;
         GameObject.Find("GameManager").GetComponent<DayNightController>().mushroomSpawners.Add(this);

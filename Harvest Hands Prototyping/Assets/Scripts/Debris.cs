@@ -6,7 +6,7 @@ public class Debris : MonoBehaviour
     public int requiredShredderTier = 1;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         //Debug.Log(this);
         //Debug.Log(Shredder.tier + " - shredder Tier");
