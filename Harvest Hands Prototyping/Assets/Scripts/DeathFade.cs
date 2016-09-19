@@ -36,6 +36,7 @@ public class DeathFade : NetworkBehaviour
         if (isLocalPlayer)
         {
             CmdFadeOut(true);
+            deadText.CrossFadeAlpha(0, 0.01f, true);
             //deadText.color = new Vector4(deadText.color.r, deadText.color.g, deadText.color.b, 0);
         }
     }
