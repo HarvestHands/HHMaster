@@ -86,7 +86,8 @@ public class StorageCatapult : NetworkBehaviour
 
         //Update sign
         expectedIncome += produceObject.ProduceAmount * produceObject.score;
-        priceText.text = "$" + expectedIncome.ToString();
+        if (priceText != null)
+            priceText.text = "$" + expectedIncome.ToString();
 
         //Deactive actual crate
         produceObject.gameObject.SetActive(false);                
