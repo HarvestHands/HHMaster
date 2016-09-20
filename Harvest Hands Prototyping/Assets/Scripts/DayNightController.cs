@@ -31,7 +31,8 @@ public class DayNightController : NetworkBehaviour
     private NetworkStartPosition[] spawnPoints;
     private ShopScript shop;
     public MushroomSpawner[] mushroomSpawners;
-    public StorageCatapult storageCatapult;
+    public List<StorageCatapult> storageCatapults;
+    //public StorageCatapult storageCatapult;
 
     [SerializeField]
     [Tooltip("Score lost per player that died")]
@@ -94,7 +95,11 @@ public class DayNightController : NetworkBehaviour
         CmdSetTimeOfDayMorning();
         CmdIncrementDay();
         CmdUpdateMushroomSpawners();
-        storageCatapult.CmdEmptyCatapult();
+        //storageCatapult.CmdEmptyCatapult();
+        foreach(StorageCatapult catapult in storageCatapults)
+        {
+            catapult.CmdEmptyCatapult();
+        }
     }
 
     void UpdateSun()

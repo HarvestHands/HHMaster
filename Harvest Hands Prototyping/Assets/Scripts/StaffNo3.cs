@@ -253,7 +253,7 @@ public class StaffNo3 : NetworkBehaviour
         var o = ClientScene.FindLocalObject(id);
         o.GetComponent<Pickupable>().anim.SetTrigger("play");
         //o.GetComponent<Water>().GetComponent<ParticleSystem>().CmdPlayParticles();
-        o.GetComponent<Water>().pouringParticleSystem.CmdPlayParticles();
+        //o.GetComponent<Water>().pouringParticleSystem.CmdPlayParticles();
         //o.GetComponent<Water>().RpcPlayParticles();
 
     }

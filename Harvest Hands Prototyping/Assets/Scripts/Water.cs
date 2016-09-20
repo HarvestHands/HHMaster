@@ -8,7 +8,7 @@ public class Water : NetworkBehaviour
 {
             
     public GameObject BucketWater;
-    public ParticleSystemScript pouringParticleSystem;
+    //public ParticleSystemScript pouringParticleSystem;
     public ParticleSystemScript drippingParticleSystem;
     public float particlePlayDuration;
 
@@ -25,6 +25,7 @@ public class Water : NetworkBehaviour
     public float waterfill = 3.0f;
 
     public GameObject refillParticles;
+    public GameObject wateredParticles;
 
     // Use this for initialization
     void Start ()
@@ -73,7 +74,12 @@ public class Water : NetworkBehaviour
                     {
                         plant.isWatered = true;
                         waterlevel -= waterdrain;
-                        AdjustWaterLevel();                        
+                        AdjustWaterLevel();        
+                        if (wateredParticles != null)
+                        {
+                            GameObject waterSplash = (GameObject)Instantiate(wateredParticles, transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
+                            Destroy(waterSplash, plant.particlePlayDuration);
+                        }                
                     }
                 }
             }
@@ -84,8 +90,11 @@ public class Water : NetworkBehaviour
 			waterlevel = waterfill;
 			BucketWater.SetActive(true);
 			AdjustWaterLevel();
-			GameObject refillSplash = (GameObject)Instantiate(refillParticles, transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
-			Destroy(refillSplash, 2);
+            if (refillParticles != null)
+            {
+                GameObject refillSplash = (GameObject)Instantiate(refillParticles, transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
+                Destroy(refillSplash, 2);
+            }
 		}
 
 		if (col.gameObject.tag == "Plant")

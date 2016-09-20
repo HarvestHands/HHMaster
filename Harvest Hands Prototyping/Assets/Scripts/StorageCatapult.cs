@@ -35,6 +35,7 @@ public class StorageCatapult : NetworkBehaviour
     {
         base.OnStartClient();
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
+        gameManager.GetComponent<DayNightController>().storageCatapults.Add(this);
         farmbank = gameManager.GetComponent<BankScript>();
         foreach (GameObject crate in catapultCrates)
         {
@@ -120,6 +121,7 @@ public class StorageCatapult : NetworkBehaviour
         }
 
         expectedIncome = 0;
-        priceText.text = "$" + expectedIncome.ToString();
+        if (priceText != null)
+            priceText.text = "$" + expectedIncome.ToString();
     }
 }
