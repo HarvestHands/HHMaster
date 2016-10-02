@@ -5,9 +5,9 @@ using System.Collections;
 public class waterNoiseTest : MonoBehaviour 
 
 	{
-		public float perlinScale;
-		public float waveSpeed;
-		public float waveHeight;
+		public float perlinScale = 4.56f;
+		public float waveSpeed = 1f;
+		public float waveHeight = 2f;
 
 		private Mesh mesh;
 
@@ -20,7 +20,7 @@ public class waterNoiseTest : MonoBehaviour
 		void AnimateMesh()
 		{
 			if ( !mesh )
-				mesh = GetComponent< MeshFilter >().mesh;
+				mesh = GetComponent< MeshFilter >().sharedMesh;
 
 			Vector3[] vertices = mesh.vertices;
 
@@ -35,10 +35,10 @@ public class waterNoiseTest : MonoBehaviour
 			mesh.vertices = vertices;
 		}
 
-	/*void OnCollisionStay(Collision terrain){
+	void OnCollisionStay(Collision terrain){
 		foreach (ContactPoint contact in terrain.contacts) {
 			print (contact.thisCollider.name + "hit" + contact.otherCollider.name);
 			Debug.DrawRay (contact.point, contact.normal, Color.white);
 		}
-	}*/
+	}
 	}

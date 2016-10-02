@@ -12,8 +12,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
     public class FirstPersonController : NetworkBehaviour
     {
         [SerializeField] private bool m_IsWalking;
-        [SerializeField] private float m_WalkSpeed;
-        [SerializeField] private float m_RunSpeed;
+        [SerializeField] public float m_WalkSpeed;
+        [SerializeField] public float m_RunSpeed;
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
@@ -111,7 +111,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void Respawn(Vector3 newPos)
         {
             transform.position = newPos;                   
-            Debug.Log("respawning at: " + newPos);            
+            //Debug.Log("respawning at: " + newPos);            
         }
         
 

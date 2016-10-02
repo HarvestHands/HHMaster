@@ -30,6 +30,9 @@ public class DayNightController : NetworkBehaviour
 
     private NetworkStartPosition[] spawnPoints;
     private ShopScript shop;
+    public MushroomSpawner[] mushroomSpawners;
+    public List<StorageCatapult> storageCatapults;
+    //public StorageCatapult storageCatapult;
 
     [SerializeField]
     [Tooltip("Score lost per player that died")]
@@ -46,6 +49,7 @@ public class DayNightController : NetworkBehaviour
         sunInitialIntensity = sun.intensity;
         spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         shop = FindObjectOfType<ShopScript>();
+        mushroomSpawners = FindObjectsOfType<MushroomSpawner>();
     }
 
     // Update is called once per frame
@@ -72,13 +76,11 @@ public class DayNightController : NetworkBehaviour
             if (!nightTimeCheckDone)
             {
                 nightTimeCheckDone = true;
-                //currentTimeOfDay = 0;
-                //currentTimeOfDay = startDayAt;
-                //ingameDay++;
-                //CmdUpdatePlants();
                 CmdCheckPlayersSafe();
+
                 Invoke("RespawnDeadPlayers", nightPauseLength / 2);
-                Invoke("CmdUpdateNightStuff", nightPauseLength);
+                Invoke("CmdUpdateNightStuff", nightPauseLength / 2);
+                Invoke("CmdSetTimeOfDayMorning", nightPauseLength);
             }
         }
 
@@ -92,8 +94,12 @@ public class DayNightController : NetworkBehaviour
         CmdUpdatePlants();
         CmdSetTimeOfDayMorning();
         CmdIncrementDay();
-        //RespawnDeadPlayers();
-        RpcSyncTimeOfDay(currentTimeOfDay);
+        CmdUpdateMushroomSpawners();
+        //storageCatapult.CmdEmptyCatapult();
+        foreach(StorageCatapult catapult in storageCatapults)
+        {
+            catapult.CmdEmptyCatapult();
+        }
     }
 
     void UpdateSun()
@@ -214,25 +220,25 @@ public class DayNightController : NetworkBehaviour
 
         foreach(GameObject player in Players)
         {
-            player.GetComponent<DeathFade>().RpcFadeIn();
+            //player.GetComponent<DeathFade>().RpcFadeIn();
             if (!player.GetComponent<PlayerInventory>().isSafe)
             {
+                player.GetComponent<DeathFade>().RpcFadeIn(false);
                 playersDead++;
                 //int respawnIndex = Random.Range(0, spawnPoints.Length -1);
                 //player.transform.position = spawnPoints[respawnIndex].transform.position;
                 //player.transform.rotation = spawnPoints[respawnIndex].transform.rotation;
                 
             }
+            else
+            {
+                player.GetComponent<DeathFade>().RpcFadeIn(true);
+            }
         }
         int scoreLost = deathPenalty * playersDead;
         //Debug.Log(shop.Score + " - " + scoreLost);
         shop.Score -= scoreLost;
         //Debug.Log(shop.Score);
-        
-        
-
-
-
     }
         
     [ClientRpc]
@@ -249,11 +255,12 @@ public class DayNightController : NetworkBehaviour
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in Players)
         {
-            player.GetComponent<DeathFade>().RpcFadeOut();
+            //player.GetComponent<DeathFade>().RpcFadeOut();
             //if player is NOT safe
             if (!player.GetComponent<PlayerInventory>().isSafe)
             {
                 int respawnIndex = Random.Range(0, spawnPoints.Length - 1);
+                player.GetComponent<DeathFade>().RpcFadeOut(false);
                 //player.transform.position = spawnPoints[respawnIndex].transform.position;
                 //player.transform.rotation = spawnPoints[respawnIndex].transform.rotation;
 
@@ -262,6 +269,10 @@ public class DayNightController : NetworkBehaviour
                 //player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().RpcRespawnPlayer(spawnPoints[respawnIndex].transform.position);
 
             }
+            else
+            {
+                player.GetComponent<DeathFade>().RpcFadeOut(true);
+            }
         }
     }
 
@@ -269,6 +280,7 @@ public class DayNightController : NetworkBehaviour
     void CmdSetTimeOfDayMorning()
     {
         currentTimeOfDay = startDayAt;
+        RpcSyncTimeOfDay(currentTimeOfDay);
     }
 
     [Command]
@@ -284,4 +296,15 @@ public class DayNightController : NetworkBehaviour
     {
         currentTimeOfDay = _timeOfDay;
     }
+
+    [Command]
+    void CmdUpdateMushroomSpawners()
+    {
+        foreach(MushroomSpawner spawner in mushroomSpawners)
+        {
+            spawner.AttemptSpawn();
+        }
+    }
+
+
 }

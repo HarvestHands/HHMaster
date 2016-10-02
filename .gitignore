@@ -29,3 +29,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 Harvest Hands Prototyping/obj/
+*.binary
