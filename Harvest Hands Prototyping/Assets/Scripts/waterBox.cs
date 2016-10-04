@@ -35,6 +35,7 @@ public class waterBox : MonoBehaviour {
 
                 GameObject.Find("GameManager").GetComponent<DayNightController>().playerdeathcount += 1;
                 GameObject.Find("GameManager").GetComponent<DayNightController>().PlayerDeathPenalty();
+                player.GetComponent<StaffNo3>().CmdDropped();
             }
 
 		}

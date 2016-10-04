@@ -24,8 +24,8 @@ public class Shredder : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetMouseButtonDown(0))
-            //if (Input.GetKeyDown(KeyCode.P))
+       // if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Debug.Log("oldtier " + tier);
             CmdUpgradeShredder(++tier);

@@ -312,7 +312,7 @@ public class StaffNo3 : NetworkBehaviour
     }
 
     [Command]
-    void CmdDropped()
+    public void CmdDropped()
     {
         ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         carriedItemID = NetworkInstanceId.Invalid;

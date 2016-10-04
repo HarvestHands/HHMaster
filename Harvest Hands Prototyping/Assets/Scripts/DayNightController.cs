@@ -292,7 +292,8 @@ public class DayNightController : NetworkBehaviour
                 //default 10
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed /= 2;
                 Debug.Log(player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed);
-            }
+                player.GetComponent<StaffNo3>().CmdDropped();
+        }
 
        
 
