@@ -58,7 +58,7 @@ public class Shredder : NetworkBehaviour
     public void UpdateDebris()
     {
         
-        Debug.Log(debrisList.Count + " debrisListCount");
+        //Debug.Log(debrisList.Count + " debrisListCount");
         foreach (Debris debris in debrisList)
         {
             if (debris == null)
@@ -71,7 +71,7 @@ public class Shredder : NetworkBehaviour
             {
                 if (debris.GetComponent<Pickupable>() != null)
                 {
-                    Debug.Log(name + " tried to add pickupable to " + debris.name + " - (debris) already has pickupable");
+                    //Debug.Log(name + " tried to add pickupable to " + debris.name + " - (debris) already has pickupable");
                     continue;
                 }
                 debris.gameObject.AddComponent<Pickupable>();

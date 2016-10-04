@@ -7,6 +7,7 @@ public class WinObjectTrigger : MonoBehaviour
 {
     public bool gameWon = false;
     public int numberOfHighScores = 5;
+    public float finalScore = 0;
     // Use this for initialization
     void Awake ()
     {
@@ -17,7 +18,12 @@ public class WinObjectTrigger : MonoBehaviour
 	void Update ()
     {
         if (!gameWon)
+        {
+            finalScore += Time.deltaTime;
             return;
+        }
+
+
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
@@ -35,11 +41,11 @@ public class WinObjectTrigger : MonoBehaviour
             //Win Game
             gameWon = true;
             Time.timeScale = 0.0001f;
-            int finalScore = 1;
+            //int finalScore = 1;
 
-            PlayerPrefs.SetFloat("finalScore1", finalScore);
+            //PlayerPrefs.SetFloat("finalScore1", finalScore);
             //if a new highscore
-            if (finalScore > PlayerPrefs.GetFloat("finalScore" + (numberOfHighScores - 1)))
+            if (finalScore > PlayerPrefs.GetFloat("finalScore" + (numberOfHighScores - 1), 0))
             {
                 //load old score order
                 List<float> highscores = new List<float>();
@@ -58,6 +64,7 @@ public class WinObjectTrigger : MonoBehaviour
                 for (int i = 0; i < numberOfHighScores; ++i)
                 {
                     PlayerPrefs.SetFloat("finalScore" + i.ToString(), highscores[i]);
+                    Debug.Log("finalScore" + i.ToString() + " = " + highscores[i].ToString());
                 }
             }
 
