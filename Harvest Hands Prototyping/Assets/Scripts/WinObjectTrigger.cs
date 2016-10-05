@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class WinObjectTrigger : MonoBehaviour
 {
+    public GameObject gameOverCanvasObject;
+
     public bool gameWon = false;
-    public int numberOfHighScores = 5;
+    //public int numberOfHighScores = 5;
     public float finalScore = 0;
     // Use this for initialization
     void Awake ()
@@ -44,29 +46,10 @@ public class WinObjectTrigger : MonoBehaviour
             //int finalScore = 1;
 
             //PlayerPrefs.SetFloat("finalScore1", finalScore);
-            //if a new highscore
-            if (finalScore > PlayerPrefs.GetFloat("finalScore" + (numberOfHighScores - 1), 0))
-            {
-                //load old score order
-                List<float> highscores = new List<float>();
-                for (int i = 0; i < numberOfHighScores; ++i)
-                {
-                    highscores.Add(PlayerPrefs.GetFloat("finalScore" + i.ToString(), 0));
-                    
-                }
-                //add new highscore to list
-                highscores.Add(finalScore);
 
-                //calculate new highscore order
-                highscores.Sort((x, y) => y.CompareTo(x));
-
-                //Save new list order
-                for (int i = 0; i < numberOfHighScores; ++i)
-                {
-                    PlayerPrefs.SetFloat("finalScore" + i.ToString(), highscores[i]);
-                    Debug.Log("finalScore" + i.ToString() + " = " + highscores[i].ToString());
-                }
-            }
+            gameOverCanvasObject.SetActive(true);
+            gameOverCanvasObject.GetComponent<EndGameMenu>().EndGameStuff(finalScore);
+           
 
 
         }
