@@ -53,7 +53,7 @@ public class MushroomSpawner : NetworkBehaviour
                     if (spwn >= randNum)
                     {
                         mushIndex = i;
-                        Debug.Log("spawn: " + spwn + " < randnum" + randNum + " --- i = " + i);
+                        //Debug.Log("spawn: " + spwn + " < randnum" + randNum + " --- i = " + i);
                         break;
                     }
 

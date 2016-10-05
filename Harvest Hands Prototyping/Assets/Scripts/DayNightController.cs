@@ -65,6 +65,7 @@ public class DayNightController : NetworkBehaviour
         UpdateStars();
 
         currentTimeOfDay += (Time.deltaTime / secondsInDay) * timeMulitplier;
+        GetComponent<FogEffect>().UpdateFog(currentTimeOfDay);
 
         if (!isServer)
             return;
