@@ -46,7 +46,7 @@ public class ParticleSystemScript : NetworkBehaviour
         foreach (ParticleSystem system in particleSystems)
         {
             system.Play();
-            Debug.Log(system.name);
+            //Debug.Log(system.name);
         }
 
         Invoke("StopParticles", playDuration);

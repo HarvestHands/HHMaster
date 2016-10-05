@@ -143,6 +143,10 @@ public class StaffNo3 : NetworkBehaviour
                         }
 
                     }
+                    else if (Hit.transform.GetComponent<Interactable>() != null)
+                    {
+                        Hit.transform.GetComponent<Interactable>().onInteract();
+                    }
                 }
             }
         }
