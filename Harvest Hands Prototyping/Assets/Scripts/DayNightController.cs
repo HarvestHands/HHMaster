@@ -39,17 +39,18 @@ public class DayNightController : NetworkBehaviour
     int deathPenalty = 0;
 
     private bool nightTimeCheckDone = false;
-    
 
-    
-	// Use this for initialization
-	void Start ()
+    public int playerdeathcount;
+
+    // Use this for initialization
+    void Start ()
     {
         sky = RenderSettings.skybox;
         sunInitialIntensity = sun.intensity;
         spawnPoints = FindObjectsOfType<NetworkStartPosition>();
         shop = FindObjectOfType<ShopScript>();
         mushroomSpawners = FindObjectsOfType<MushroomSpawner>();
+        playerdeathcount = 0;
     }
 
     // Update is called once per frame
@@ -58,7 +59,7 @@ public class DayNightController : NetworkBehaviour
         //only run if server?
         //if (!isServer)
         //    return;
-
+    //    PlayerDeathPenalty();
 
         //Update Sun rotation according to time of day
         UpdateSun();
@@ -269,12 +270,34 @@ public class DayNightController : NetworkBehaviour
 
                 //player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().RpcRespawnPlayer(spawnPoints[respawnIndex].transform.position);
 
+                playerdeathcount += 1;
+                PlayerDeathPenalty();
             }
             else
             {
                 player.GetComponent<DeathFade>().RpcFadeOut(true);
             }
         }
+    }
+
+
+    public void PlayerDeathPenalty()
+    {
+       
+        
+     
+            Debug.Log("PLAYERDEATHTEST");
+            GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
+            foreach (GameObject player in Players)
+            {
+                //default 10
+                player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed /= 2;
+                Debug.Log(player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed);
+                player.GetComponent<StaffNo3>().CmdDropped();
+        }
+
+       
+
     }
 
     [Command]

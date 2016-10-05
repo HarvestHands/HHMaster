@@ -31,8 +31,12 @@ public class waterBox : MonoBehaviour {
 
 				plr.transform.position = spawnPoint.transform.position;
 				Debug.Log ("Dead af lol");
+              
 
-			}
+                GameObject.Find("GameManager").GetComponent<DayNightController>().playerdeathcount += 1;
+                GameObject.Find("GameManager").GetComponent<DayNightController>().PlayerDeathPenalty();
+                player.GetComponent<StaffNo3>().CmdDropped();
+            }
 
 		}
 		oxySlider.value = drownTimer;
