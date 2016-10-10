@@ -24,12 +24,12 @@ public class Shredder : NetworkBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (Input.GetMouseButtonDown(0))
-            //if (Input.GetKeyDown(KeyCode.P))
-        {
-            Debug.Log("oldtier " + tier);
-            CmdUpgradeShredder(++tier);
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //    //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    Debug.Log("oldtier " + tier);
+        //    CmdUpgradeShredder(++tier);
+        //}
     }
 
     //  ///////////////////////////////// TO DO TEST DEBRIS AND SHREDDER UPGRADING
@@ -82,7 +82,7 @@ public class Shredder : NetworkBehaviour
     [Command]
     public void CmdUpgradeShredder(int newTier)
     {
-        Debug.Log("Inside UpgradeShredder, new tier = " + newTier);
+        //Debug.Log("Inside UpgradeShredder, new tier = " + newTier);
         RpcUpgradeShredder(newTier);
         tier = newTier;
         if (newTier > Shredder.highestTierShredder)

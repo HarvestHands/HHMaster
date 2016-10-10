@@ -41,7 +41,7 @@ public class MushroomSpawner : NetworkBehaviour
             {
                 if (mushrooms.Count < 1)
                 {
-                    Debug.Log(name + " - mushroom list is empty");
+                    //Debug.Log(name + " - mushroom list is empty");
                     return;
                 }
                 float randNum = Random.Range(0, 100);
@@ -53,7 +53,7 @@ public class MushroomSpawner : NetworkBehaviour
                     if (spwn >= randNum)
                     {
                         mushIndex = i;
-                        Debug.Log("spawn: " + spwn + " < randnum" + randNum + " --- i = " + i);
+                        //Debug.Log("spawn: " + spwn + " < randnum" + randNum + " --- i = " + i);
                         break;
                     }
 

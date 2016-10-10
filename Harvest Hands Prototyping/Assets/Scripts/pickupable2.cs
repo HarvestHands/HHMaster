@@ -19,10 +19,18 @@ public class pickupable2 : MonoBehaviour
     //public float FresnalRate;
     public float FresnelIncrease;
     //private float FresnalTimer;
+
+    [Header("Optional")]
+    public Renderer renderer;
     // Use this for initialization
     void Start()
     {
-		GetComponent<Renderer> ().sharedMaterial = GetComponent<Renderer> ().material;
+        if (renderer == null)
+            renderer = GetComponent<Renderer>();
+
+            //GetComponent<Renderer> ().sharedMaterial = GetComponent<Renderer> ().material;
+
+        renderer.sharedMaterial = renderer.material;
 
 
 
@@ -47,16 +55,16 @@ public class pickupable2 : MonoBehaviour
             switch (type)
             {
                 case pickupType.PICKUP:
-                    GetComponent<Renderer>().sharedMaterial.SetColor("_FresnelColour", ColorSingleton.instance.PickUp);
-                    GetComponent<Renderer>().sharedMaterial.SetFloat("_FresnelAmount", FresnelAmount);// FresnelAmount
+                    renderer.sharedMaterial.SetColor("_FresnelColour", ColorSingleton.instance.PickUp);
+                    renderer.sharedMaterial.SetFloat("_FresnelAmount", FresnelAmount);// FresnelAmount
                     break;
                 case pickupType.INTERACT:
-                    GetComponent<Renderer>().sharedMaterial.SetColor("_FresnelColour", ColorSingleton.instance.Interact);
-                    GetComponent<Renderer>().sharedMaterial.SetFloat("_FresnelAmount", FresnelAmount);// FresnelAmount
+                    renderer.sharedMaterial.SetColor("_FresnelColour", ColorSingleton.instance.Interact);
+                    renderer.sharedMaterial.SetFloat("_FresnelAmount", FresnelAmount);// FresnelAmount
                     break;
                 case pickupType.BUY:
-                    GetComponent<Renderer>().sharedMaterial.SetColor("_FresnelColour", ColorSingleton.instance.Buy);
-                    GetComponent<Renderer>().sharedMaterial.SetFloat("_FresnelAmount", FresnelAmount);// FresnelAmount
+                    renderer.sharedMaterial.SetColor("_FresnelColour", ColorSingleton.instance.Buy);
+                    renderer.sharedMaterial.SetFloat("_FresnelAmount", FresnelAmount);// FresnelAmount
                     break;
             }
         }
@@ -64,7 +72,7 @@ public class pickupable2 : MonoBehaviour
         {
             FresnelAmount -= Time.deltaTime * FresnelDecrease;
             FresnelAmount = Mathf.Clamp(FresnelAmount, 0, 1);
-            GetComponent<Renderer>().sharedMaterial.SetFloat("_FresnelAmount", FresnelAmount);
+            renderer.sharedMaterial.SetFloat("_FresnelAmount", FresnelAmount);
         }
 
         hit = false;

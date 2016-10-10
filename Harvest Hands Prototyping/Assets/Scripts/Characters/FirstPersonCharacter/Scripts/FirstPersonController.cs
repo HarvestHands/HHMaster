@@ -14,6 +14,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private bool m_IsWalking;
         [SerializeField] public float m_WalkSpeed;
         [SerializeField] public float m_RunSpeed;
+        [SerializeField] public float walkSpeedAccelerationTime = 0.2f;
+        [SerializeField] public float runSpeedAccelerationTime = 1f;
         [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
         [SerializeField] private float m_JumpSpeed;
         [SerializeField] private float m_StickToGroundForce;
@@ -45,6 +47,12 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_NextStep;
         private bool m_Jumping;
         private AudioSource m_AudioSource;
+
+
+        private float velocity = 0;
+        private float currentSpeed;
+        private Vector3 desiredMoveDir;
+
 
         // Use this for initialization
         private void Start()
@@ -132,17 +140,39 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
             float speed;
             GetInput(out speed);
+
+            if(m_Input.sqrMagnitude == 0.0f)
+            {
+                speed = 0.0f;
+            }
+
+            if (m_IsWalking)
+                currentSpeed = Mathf.SmoothDamp(currentSpeed, speed, ref velocity, walkSpeedAccelerationTime);
+            else
+                currentSpeed = Mathf.SmoothDamp(currentSpeed, speed, ref velocity, runSpeedAccelerationTime);
+
+            Debug.Log(currentSpeed);
+
+
             // always move along the camera forward as it is the direction that it being aimed at
-            Vector3 desiredMove = transform.forward*m_Input.y + transform.right*m_Input.x;
+            Vector3 desiredMove = transform.forward * m_Input.y + transform.right * m_Input.x;
 
             // get a normal for the surface that is being touched to move along it
             RaycastHit hitInfo;
             Physics.SphereCast(transform.position, m_CharacterController.radius, Vector3.down, out hitInfo,
-                               m_CharacterController.height/2f, ~0, QueryTriggerInteraction.Ignore);
+                               m_CharacterController.height / 2f, ~0, QueryTriggerInteraction.Ignore);
             desiredMove = Vector3.ProjectOnPlane(desiredMove, hitInfo.normal).normalized;
 
-            m_MoveDir.x = desiredMove.x*speed;
-            m_MoveDir.z = desiredMove.z*speed;
+            if (desiredMove.sqrMagnitude != 0.0f)
+            {
+                desiredMoveDir = desiredMove;
+            }
+            
+
+            
+
+            m_MoveDir.x = desiredMoveDir.x* currentSpeed;
+            m_MoveDir.z = desiredMoveDir.z* currentSpeed;
 
 
             if (m_CharacterController.isGrounded)
@@ -163,8 +193,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
 
-            ProgressStepCycle(speed);
-            UpdateCameraPosition(speed);
+            ProgressStepCycle(currentSpeed);
+            UpdateCameraPosition(currentSpeed);
 
             m_MouseLook.UpdateCursorLock();
         }
@@ -252,6 +282,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 #endif
             // set the desired speed to be walking or running
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
+
+        
+            Debug.Log("Speed = " + speed);
+
             m_Input = new Vector2(horizontal, vertical);
 
             // normalize input if it exceeds 1 in combined length:
