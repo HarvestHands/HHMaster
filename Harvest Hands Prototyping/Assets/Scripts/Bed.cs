@@ -18,6 +18,6 @@ public class Bed : MonoBehaviour
 
     public void Activate()
     {
-        GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay = 0.75f;
+        GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay = 0.749f;
     }
 }
