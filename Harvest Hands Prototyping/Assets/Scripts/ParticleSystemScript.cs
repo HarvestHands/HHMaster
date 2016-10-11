@@ -42,7 +42,7 @@ public class ParticleSystemScript : NetworkBehaviour
     [ClientRpc]
     public void RpcPlayParticlesForTime()
     {
-        Debug.Log("insidePlayParticlesForTime");
+        //Debug.Log("insidePlayParticlesForTime");
         foreach (ParticleSystem system in particleSystems)
         {
             system.Play();

@@ -10,9 +10,10 @@ public class EndGameMenu : MonoBehaviour
     public List<Text> highScoreTexts;
     public InputField inputField;
     private string playerName;
-    private List<float> highscores;
-    private List<string> highscoreNames;
+    public List<float> highscores;
+    public List<string> highscoreNames;
     private float score;
+    private bool scoreSaved = false;
 
 	// Use this for initialization
 	void Start ()
@@ -45,33 +46,65 @@ public class EndGameMenu : MonoBehaviour
         //Update highscore texts
         for (int i = 0; i < numberOfHighScores; ++i)
         {
+            
             highscores.Add(PlayerPrefs.GetFloat("finalScore" + i.ToString(), 0));
-            //highscoreNames
-            highScoreTexts[i].text = highscores[i].ToString();
+            highscoreNames.Add(PlayerPrefs.GetString("finalScoreName" + i.ToString(), "Farmer"));
+
+            if (highScoreTexts[i] != null)
+                highScoreTexts[i].text = highscoreNames[i].ToString() + ": " + highscores[i].ToString();
         }
 
-        SaveScores(numberOfHighScores);
-    }
-
-    public void SaveScores(int numberOfHighScores)
-    {
-        //if a new highscore, save it 
+        //SaveScores(numberOfHighScores);
         if (score > PlayerPrefs.GetFloat("finalScore" + (numberOfHighScores - 1), 0))
         {
-            //add new highscore to list
-            highscores.Add(score);
-
-            //calculate new highscore order
-            highscores.Sort((x, y) => y.CompareTo(x));
-
-            //Save new list order
-            for (int i = 0; i < numberOfHighScores; ++i)
-            {
-                PlayerPrefs.SetFloat("finalScore" + i.ToString(), highscores[i]);
-                Debug.Log("finalScore" + i.ToString() + " = " + highscores[i].ToString());
-            }
-            //RenderSettings.skybox.color = Color.red;
+            inputField.ActivateInputField();
         }
+    }
+
+    public void SaveScores()
+    {
+        //only save once
+        if (scoreSaved)
+            return;
+        
+        //add new highscore to list
+        highscores.Add(score);
+        highscoreNames.Add(inputField.text);
+
+        //calculate new highscore order
+        //highscores.Sort((x, y) => y.CompareTo(x));
+        bool listSorted = false;
+        while (!listSorted)
+        {
+            listSorted = true;
+            for (int i = 0; i < highscores.Count - 1; ++i)
+            {
+                
+                if (highscores[i + 1] > highscores[i])
+                {
+                    float temp = highscores[i];
+                    highscores[i] = highscores[i + 1];
+                    highscores[i + 1] = temp;
+
+                    string tempName = highscoreNames[i];
+                    highscoreNames[i] = highscoreNames[i + 1];
+                    highscoreNames[i + 1] = tempName;
+
+                    listSorted = false;
+                }
+            }
+        }
+
+        //Save new list order
+        for (int i = 0; i < highscores.Count - 1; ++i)
+        {
+            Debug.Log("saving scores = score - " + highscores[i].ToString() + ", name - " + highscoreNames[i].ToString());
+            PlayerPrefs.SetFloat("finalScore" + i.ToString(), highscores[i]);
+            PlayerPrefs.SetString("finalScoreName" + i.ToString(), highscoreNames[i]);
+            //Debug.Log("finalScore" + i.ToString() + " = " + highscores[i].ToString());
+        }
+          
+        scoreSaved = true;
     }
 
     public void DeleteScores()
