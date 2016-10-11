@@ -78,6 +78,7 @@ public class DayNightController : NetworkBehaviour
                 nightTimeCheckDone = true;
                 CmdCheckPlayersSafe();
 
+                //yield return new WaitForSeconds(10);
                 Invoke("RespawnDeadPlayers", nightPauseLength / 2);
                 Invoke("CmdUpdateNightStuff", nightPauseLength / 2);
                 Invoke("CmdSetTimeOfDayMorning", nightPauseLength);

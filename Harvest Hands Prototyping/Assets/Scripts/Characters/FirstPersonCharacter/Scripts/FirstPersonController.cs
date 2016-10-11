@@ -151,7 +151,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
                 currentSpeed = Mathf.SmoothDamp(currentSpeed, speed, ref velocity, runSpeedAccelerationTime);
 
-            Debug.Log(currentSpeed);
+            //Debug.Log(currentSpeed);
 
 
             // always move along the camera forward as it is the direction that it being aimed at
