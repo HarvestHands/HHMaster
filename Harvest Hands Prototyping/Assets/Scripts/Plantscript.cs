@@ -100,6 +100,7 @@ public class Plantscript : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
+		transform.localRotation = Quaternion.Euler (0, Random.Range (0, 360), 0);
         renderer = GetComponent<Renderer>();
         renderer = GetComponentInChildren<Renderer>();
 
