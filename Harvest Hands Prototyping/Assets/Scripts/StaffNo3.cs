@@ -91,7 +91,8 @@ public class StaffNo3 : NetworkBehaviour
                 }
                 else
                 {
-                    ChosenObj.GetComponent<Rigidbody>().MovePosition(StaffGrabber.transform.position);
+                       ChosenObj.GetComponent<Rigidbody>().MovePosition(StaffGrabber.transform.position);
+                    
                     if (carriedItemID == NetworkInstanceId.Invalid)
                     {
                         ChosenObj.GetComponent<Rigidbody>().useGravity = true;
@@ -159,17 +160,17 @@ public class StaffNo3 : NetworkBehaviour
         }
         else
         {
-
+            ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, StaffGrabber.transform.position, 0.5f);
 
 
             // staffmove();
-            ChosenObj.GetComponent<Rigidbody>().MovePosition(StaffGrabber.transform.position);
+            //ChosenObj.GetComponent<Rigidbody>().MovePosition(StaffGrabber.transform.position);
 
 
             float posRatio = throwforce / (throwForceMax - throwForceMin);
             Vector3 idealPos = Vector3.Lerp(StaffGrabber.transform.position, pullBackPosition.transform.position, posRatio);
 
-            ChosenObj.GetComponent<Rigidbody>().MovePosition(idealPos);
+            //ChosenObj.GetComponent<Rigidbody>().MovePosition(idealPos);
 
             //float posRatio = throwforce / (throwForceMax - throwForceMin);
             //Vector3 
