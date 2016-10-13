@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class StaffNo3 : NetworkBehaviour
 {
-
+    [FMODUnity.EventRef]
+    public string pickUpSound = "event:/priority/pick up object magic";
+    [FMODUnity.EventRef]
+    public string dropSound = "event:/priority/dropping object magic";
 
     public Animator anim;
 
@@ -116,9 +119,6 @@ public class StaffNo3 : NetworkBehaviour
 
                     if ((Hit.collider.gameObject.GetComponent<Pickupable>() != null))
                     {
-                        //Debug.Log("SUCESS");
-                        //    ChosenObj = Hit.collider.gameObject;
-                        //Debug.Log(ChosenObj.GetComponent<Pickupable>().beingHeld);
                         //check that another player isn't holding the object
                         if (!ChosenObj.GetComponent<Pickupable>().BeingHeld)
                         {
@@ -135,6 +135,9 @@ public class StaffNo3 : NetworkBehaviour
                             //ChosenObj.GetComponent<Rigidbody>().isKinematic = true;
 
                             CmdPickedUp(carriedItemID);
+
+                            //Play Sound
+                            FMODUnity.RuntimeManager.PlayOneShot(pickUpSound, ChosenObj.transform.position);
 
                         }
                         else
@@ -224,6 +227,8 @@ public class StaffNo3 : NetworkBehaviour
                 CmdDropped();
                 CmdNullChosen();
                 throwforce = throwForceMin;
+                //Play Sound
+                FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
             }
             //if object held , throws the object
             if (Input.GetMouseButtonUp(1))
@@ -231,6 +236,8 @@ public class StaffNo3 : NetworkBehaviour
                 CmdThrowed(throwforce);
                 CmdNullChosen();
                 throwforce = throwForceMin;
+                //Play Sound
+                FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
             }
             RotateObject();
 
@@ -344,5 +351,7 @@ public class StaffNo3 : NetworkBehaviour
         ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToServer);
     }
 
+
+   
 }
 

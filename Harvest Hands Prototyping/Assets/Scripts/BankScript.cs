@@ -52,6 +52,7 @@ public class BankScript : NetworkBehaviour
     public void RpcGivePlayerMoney(NetworkInstanceId playerId, int amount)
     {
         ClientScene.FindLocalObject(playerId).GetComponent<PlayerInventory>().money += amount;
+        
     }
 
 

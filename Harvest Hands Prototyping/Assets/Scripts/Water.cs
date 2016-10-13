@@ -27,6 +27,11 @@ public class Water : NetworkBehaviour
     public GameObject refillParticles;
     public GameObject wateredParticles;
 
+    [FMODUnity.EventRef]
+    public string emptyBucketSound = "event:/Done/Empty Bucket";
+    [FMODUnity.EventRef]
+    public string refillBucketSound = "event:/Done/Watering Plant";
+
     // Use this for initialization
     void Start ()
     {
@@ -79,7 +84,9 @@ public class Water : NetworkBehaviour
                         {
                             GameObject waterSplash = (GameObject)Instantiate(wateredParticles, transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
                             Destroy(waterSplash, plant.particlePlayDuration);
-                        }                
+                        }
+                        //Play Sound
+                        FMODUnity.RuntimeManager.PlayOneShot(plant.wateredSound, col.transform.position);
                     }
                 }
             }
@@ -95,7 +102,9 @@ public class Water : NetworkBehaviour
                 GameObject refillSplash = (GameObject)Instantiate(refillParticles, transform.position - new Vector3(0, 0.5f, 0), transform.rotation);
                 Destroy(refillSplash, 2);
             }
-		}
+            //Play Sound
+            FMODUnity.RuntimeManager.PlayOneShot(refillBucketSound, col.transform.position);
+        }
 
 		if (col.gameObject.tag == "Plant")
 		{
@@ -109,6 +118,8 @@ public class Water : NetworkBehaviour
         {
             drippingParticleSystem.StopParticles();
             BucketWater.SetActive(false);
+            //Play Sound
+            FMODUnity.RuntimeManager.PlayOneShot(emptyBucketSound, transform.position);
         }
         else
         {

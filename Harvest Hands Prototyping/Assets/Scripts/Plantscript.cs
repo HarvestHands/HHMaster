@@ -97,6 +97,11 @@ public class Plantscript : NetworkBehaviour
     public float particlePlayDuration = 1f;
 
 
+    [FMODUnity.EventRef]
+    public string wateredSound = "event:/Done/Watering Plant";
+    [FMODUnity.EventRef]
+    public string harvestedSound = "event:/Priority/Harvesting";
+
     // Use this for initialization
     void Start()
     {

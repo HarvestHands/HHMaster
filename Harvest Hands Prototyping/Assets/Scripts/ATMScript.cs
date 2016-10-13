@@ -11,6 +11,11 @@ public class ATMScript : NetworkBehaviour
 
     BankScript farmbank;
 
+    //[FMODUnity.EventRef]
+    //public string depositSound = "event:/Done/Gold Spend";
+    //[FMODUnity.EventRef]
+    //public string withdrawSound = "event:/Done/Gold income";
+
     public override void OnStartClient()
     {
         base.OnStartClient();
@@ -22,6 +27,7 @@ public class ATMScript : NetworkBehaviour
     {
         GameObject player = NetworkServer.FindLocalObject(playerNetworkId);
         PlayerInventory playerInv = player.GetComponent<PlayerInventory>();
+        
 
         Debug.Log("inside CmdWithdrawMoney");
 
@@ -31,6 +37,8 @@ public class ATMScript : NetworkBehaviour
             //RpcGivePlayerMoney(playerNetworkId, amount);
             playerInv.RpcGiveMoney(amount);
             farmbank.Score -= amount;
+            //Play Sound
+            //playerInv.RpcPlaySoundForPlayer(withdrawSound);
         }
         //if farmbank < amount, withdraw remaining
         else
@@ -38,6 +46,9 @@ public class ATMScript : NetworkBehaviour
             //RpcGivePlayerMoney(playerNetworkId, farmbank.Score);
             playerInv.RpcGiveMoney(farmbank.Score);
             farmbank.Score = 0;
+            Debug.Log("Calling to play sound from ATM");
+            //Play Sound
+            //playerInv.RpcPlaySoundForPlayer(withdrawSound);
         }      
     }
 
@@ -46,6 +57,7 @@ public class ATMScript : NetworkBehaviour
     {
         GameObject player = NetworkServer.FindLocalObject(playerNetworkId);
         PlayerInventory playerInv = player.GetComponent<PlayerInventory>();
+        Debug.Log("Depositing");
 
         //depositing
         if (playerInv.money >= amount)

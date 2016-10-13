@@ -46,8 +46,9 @@ public class WinObjectTrigger : MonoBehaviour
             //int finalScore = 1;
 
             //PlayerPrefs.SetFloat("finalScore1", finalScore);
-
+            Debug.Log(gameOverCanvasObject.name + " - trying to set active");
             gameOverCanvasObject.SetActive(true);
+            Debug.Log(gameOverCanvasObject.active + " = active?");
             gameOverCanvasObject.GetComponent<EndGameMenu>().EndGameStuff(finalScore);
            
 
