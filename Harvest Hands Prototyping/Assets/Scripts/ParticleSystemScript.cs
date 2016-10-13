@@ -57,7 +57,8 @@ public class ParticleSystemScript : NetworkBehaviour
     {
         foreach (ParticleSystem system in particleSystems)
         {
-            system.Play();
+            if (system != null)
+                system.Play();
         }
     }
         
@@ -66,7 +67,8 @@ public class ParticleSystemScript : NetworkBehaviour
     {
         foreach (ParticleSystem system in particleSystems)
         {
-            system.Stop();
+            if (system != null)
+                system.Stop();
         }
     }
 
@@ -74,7 +76,8 @@ public class ParticleSystemScript : NetworkBehaviour
     {
         foreach (ParticleSystem system in particleSystems)
         {
-            system.Play();
+            if (system != null)
+                system.Play();
         }
     }
 
@@ -82,7 +85,8 @@ public class ParticleSystemScript : NetworkBehaviour
     {
         foreach (ParticleSystem system in particleSystems)
         {
-            system.Stop();
+            if (system != null)
+                system.Stop();
         }
     }
 
@@ -90,7 +94,8 @@ public class ParticleSystemScript : NetworkBehaviour
     {
         foreach (ParticleSystem system in particleSystems)
         {
-            system.loop = false;
+            if (system != null)
+                system.loop = false;
         }
     }
 

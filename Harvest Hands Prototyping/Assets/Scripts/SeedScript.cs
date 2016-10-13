@@ -9,9 +9,12 @@ public class SeedScript : NetworkBehaviour
     public int NumberOfSeeds = 1;
     [Tooltip("What the seed plants.")]
     public GameObject plantPrefab;
-    
-	// Use this for initialization
-	void Start () {
+
+    [FMODUnity.EventRef]
+    public string plantedSound = "event:/Done/planting";
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -31,6 +34,8 @@ public class SeedScript : NetworkBehaviour
                 soil.CmdPlantSeed(plantPrefab, plantPrefab.GetComponent<Plantscript>().currentPlantState); // pass in type of seed?
                 NumberOfSeeds--;
                 soil.occupied = true;
+                //Play Sound
+                FMODUnity.RuntimeManager.PlayOneShot(plantedSound, col.transform.position);
                 if (NumberOfSeeds < 1)
                 {
                     Destroy(gameObject);

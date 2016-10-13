@@ -29,6 +29,8 @@ public class Scythe : MonoBehaviour
                         plant.CmdHarvest();
                         GameObject leaffall = (GameObject)Instantiate(plant.leafFallParticles, plant.transform.position, plant.transform.rotation);
                         Destroy(leaffall, plant.particlePlayDuration);
+                        //Play Sound
+                        FMODUnity.RuntimeManager.PlayOneShot(plant.harvestedSound, col.transform.position);
                         Debug.Log("Calling cmdharvest");
                     }
                 }

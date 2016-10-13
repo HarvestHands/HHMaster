@@ -10,8 +10,11 @@ public class SpawnPad : NetworkBehaviour
     public string gameManagerName = "GameManager";
     public BankScript bank;
 
-	// Use this for initialization
-	void Start ()
+    [FMODUnity.EventRef]
+    public string buySound = "event:/Done/Gold Spend";
+
+    // Use this for initialization
+    void Start ()
     {
         bank = GameObject.Find(gameManagerName).GetComponent<BankScript>();
         if (ObjectToSpawn == null)
@@ -35,7 +38,14 @@ public class SpawnPad : NetworkBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             CmdSpawnObject(col.GetComponent<NetworkIdentity>().netId);
+            RpcPlaySound(col.GetComponent<NetworkIdentity>().netId);
         }
+    }
+
+    [ClientRpc]
+    void RpcPlaySound(NetworkInstanceId id)
+    {
+        NetworkServer.FindLocalObject(id).GetComponent<PlayerInventory>().RpcPlaySoundForPlayer(buySound);
     }
 
 }

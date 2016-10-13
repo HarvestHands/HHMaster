@@ -4,6 +4,7 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
 using Random = UnityEngine.Random;
 using UnityEngine.Networking;
+using System.Collections.Generic;
 
 namespace UnityStandardAssets.Characters.FirstPerson
 {
@@ -30,6 +31,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+
+        [FMODUnity.EventRef]
+        public List<string> footstepSounds;
+        private int lastPlayedFootstep = 0;
+
+        FMOD.Studio.ParameterInstance walking;
+        FMOD.Studio.EventInstance footsteps;
 
 		public GameObject gameManager;
 		public bool allowInput = true;
@@ -67,10 +75,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
-
-			//if (gameManager.GetComponent<pauseMenu> ().isPaused == true) {
-			//	m_Camera.enabled = true;
-			//}
+            
+            //walking = FMOD.Studio.
 
             if(!isLocalPlayer)
             {
@@ -151,7 +157,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             else
                 currentSpeed = Mathf.SmoothDamp(currentSpeed, speed, ref velocity, runSpeedAccelerationTime);
 
-            Debug.Log(currentSpeed);
+            //Debug.Log(currentSpeed);
 
 
             // always move along the camera forward as it is the direction that it being aimed at
@@ -240,6 +246,21 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // move picked sound to index 0 so it's not picked next time
             m_FootstepSounds[n] = m_FootstepSounds[0];
             m_FootstepSounds[0] = m_AudioSource.clip;
+
+            //if there is sound     //TO FIX TOFIX
+            //if (footstepSounds.Count > 0)
+            //{
+            //    int i = Random.Range(0, footstepSounds.Count - 1);
+            //    //attempt to not repeat same footstep
+            //    if (i == lastPlayedFootstep)
+            //        i = Random.Range(0, footstepSounds.Count - 1);
+            //
+            //    //Play Sound
+            //    FMODUnity.RuntimeManager.PlayOneShot(footstepSounds[i], transform.position);
+            //    
+            //}
+            //
+
         }
 
 
@@ -284,7 +305,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             speed = m_IsWalking ? m_WalkSpeed : m_RunSpeed;
 
         
-            Debug.Log("Speed = " + speed);
+            //Debug.Log("Speed = " + speed);
 
             m_Input = new Vector2(horizontal, vertical);
 

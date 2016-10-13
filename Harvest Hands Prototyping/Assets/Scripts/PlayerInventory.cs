@@ -15,8 +15,13 @@ public class PlayerInventory : NetworkBehaviour {
     public int money = 0;
     private int oldMoney = -1;
 
-	// Use this for initialization
-	void Start ()
+    [FMODUnity.EventRef]
+    public string depositSound = "event:/Done/Gold Spend";
+    [FMODUnity.EventRef]
+    public string withdrawSound = "event:/Done/Gold income";
+
+    // Use this for initialization
+    void Start ()
     {
         shop = GameObject.Find("GameManager").GetComponent<ShopScript>();
         farmBank = GameObject.Find("GameManager").GetComponent<BankScript>();
@@ -111,6 +116,8 @@ public class PlayerInventory : NetworkBehaviour {
             farmBank.CmdDepositMoney(netId, money);
         }
 
+        //Play Sound
+        FMODUnity.RuntimeManager.PlayOneShot(depositSound, transform.position);
 
         //farmBank.CmdDepositMoney(netId, amount);
     }
@@ -118,10 +125,11 @@ public class PlayerInventory : NetworkBehaviour {
     [Command]
     public void CmdWithdrawMoneyFromFarm(int amount)
     {
-        //depositing
+        //Withdraw
         if (farmBank.Score >= amount)
         {
             farmBank.CmdWithdrawMoney(netId, amount);
+            RpcPlaySoundForPlayer(withdrawSound);            
         }
         //if playerMoney < amount, deposit remaining
         else
@@ -129,11 +137,23 @@ public class PlayerInventory : NetworkBehaviour {
             farmBank.CmdWithdrawMoney(netId, farmBank.Score);
         }
 
+        //Play Sound
+        FMODUnity.RuntimeManager.PlayOneShot(withdrawSound, transform.position);
 
         //farmBank.CmdWithdrawMoney(netId, amount);
     }
 
-    
-    
+
+    [ClientRpc]
+    public void RpcPlaySoundForPlayer(string sound)
+    {
+        Debug.Log("Inside player play sound");
+        if (isLocalPlayer)
+        {
+            Debug.Log("Playing sound for local player");
+            //Play Sound
+            FMODUnity.RuntimeManager.PlayOneShot(sound, transform.position);
+        }
+    }
 
 }
