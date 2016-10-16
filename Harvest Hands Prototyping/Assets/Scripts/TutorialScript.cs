@@ -14,6 +14,7 @@ public class TutorialScript : MonoBehaviour
 
     [Header("Optional")]
     public KeyCode skipKey = KeyCode.None;
+	public KeyCode nextKey = KeyCode.None;
 
 	// Use this for initialization
 	void Start ()
@@ -38,7 +39,7 @@ public class TutorialScript : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
+		if (Input.GetKeyDown(nextKey))
         {
             NextGO();
         }
