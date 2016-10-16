@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class EndGameMenu : MonoBehaviour
 {
@@ -110,6 +111,11 @@ public class EndGameMenu : MonoBehaviour
     public void DeleteScores()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    public void StopHost()
+    {
+        NetworkManager.singleton.StopHost();
     }
    
 }

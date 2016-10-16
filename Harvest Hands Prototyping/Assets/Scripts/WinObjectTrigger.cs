@@ -48,10 +48,12 @@ public class WinObjectTrigger : MonoBehaviour
             //PlayerPrefs.SetFloat("finalScore1", finalScore);
             Debug.Log(gameOverCanvasObject.name + " - trying to set active");
             gameOverCanvasObject.SetActive(true);
+            gameOverCanvasObject.GetComponent<Canvas>().enabled = true;
             Debug.Log(gameOverCanvasObject.active + " = active?");
             gameOverCanvasObject.GetComponent<EndGameMenu>().EndGameStuff(finalScore);
-           
-
+            Debug.Log("Cursos Visible = " + Cursor.visible);
+            Cursor.visible = true;
+            Debug.Log("Cursos Visible = " + Cursor.visible);
 
         }
     }
