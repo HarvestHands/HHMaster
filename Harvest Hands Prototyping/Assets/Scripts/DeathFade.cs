@@ -15,9 +15,16 @@ public class DeathFade : NetworkBehaviour
 
     public Text deadText;
 
+    private DayNightController DNCont;
+    public float imageFadeInStartTime = 0.7f;
+    [HideInInspector]
+    public bool fadingIn = false;
+
     // Use this for initialization
     void Start()
     {
+        DNCont = FindObjectOfType<DayNightController>();
+        
         if (FadeImage == null)
             Debug.Log("Player-FadeImage not assigned");
 
@@ -25,11 +32,7 @@ public class DeathFade : NetworkBehaviour
         {
             FadeImage.enabled = false;
             deadText.enabled = false;
-            //deadText.color = new Vector4(deadText.color.r, deadText.color.g, deadText.color.b, 0);
         }
-        //else
-        //FadeImage.rectTransform.rect 
-        //FadeImage.uvRect.width = Screen.width;//.size.x =  = new Vector2(Screen.width, Screen.height);
 
         FadeImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
 
@@ -39,6 +42,29 @@ public class DeathFade : NetworkBehaviour
             deadText.CrossFadeAlpha(0, 0.01f, true);
             //deadText.color = new Vector4(deadText.color.r, deadText.color.g, deadText.color.b, 0);
         }
+    }
+
+    void Update()
+    {
+        if (!isLocalPlayer)
+            return;
+
+        if (fadingIn == true)
+        {
+            if (DNCont.currentTimeOfDay < imageFadeInStartTime)
+            {
+                fadingIn = false;
+            }
+        }
+
+
+        if (DNCont.currentTimeOfDay >= imageFadeInStartTime && fadingIn == false)
+        {
+            fadingIn = true;
+            //              fade to 1, alpha == 1 at endDayAt
+            FadeImage.CrossFadeAlpha(1, DNCont.secondsInDay * (DNCont.endDayAt - imageFadeInStartTime), false);
+        }
+
     }
 
     [Command]
@@ -59,7 +85,7 @@ public class DeathFade : NetworkBehaviour
             //deadTextFadeIn.Play();
         }
 
-        FadeImage.CrossFadeAlpha(1f, fadeSpeed, true);
+        //FadeImage.CrossFadeAlpha(1f, fadeSpeed, true);
     }
 
     [Command]
@@ -73,10 +99,10 @@ public class DeathFade : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
-        if (!isSafe)
-        {
+        //if (isSafe)
+       //{
             deadText.CrossFadeAlpha(0, fadeSpeed, true);
-        }
+        //}
         FadeImage.CrossFadeAlpha(0f, fadeSpeed, true);
     }
 
