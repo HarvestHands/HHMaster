@@ -14,7 +14,7 @@ public class menu : MonoBehaviour {
 public void singlePlayer()
     {
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
         Debug.Log("singleplayer");
 
     }
@@ -58,7 +58,7 @@ void Start()
 
         resolutions = Screen.resolutions;
 
-        resolutionDrop.options.Clear();
+        //resolutionDrop.options.Clear();
 
         for(int i = 0; i < resolutions.Length; i++)
         {
