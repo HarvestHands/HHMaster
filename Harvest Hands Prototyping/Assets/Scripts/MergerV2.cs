@@ -20,9 +20,6 @@ public class MergerV2 : MonoBehaviour
 
     private Transform closestMerge;
     
-    //flag to stop double merge in update since destroy is called after update loop
-    [HideInInspector]
-    public bool merged = false;
 
 
 	// Use this for initialization
@@ -40,7 +37,12 @@ public class MergerV2 : MonoBehaviour
         if (closestMerge != null)
         {
             transform.position = Vector3.Lerp(transform.position, closestMerge.transform.position, attractionStrength);
-            
+
+            //Check if in range to actually merge
+            if (Vector3.Distance(transform.position, closestMerge.position) <= mergeRadius)
+            {       
+                Merge(closestMerge);                   
+            }
         }
 
 
@@ -116,24 +118,13 @@ public class MergerV2 : MonoBehaviour
                                 continue;
                         }
 
-
-
                         float distance = Vector3.Distance(transform.position, col.transform.position);
                         //if target is in range and is closer than current closest
                         if (distance <= attractionRadius && distance <= closestDist)
                         {
                             closestDist = distance;
                             closestMerge = col.transform;
-                        }
-
-                        //Check if in range to actually merge
-                        if (distance <= mergeRadius)
-                        {
-                            if (!merged)
-                            {
-                                Merge(target);
-                            }
-                        }
+                        }                        
                     }
                 }
             }
@@ -141,19 +132,28 @@ public class MergerV2 : MonoBehaviour
         //yield return new WaitForSeconds(0.5f);
     }
 
-    void Merge(MergerV2 other)
+    void Merge(Transform other)
     {
-        //Combine objects
-        //other.merged = true;
-        //merged = true;
+        if (!gameObject.activeSelf || !other.gameObject.activeSelf)
+            return;
+
+
+        //if other is being held
+        if (other.GetComponent<Pickupable>().BeingHeld)
+        {
+            return;
+        }        
+
         if (mergeType == MergeType.PRODUCE)
         {
             GetComponent<PlantProduce>().ProduceAmount += other.GetComponent<PlantProduce>().ProduceAmount;
+            other.gameObject.SetActive(false);
             Destroy(other.gameObject);
         }
         else if (mergeType == MergeType.SEED)
         {
             GetComponent<SeedScript>().NumberOfSeeds += other.GetComponent<SeedScript>().NumberOfSeeds;
+            other.gameObject.SetActive(false);
             Destroy(other.gameObject);
         }
 
@@ -167,6 +167,9 @@ public class MergerV2 : MonoBehaviour
             }
             Destroy(particles, particleLifeTime);
         }
+
+        //See if new merge target is around
+        FindMergeTarget();
         
     }
 
