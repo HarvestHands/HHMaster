@@ -27,10 +27,10 @@ public class WinObjectTrigger : MonoBehaviour
 
 
 
-        if (Input.GetKeyUp(KeyCode.Space))
+       /* if (Input.GetKeyUp(KeyCode.Space))
         {
-            SceneManager.LoadScene(0);
-        }
+            SceneManager.LoadScene(1);
+        }*/
         
 
 	}
