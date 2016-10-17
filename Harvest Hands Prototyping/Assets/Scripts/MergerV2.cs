@@ -83,7 +83,7 @@ public class MergerV2 : MonoBehaviour
     //IEnumerator FindMergeTarget()
     void FindMergeTarget()
     {
-        Debug.Log("Inside FindMergeTarget");
+       // Debug.Log("Inside FindMergeTarget");
         if (mergeType == MergeType.NONE)
             return;
             //yield return new WaitForSeconds(0.5f);
