@@ -1,16 +1,62 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MergerV2 : MonoBehaviour {
+public class MergerV2 : MonoBehaviour
+{
+    public enum MergeType
+    {
+        NONE = -1,
+        SEED = 0,
+        PRODUCE = 1,
+    }
+
+    public MergeType mergeType = MergeType.NONE;
+    public float attractionRadius = 4f;
+    public float attractionStrength = 0.01f;
+    public float mergeRadius = 1;
+    public GameObject mergeParticles;
+    [Tooltip("Destroy particle objects after this amount of time")]
+    public float particleLifeTime = 4f;
+
+    private Transform closestMerge;
+    
+    //flag to stop double merge in update since destroy is called after update loop
+    [HideInInspector]
+    public bool merged = false;
+
 
 	// Use this for initialization
-	void Start () {
-	
+	void Awake ()
+    {
+        //StartCoroutine(FindMergeTarget());
+        InvokeRepeating("FindMergeTarget", 0f, 0.5f);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        //FindMergeTarget();
 
+        if (closestMerge != null)
+        {
+            transform.position = Vector3.Lerp(transform.position, closestMerge.transform.position, attractionStrength);
+            
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<StaffNo3>().ChosenObj.tag == "Produce")
         {
 
@@ -31,5 +77,97 @@ public class MergerV2 : MonoBehaviour {
             }
         }
        }
+       */    
 	}
+
+    //IEnumerator FindMergeTarget()
+    void FindMergeTarget()
+    {
+        Debug.Log("Inside FindMergeTarget");
+        if (mergeType == MergeType.NONE)
+            return;
+            //yield return new WaitForSeconds(0.5f);
+
+        float closestDist = Mathf.Infinity;
+        closestMerge = null;
+
+        Collider[] hitcolliders = Physics.OverlapSphere(transform.position, attractionRadius);
+        foreach (Collider col in hitcolliders)
+        {
+            //if col != ourself
+            if (col.transform.root != transform)
+            {
+                MergerV2 target = col.GetComponent<MergerV2>();
+                //if target doesnt have merger script, go to next object;
+                if (target != null)
+                {
+                    //if target mergeType is different, go to next object;
+                    if (target.mergeType == mergeType)
+                    {
+                        //if seed or produce are different types, go to next object
+                        if (mergeType == MergeType.SEED)
+                        {
+                            if (GetComponent<SeedScript>().plantPrefab != col.GetComponent<SeedScript>().plantPrefab)
+                            continue;
+                        }
+                        else if (mergeType == MergeType.PRODUCE)
+                        {
+                            if (GetComponent<PlantProduce>().produceName != col.GetComponent<PlantProduce>().produceName)
+                                continue;
+                        }
+
+
+
+                        float distance = Vector3.Distance(transform.position, col.transform.position);
+                        //if target is in range and is closer than current closest
+                        if (distance <= attractionRadius && distance <= closestDist)
+                        {
+                            closestDist = distance;
+                            closestMerge = col.transform;
+                        }
+
+                        //Check if in range to actually merge
+                        if (distance <= mergeRadius)
+                        {
+                            if (!merged)
+                            {
+                                Merge(target);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //yield return new WaitForSeconds(0.5f);
+    }
+
+    void Merge(MergerV2 other)
+    {
+        //Combine objects
+        //other.merged = true;
+        //merged = true;
+        if (mergeType == MergeType.PRODUCE)
+        {
+            GetComponent<PlantProduce>().ProduceAmount += other.GetComponent<PlantProduce>().ProduceAmount;
+            Destroy(other.gameObject);
+        }
+        else if (mergeType == MergeType.SEED)
+        {
+            GetComponent<SeedScript>().NumberOfSeeds += other.GetComponent<SeedScript>().NumberOfSeeds;
+            Destroy(other.gameObject);
+        }
+
+        //Play merging particle effect
+        if (mergeParticles != null)
+        {
+            GameObject particles = (GameObject)Instantiate(mergeParticles, transform.position, transform.rotation);
+            foreach (ParticleSystem system in particles.GetComponentsInChildren<ParticleSystem>())
+            {
+                system.Play();
+            }
+            Destroy(particles, particleLifeTime);
+        }
+        
+    }
+
 }

@@ -248,18 +248,17 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_FootstepSounds[0] = m_AudioSource.clip;
 
             //if there is sound     //TO FIX TOFIX
-            //if (footstepSounds.Count > 0)
-            //{
-            //    int i = Random.Range(0, footstepSounds.Count - 1);
-            //    //attempt to not repeat same footstep
-            //    if (i == lastPlayedFootstep)
-            //        i = Random.Range(0, footstepSounds.Count - 1);
-            //
-            //    //Play Sound
-            //    FMODUnity.RuntimeManager.PlayOneShot(footstepSounds[i], transform.position);
-            //    
-            //}
-            //
+            if (footstepSounds.Count > 0)
+            {
+                int i = Random.Range(0, footstepSounds.Count - 1);
+                //attempt to not repeat same footstep
+                if (i == lastPlayedFootstep)
+                    i = Random.Range(0, footstepSounds.Count - 1);
+            
+                //Play Sound
+                FMODUnity.RuntimeManager.PlayOneShot(footstepSounds[i], transform.position);
+            }
+            
 
         }
 

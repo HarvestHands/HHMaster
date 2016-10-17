@@ -53,6 +53,8 @@ public class StaffNo3 : NetworkBehaviour
     public Text SeedNumber;
     public Text SeedType;
 
+    public float lerpStrength = 0.5f;
+
 
     // Use this for initialization
     void Start()
@@ -169,16 +171,11 @@ public class StaffNo3 : NetworkBehaviour
 
             float posRatio = throwforce / (throwForceMax - throwForceMin);
             Vector3 idealPos = Vector3.Lerp(StaffGrabber.transform.position, pullBackPosition.transform.position, posRatio);
-            ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, idealPos, 0.5f);
 
-
+            ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, idealPos, lerpStrength);        
+            //ChosenObj.transform.position = Vector3.MoveTowards(ChosenObj.transform.position, idealPos, lerpStrength * Time.deltaTime);
             //ChosenObj.GetComponent<Rigidbody>().MovePosition(idealPos);
-
-            //float posRatio = throwforce / (throwForceMax - throwForceMin);
-            //Vector3 
-            //Vector3 pullbackDir = new Vector3(pullBackPosition.transform.position - StaffGrabber.transform.position);
-
-            // Vector3 idealPos = new Vector3(StaffGrabber)
+            
 
             ChosenObj.GetComponent<Rigidbody>().useGravity = false;
             ChosenObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -188,13 +185,7 @@ public class StaffNo3 : NetworkBehaviour
 
             Quaternion grabbedRotation = StaffGrabber.transform.rotation;
             ChosenObj.GetComponent<Rigidbody>().MoveRotation(grabbedRotation * Quaternion.Euler(objectXRotation, objectYRotation, 0));
-
-
-
-
-
-
-
+            
             if (Input.GetKeyDown(KeyCode.E))
             {
 
