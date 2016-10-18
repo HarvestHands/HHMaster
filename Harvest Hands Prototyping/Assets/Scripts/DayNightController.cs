@@ -99,10 +99,10 @@ public class DayNightController : NetworkBehaviour
             GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed = 20;
 
             //spawns mushrooms at night
-            foreach (MushroomSpawner spawner in mushroomSpawners)
-            {
-                spawner.AttemptSpawn();
-            }        
+           // foreach (MushroomSpawner spawner in mushroomSpawners)
+          //  {
+          //      spawner.AttemptSpawn();
+          //  }        
         }
 
         //destroys mushrooms after certain time in day
