@@ -34,6 +34,10 @@ public class DayNightController : NetworkBehaviour
     public List<StorageCatapult> storageCatapults;
     //public StorageCatapult storageCatapult;
 
+
+    public List<Mushroom> mushrooms;
+
+
     [SerializeField]
     [Tooltip("Score lost per player that died")]
     int deathPenalty = 0;
@@ -41,6 +45,9 @@ public class DayNightController : NetworkBehaviour
     private bool nightTimeCheckDone = false;
 
     public int playerdeathcount;
+
+    RaycastHit Hit;
+    public float GrabDistance = 3.0f;
 
     // Use this for initialization
     void Start ()
@@ -51,6 +58,10 @@ public class DayNightController : NetworkBehaviour
         shop = FindObjectOfType<ShopScript>();
         mushroomSpawners = FindObjectsOfType<MushroomSpawner>();
         playerdeathcount = 0;
+
+
+
+        //mushrooms = FindObjectsOfType<Mushroom>();
     }
 
     // Update is called once per frame
@@ -60,6 +71,63 @@ public class DayNightController : NetworkBehaviour
         //if (!isServer)
         //    return;
     //    PlayerDeathPenalty();
+
+
+
+        //insta sells catapaults items
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+
+            Physics.Raycast(ray, out Hit, GrabDistance);
+
+            if (Hit.collider.gameObject == GameObject.Find("CatapaultButton"))
+            {
+                foreach (StorageCatapult catapult in storageCatapults)
+                {
+                    catapult.CmdEmptyCatapult();
+                }
+            }
+        }
+
+
+        //Returns player spped back to default after the next day
+        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.75 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.76)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 10;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed = 20;
+
+            //spawns mushrooms at night
+           // foreach (MushroomSpawner spawner in mushroomSpawners)
+          //  {
+          //      spawner.AttemptSpawn();
+          //  }        
+        }
+
+        //destroys mushrooms after certain time in day
+        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.35 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.36)
+        {
+            //   Destroy(this.gameObject);
+
+            //Destroy(GameObject.FindGameObjectWithTag("Mushroom"));
+
+          //  Destroy(GameObject.Find("MushroomSpawner").GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
+
+
+
+
+
+           // Destroy(GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
+
+
+           // Destroy(GameObject.Find("mushroom_Common1"));
+           // Destroy(GameObject.Find("mushroom_Common2"));
+          //  Destroy(GameObject.Find("mushroom_Rare"));
+           // Destroy(GameObject.Find("mushroom_Uncommon1"));
+          //  Destroy(GameObject.Find("mushroom_Uncommon2"));
+        }
+
 
         //Update Sun rotation according to time of day
         UpdateSun();
@@ -293,6 +361,8 @@ public class DayNightController : NetworkBehaviour
             {
                 //default 10
                 player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed /= 2;
+                player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed /= 2;
+
                 Debug.Log(player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed);
                 player.GetComponent<StaffNo3>().CmdDropped();
         }
