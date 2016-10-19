@@ -11,6 +11,7 @@ public class MergerV2 : MonoBehaviour
     }
 
     public MergeType mergeType = MergeType.NONE;
+    public int stackLimit = 20;
     public float attractionRadius = 4f;
     public float attractionStrength = 0.01f;
     public float mergeRadius = 1;
@@ -85,13 +86,29 @@ public class MergerV2 : MonoBehaviour
     //IEnumerator FindMergeTarget()
     void FindMergeTarget()
     {
-        Debug.Log("Inside FindMergeTarget");
+        closestMerge = null;
+        //Debug.Log("Inside FindMergeTarget");
         if (mergeType == MergeType.NONE)
             return;
             //yield return new WaitForSeconds(0.5f);
+        
+        //if full, return
+        if (mergeType == MergeType.SEED)
+        {
+            if (GetComponent<SeedScript>().NumberOfSeeds >= stackLimit)
+            {
+                return;
+            }
+        }
+        else if (mergeType == MergeType.PRODUCE)
+        {
+            if (GetComponent<PlantProduce>().ProduceAmount >= stackLimit)
+            {
+                return;
+            }
+        }
 
         float closestDist = Mathf.Infinity;
-        closestMerge = null;
 
         Collider[] hitcolliders = Physics.OverlapSphere(transform.position, attractionRadius);
         foreach (Collider col in hitcolliders)
@@ -100,6 +117,7 @@ public class MergerV2 : MonoBehaviour
             if (col.transform.root != transform)
             {
                 MergerV2 target = col.GetComponent<MergerV2>();
+                
                 //if target doesnt have merger script, go to next object;
                 if (target != null)
                 {
@@ -107,14 +125,19 @@ public class MergerV2 : MonoBehaviour
                     if (target.mergeType == mergeType)
                     {
                         //if seed or produce are different types, go to next object
+                        //or if target is full, go to next
                         if (mergeType == MergeType.SEED)
                         {
                             if (GetComponent<SeedScript>().plantPrefab != col.GetComponent<SeedScript>().plantPrefab)
-                            continue;
+                                continue;
+                            if (target.GetComponent<SeedScript>().NumberOfSeeds >= target.stackLimit)
+                                continue;
                         }
                         else if (mergeType == MergeType.PRODUCE)
                         {
                             if (GetComponent<PlantProduce>().produceName != col.GetComponent<PlantProduce>().produceName)
+                                continue;
+                            if (target.GetComponent<PlantProduce>().ProduceAmount >= target.stackLimit)
                                 continue;
                         }
 
@@ -146,15 +169,47 @@ public class MergerV2 : MonoBehaviour
 
         if (mergeType == MergeType.PRODUCE)
         {
-            GetComponent<PlantProduce>().ProduceAmount += other.GetComponent<PlantProduce>().ProduceAmount;
-            other.gameObject.SetActive(false);
-            Destroy(other.gameObject);
+            PlantProduce otherPlant = other.GetComponent<PlantProduce>();
+            PlantProduce mePlant = GetComponent<PlantProduce>();
+            //mePlant.ProduceAmount += otherPlant.ProduceAmount;
+
+            int produceTotal = mePlant.ProduceAmount + otherPlant.ProduceAmount;
+            //if stacks can fit into 1 stack
+            if (produceTotal <= stackLimit)
+            {
+                mePlant.ProduceAmount = produceTotal;
+                otherPlant.ProduceAmount = 0;
+                other.gameObject.SetActive(false);
+                Destroy(other.gameObject);
+            }
+            //else fill one, and rest in other
+            else
+            {
+                mePlant.ProduceAmount = stackLimit;
+                otherPlant.ProduceAmount = produceTotal - stackLimit;
+            }
         }
         else if (mergeType == MergeType.SEED)
         {
-            GetComponent<SeedScript>().NumberOfSeeds += other.GetComponent<SeedScript>().NumberOfSeeds;
-            other.gameObject.SetActive(false);
-            Destroy(other.gameObject);
+            SeedScript mePlant = GetComponent<SeedScript>();
+            SeedScript otherPlant = other.GetComponent<SeedScript>();
+            //mePlant.NumberOfSeeds += otherPlant.NumberOfSeeds;
+
+            int produceTotal = mePlant.NumberOfSeeds + otherPlant.NumberOfSeeds;
+            //if stacks can fit into 1 stack
+            if (produceTotal <= stackLimit)
+            {
+                mePlant.NumberOfSeeds = produceTotal;
+                otherPlant.NumberOfSeeds = 0;
+                other.gameObject.SetActive(false);
+                Destroy(other.gameObject);
+            }
+            //else fill one, and rest in other
+            else
+            {
+                mePlant.NumberOfSeeds = stackLimit;
+                otherPlant.NumberOfSeeds = produceTotal - stackLimit;
+            }
         }
 
         //Play merging particle effect
