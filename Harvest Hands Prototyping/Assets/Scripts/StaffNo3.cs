@@ -230,7 +230,7 @@ public class StaffNo3 : NetworkBehaviour
                 //Play Sound
                 FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
             }
-            RotateObject();
+            //RotateObject();
 
 
            //  Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
