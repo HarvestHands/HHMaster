@@ -51,13 +51,13 @@ public class PlayerInventory : NetworkBehaviour {
             oldMoney = money;
         }
 
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            //spawns seed infront of player
-            //shop.CmdSpawnSeeds(transform.position + transform.forward * 2, transform.rotation);
-
-            CmdSpawnSeeds();
-        }
+ //       if(Input.GetKeyDown(KeyCode.Q))
+ //       {
+ //           //spawns seed infront of player
+ //           //shop.CmdSpawnSeeds(transform.position + transform.forward * 2, transform.rotation);
+ //
+ //           CmdSpawnSeeds();
+ //       }
 
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         RaycastHit Hit;
