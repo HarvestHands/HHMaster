@@ -10,24 +10,24 @@ public class StaffNo3 : NetworkBehaviour
     [FMODUnity.EventRef]
     public string dropSound = "event:/priority/dropping object magic";
 
-    public Animator anim;
+    private Animator anim;
 
     //game objects you can pick up
     //add them here first
-    
+
     [SyncVar]
     RaycastHit Hit;
-    
+
     GameObject StaffGrabber;
     GameObject pullBackPosition;
     [SyncVar]
     bool objectheld;
 
     float timeLeft;
-    
+
     public GameObject ChosenObj;
-    
-    
+
+
     [SyncVar]
     public float GrabDistance = 3.0f;
     [SyncVar]
@@ -43,7 +43,7 @@ public class StaffNo3 : NetworkBehaviour
     {
         carriedItemID = pickedUpItemID;
     }
-    
+
     Transform from;
     Transform to;
     float turnspeed = 200.0f;
@@ -56,21 +56,38 @@ public class StaffNo3 : NetworkBehaviour
     public float lerpStrength = 0.5f;
 
 
+    float walkTimer;
     // Use this for initialization
     void Start()
     {
+        walkTimer = 0.075f;
+        anim = transform.GetChild(0).GetChild(2).GetComponent<Animator>();
         //initialize the gameobjects here
         throwforce = throwForceMin;
         StaffGrabber = transform.FindChild("FirstCamera").FindChild("Staff Grabber").gameObject;
         pullBackPosition = transform.FindChild("FirstCamera").FindChild("PullBackPosition").gameObject;
         objectheld = false;
         timeLeft = 0.02f;
-     //   GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
+        //   GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        walkTimer -= Time.deltaTime;
+
+        if (walkTimer < 0)
+            anim.SetBool("Walking", false);
+
+
+        if (Input.GetAxis("Horizontal") > 0.1f || Input.GetAxis("Horizontal") < -0.1f ||
+            Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f)
+        {
+            anim.SetBool("Walking", true);
+            walkTimer = 0.075f;
+        }
+
+
 
         if (!isLocalPlayer)
         {
@@ -96,8 +113,8 @@ public class StaffNo3 : NetworkBehaviour
                 }
                 else
                 {
-                       ChosenObj.GetComponent<Rigidbody>().MovePosition(StaffGrabber.transform.position);
-                    
+                    ChosenObj.GetComponent<Rigidbody>().MovePosition(StaffGrabber.transform.position);
+
                     if (carriedItemID == NetworkInstanceId.Invalid)
                     {
                         ChosenObj.GetComponent<Rigidbody>().useGravity = true;
@@ -129,6 +146,7 @@ public class StaffNo3 : NetworkBehaviour
                             //CmdAssignAuthority();
                             objectheld = true;
 
+                            anim.SetTrigger("Pickup");
 
                             ChosenObj.GetComponent<Pickupable>().BeingHeld = true;
                             //Debug.Log(ChosenObj.GetComponent<Pickupable>().beingHeld);
@@ -166,16 +184,16 @@ public class StaffNo3 : NetworkBehaviour
         else
         {
             //ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, StaffGrabber.transform.position, 0.5f);
-            
+
 
 
             float posRatio = throwforce / (throwForceMax - throwForceMin);
             Vector3 idealPos = Vector3.Lerp(StaffGrabber.transform.position, pullBackPosition.transform.position, posRatio);
 
-            ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, idealPos, lerpStrength);        
+            ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, idealPos, lerpStrength);
             //ChosenObj.transform.position = Vector3.MoveTowards(ChosenObj.transform.position, idealPos, lerpStrength * Time.deltaTime);
             //ChosenObj.GetComponent<Rigidbody>().MovePosition(idealPos);
-            
+
 
             ChosenObj.GetComponent<Rigidbody>().useGravity = false;
             ChosenObj.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -185,11 +203,14 @@ public class StaffNo3 : NetworkBehaviour
 
             Quaternion grabbedRotation = StaffGrabber.transform.rotation;
             ChosenObj.GetComponent<Rigidbody>().MoveRotation(grabbedRotation * Quaternion.Euler(objectXRotation, objectYRotation, 0));
-            
+
             if (Input.GetKeyDown(KeyCode.E))
             {
 
             }
+
+           
+
 
             if (ChosenObj.tag == "Seed")
             {
@@ -206,15 +227,30 @@ public class StaffNo3 : NetworkBehaviour
                 SeedType.text = "";
             }
 
+            if (Input.GetMouseButtonDown(1))
+            {
+                anim.SetTrigger("Charge");
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                anim.SetTrigger("Release");
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                anim.SetTrigger("Drop");
+            }
 
             if (Input.GetMouseButton(1))
             {
+
                 throwforce += ((throwForceMax - throwForceMin) / throwMaxChargeTime) * Time.deltaTime;
                 throwforce = Mathf.Clamp(throwforce, throwForceMin, throwForceMax);
             }
             //if object held , drops the object
             if (Input.GetMouseButtonDown(0))
             {
+                anim.SetTrigger("Drop");
                 CmdDropped();
                 CmdNullChosen();
                 throwforce = throwForceMin;
@@ -224,29 +260,30 @@ public class StaffNo3 : NetworkBehaviour
             //if object held , throws the object
             if (Input.GetMouseButtonUp(1))
             {
+
                 CmdThrowed(throwforce);
                 CmdNullChosen();
                 throwforce = throwForceMin;
                 //Play Sound
                 FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
             }
-            //RotateObject();
+            RotateObject();
 
 
-           //  Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
-             //   Physics.IgnoreLayerCollision(GameObject.FindGameObjectWithTag("Player").layer, ChosenObj.layer);
-
-
-
-        //    Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+            //  Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+            //   Physics.IgnoreLayerCollision(GameObject.FindGameObjectWithTag("Player").layer, ChosenObj.layer);
 
 
 
-          
+            //    Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
 
-               Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
 
-          //  Physics.IgnoreLayerCollision(GameObject.FindGameObjectWithTag("Player").layer, ChosenObj.layer);
+
+
+
+            Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+
+            //  Physics.IgnoreLayerCollision(GameObject.FindGameObjectWithTag("Player").layer, ChosenObj.layer);
         }
     }
     [Command]
@@ -281,7 +318,7 @@ public class StaffNo3 : NetworkBehaviour
             objectYRotation += turnspeed * Time.deltaTime;
             objectYRotation += turnspeed * Time.deltaTime;
             if (objectYRotation >= 360) objectYRotation -= 360;
-        }    
+        }
         //down
         if (rot < 0f)
         {
@@ -343,6 +380,6 @@ public class StaffNo3 : NetworkBehaviour
     }
 
 
-   
+
 }
 

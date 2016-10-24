@@ -99,6 +99,7 @@ public class DeathFade : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
+        transform.GetChild(0).GetChild(2).GetComponent<Animator>().SetBool("Walking", false);
         //if (isSafe)
        //{
             deadText.CrossFadeAlpha(0, fadeSpeed, true);
