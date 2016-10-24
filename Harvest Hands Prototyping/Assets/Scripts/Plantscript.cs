@@ -12,6 +12,13 @@ public class Plantscript : NetworkBehaviour
         Grown,
         Dead,
     }
+    public enum PlantStateMat
+    {
+        Dry,
+        Growing,
+        Grown,
+        Dead,
+    }
 
     public enum PlantType
     {
@@ -32,6 +39,7 @@ public class Plantscript : NetworkBehaviour
 
     public PlantType currentPlantType = PlantType.Root;
     public PlantState currentPlantState = PlantState.Sapling;
+    public PlantStateMat currentPlantStateMat = PlantStateMat.Dry;
     
     [Header("Plant life")]
 
@@ -48,8 +56,7 @@ public class Plantscript : NetworkBehaviour
     public float TimeToGrow;
     [Tooltip("1.0 = 1 full day")]
     public float dryDaysToDie = 2;
-    [Tooltip("Current amount of day spent unwatered")]
-    [HideInInspector]
+    [Tooltip("Current amount of day spent unwatered")][HideInInspector]
     public float currentDryStreak = 0;
     //counter for days which do not count towards growth
     [HideInInspector]
@@ -69,34 +76,36 @@ public class Plantscript : NetworkBehaviour
     [HideInInspector]
     public float timeOfDay;
 
-    //[Header("Produce Attributes",[1])]
+    [Header("Produce Attributes")]
     public int minSeedsProduced = 1;
     public int maxSeedsProduced = 4;
     public GameObject plantProducePrefab;
+    
+    [Header("PlantState Meshes+Materials")]
+    public Mesh saplingMesh;
+    public Mesh growingMesh;
+    public Mesh grownMesh;
+    public Mesh deadMesh;
 
-    public Material HarvestMaterial;
-
-    public MeshState sapling;
-    public MeshState growing;
-    public MeshState grown;
-    public MeshState dead;
-
-    public Material wateredMaterial;
     public Material dryMaterial;
-       
+    public Material growingMaterial;
+    public Material grownMaterial;
+    public Material deadMaterial;
+
 
     public new Renderer renderer;
     public MeshRenderer meshRenderer;
     public SkinnedMeshRenderer skinnedMeshRenderer;
     public MeshFilter meshFilter;
         
+    [Header("Particle Effects")]
     public ParticleSystemScript plantingParticles;
     public ParticleSystemScript leafFallParticleSystem;
     public GameObject plantedParticles;
     public GameObject leafFallParticles;
     public float particlePlayDuration = 1f;
 
-
+    [Header("Sound Effects")]
     [FMODUnity.EventRef]
     public string wateredSound = "event:/Done/Watering Plant";
     [FMODUnity.EventRef]
@@ -109,14 +118,14 @@ public class Plantscript : NetworkBehaviour
         renderer = GetComponent<Renderer>();
         renderer = GetComponentInChildren<Renderer>();
 
-        if (isWatered)
-        {
-            renderer.material = wateredMaterial;
-        }
+        if (ReadyToHarvest)
+            renderer.material = grownMaterial;
+        else if (!isAlive)
+            renderer.material = deadMaterial;
+        else if (isWatered)
+            renderer.material = growingMaterial;
         else
-        {
             renderer.material = dryMaterial;
-        }
 
         GameObject plantParticles = (GameObject)Instantiate(plantedParticles, transform.position, transform.rotation);
         Destroy(plantParticles, particlePlayDuration);
@@ -160,28 +169,28 @@ public class Plantscript : NetworkBehaviour
         {
             case PlantState.Sapling:
                 {
-                    meshFilter.mesh = sapling.mesh;
+                    meshFilter.mesh = saplingMesh;
                     //renderer.material = sapling.material;
                     currentPlantState = PlantState.Sapling;
                 }
                 break;
             case PlantState.Growing:
                 {
-                    meshFilter.mesh = growing.mesh;
+                    meshFilter.mesh = growingMesh;
                     //renderer.material = growing.material;
                     currentPlantState = PlantState.Growing;
                 }
                 break;
             case PlantState.Grown:
                 {
-                    meshFilter.mesh = grown.mesh;
+                    meshFilter.mesh = grownMesh;
                     //renderer.material = grown.material;
                     currentPlantState = PlantState.Grown;
                 }
                 break;
             case PlantState.Dead:
                 {
-                    meshFilter.mesh = dead.mesh;
+                    meshFilter.mesh = deadMesh;
                     //renderer.material = dead.material;
                     currentPlantState = PlantState.Dead;
                 }
@@ -228,6 +237,7 @@ public class Plantscript : NetworkBehaviour
             harvestsToRemove--;
             ReadyToHarvest = false;
             daySinceLastHarvest = 0;
+            CmdSwapPlantMaterial(PlantStateMat.Growing);
         }
 
 
@@ -272,14 +282,66 @@ public class Plantscript : NetworkBehaviour
         SwitchPlantState(state);
     }
 
+    [Command]
+    public void CmdSwapPlantMaterial(Plantscript.PlantStateMat stateMat)
+    {
+        RpcSwapPlantMaterial(stateMat);
+    }
+
+    [ClientRpc]
+    void RpcSwapPlantMaterial(Plantscript.PlantStateMat stateMat)
+    {
+        var plant = ClientScene.FindLocalObject(netId);
+        if (plant == null)
+        {
+            Debug.LogError("Where is plant? ID: " + netId.ToString());
+            return;
+        }
+
+        SwitchPlantMaterial(stateMat);
+    }
+
+    public void SwitchPlantMaterial(PlantStateMat stateMat)
+    {
+        switch (stateMat)
+        {
+            case PlantStateMat.Dead:
+                {
+                    renderer.material = deadMaterial;
+                    currentPlantStateMat = PlantStateMat.Dead;
+                }
+                break;
+            case PlantStateMat.Dry:
+                {
+                    renderer.material = dryMaterial;
+                    currentPlantStateMat = PlantStateMat.Dry;
+                }
+                break;
+            case PlantStateMat.Growing:
+                {
+                    renderer.material = growingMaterial;
+                    currentPlantStateMat = PlantStateMat.Growing;
+                }
+                break;
+            case PlantStateMat.Grown:
+                {
+                    renderer.material = grownMaterial;
+                    currentPlantStateMat = PlantStateMat.Grown;
+                }
+                break;
+            default:
+                Debug.LogError("Trying to swap PlantStateMat to unknown state");
+                break;
+        }
+    }
 
     void OnWateredChange(bool watered)
     {
         
         if (watered)
         {
-            skinnedMeshRenderer.material = wateredMaterial;
-            renderer.material = wateredMaterial;
+            skinnedMeshRenderer.material = growingMaterial;
+            renderer.material = growingMaterial;
         }
         else
         {

@@ -30,6 +30,8 @@ public class SpawnPad : NetworkBehaviour
             player.money -= cost;
             //bank.Score -= cost;
             GameObject newSpawn = (GameObject)Instantiate(ObjectToSpawn, spawnPoint.position, transform.rotation);
+            RpcPlaySound(id);
+            RpcPriceText(id, cost);
         }
     }
 
@@ -38,7 +40,7 @@ public class SpawnPad : NetworkBehaviour
         if (col.gameObject.CompareTag("Player"))
         {
             CmdSpawnObject(col.GetComponent<NetworkIdentity>().netId);
-            RpcPlaySound(col.GetComponent<NetworkIdentity>().netId);
+            //RpcPlaySound(col.GetComponent<NetworkIdentity>().netId);
         }
     }
 
@@ -46,6 +48,12 @@ public class SpawnPad : NetworkBehaviour
     void RpcPlaySound(NetworkInstanceId id)
     {
         NetworkServer.FindLocalObject(id).GetComponent<PlayerInventory>().RpcPlaySoundForPlayer(buySound);
+    }
+
+    [ClientRpc]
+    void RpcPriceText(NetworkInstanceId id, int price)
+    {
+         ClientScene.FindLocalObject(id).GetComponent<PlayerInventory>().SpawnPriceText(price);
     }
 
 }
