@@ -11,9 +11,13 @@ public class PlayerInventory : NetworkBehaviour {
     ShopScript shop;
     public Text playerMoneyText;
     public Text farmMoneyText;
-
+    
     public int money = 0;
     private int oldMoney = -1;
+
+    public Canvas UICanvas;
+    public Text costText;
+    public float costTextLifeTime = 2.5f;
 
     [FMODUnity.EventRef]
     public string depositSound = "event:/Done/Gold Spend";
@@ -147,12 +151,34 @@ public class PlayerInventory : NetworkBehaviour {
     [ClientRpc]
     public void RpcPlaySoundForPlayer(string sound)
     {
-        Debug.Log("Inside player play sound");
+        //Debug.Log("Inside player play sound");
         if (isLocalPlayer)
         {
-            Debug.Log("Playing sound for local player");
+            //Debug.Log("Playing sound for local player");
             //Play Sound
             FMODUnity.RuntimeManager.PlayOneShot(sound, transform.position);
+        }
+    }
+
+    public void SpawnPriceText(int price)
+    {
+        if (!isLocalPlayer)
+            return;
+
+        if (UICanvas != null)
+        {
+            Text priceText = (Text)Instantiate(costText, playerMoneyText.rectTransform.position, playerMoneyText.rectTransform.rotation);
+            priceText.rectTransform.SetParent(UICanvas.transform, false);
+            priceText.rectTransform.position = playerMoneyText.rectTransform.position;
+            priceText.rectTransform.rotation = playerMoneyText.rectTransform.rotation;
+
+            if (price > 0)
+                priceText.text = "-";
+            else
+                priceText.text = "+";
+            priceText.text += "$" + price; 
+
+            Destroy(priceText.gameObject, costTextLifeTime);
         }
     }
 

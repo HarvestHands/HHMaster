@@ -240,11 +240,13 @@ public class DayNightController : NetworkBehaviour
                     {
                         plantScript.ReadyToHarvest = true;
                         RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Grown);
+                        plantScript.CmdSwapPlantMaterial(Plantscript.PlantStateMat.Grown);
                     }
                     else
                     {
                         plantScript.isWatered = false;
                         RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Growing);
+                        plantScript.CmdSwapPlantMaterial(Plantscript.PlantStateMat.Dry);
                     }
                 }
             }
@@ -261,6 +263,7 @@ public class DayNightController : NetworkBehaviour
                     plantScript.ReadyToHarvest = true;
                     plantScript.isAlive = false;
                     RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Dead);
+                    plantScript.CmdSwapPlantMaterial(Plantscript.PlantStateMat.Dead);
                 }
             }
 
