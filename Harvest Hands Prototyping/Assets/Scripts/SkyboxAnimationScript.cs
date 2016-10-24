@@ -13,7 +13,7 @@ public class SkyboxAnimationScript : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        GetComponent<Renderer>().sharedMaterial = GetComponent<Renderer>().material;
+      //  GetComponent<Renderer>().sharedMaterial = GetComponent<Renderer>().material;
         
     }
 	

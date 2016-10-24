@@ -49,8 +49,9 @@ public class ShopScript1 : NetworkBehaviour
         TargetPlayer = GameObject.FindGameObjectWithTag("Player");
         Storekeep = GameObject.Find("StoreKeep");
 
-        Renderer rend = Storekeep.GetComponent<Renderer>();
-        rend.material.shader = Shader.Find("Standard");
+        //Renderer rend = Storekeep.GetComponent<Renderer>();
+        //
+        //rend.material.shader = Shader.Find("Standard");
 
         SpawnLoc = Storekeep.transform.position;
         Storekeep.GetComponent<Renderer>().sharedMaterials[0].color = Color.grey;
