@@ -22,7 +22,7 @@ public class Bed : NetworkBehaviour
     public void CmdActivate()
     {
         GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay = setTimeTo;
-        //TriggerFadeIn();
+        TriggerFadeIn();
     }
     
     public void TriggerFadeIn()

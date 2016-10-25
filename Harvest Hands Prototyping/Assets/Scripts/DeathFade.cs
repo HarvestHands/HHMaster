@@ -158,11 +158,12 @@ public class DeathFade : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
+        fadingIn = true;
         if (DNCont.currentTimeOfDay > DNCont.endDayAt)
             FadeImage.CrossFadeAlpha(1, bedFadeInTime, false);
         else
         {
-
+            FadeImage.CrossFadeAlpha(1, bedFadeInTime, false);
         }
     }
 

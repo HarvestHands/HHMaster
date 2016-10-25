@@ -239,7 +239,7 @@ public class DayNightController : NetworkBehaviour
                 {
                     plantScript.currentDryStreak = 0;
                     //if ready to grow
-                    if (ingameDay >= plantScript.dayPlanted + plantScript.TimeToGrow - plantScript.dryDays)
+                    if (ingameDay >= plantScript.dayPlanted + plantScript.TimeToGrow + plantScript.dryDays)
                     {
                         plantScript.ReadyToHarvest = true;
                         RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Grown);
