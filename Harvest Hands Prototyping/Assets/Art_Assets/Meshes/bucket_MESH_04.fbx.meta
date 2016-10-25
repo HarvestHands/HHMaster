@@ -1,18 +1,22 @@
 fileFormatVersion: 2
-guid: ce7042602056a0f4caaa9c006b84a921
-timeCreated: 1473650795
+guid: 1a090ab9fbaabc6479999110b9cfe1fa
+timeCreated: 1477373035
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: BucketMESH_02
+    100004: Objects
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: WellWall_MESH_01
+    400002: BucketMESH_02
+    400004: Objects
+    2300000: BucketMESH_02
+    3300000: BucketMESH_02
+    4300000: BucketMESH_02
     9500000: //RootNode
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
   animations:

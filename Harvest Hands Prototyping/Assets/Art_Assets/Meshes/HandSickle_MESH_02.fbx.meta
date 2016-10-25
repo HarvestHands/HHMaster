@@ -1,21 +1,16 @@
 fileFormatVersion: 2
-guid: 3b93c6951b75cfc4dab24a164fc18fa7
-timeCreated: 1471932009
+guid: 3090cb0074f44d14f9a719b681050b44
+timeCreated: 1477373608
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: BucketMESH
-    100002: //RootNode
-    100004: First_JNT
-    100006: ROOTJNT
-    400000: BucketMESH
-    400002: //RootNode
-    400004: First_JNT
-    400006: ROOTJNT
-    4300000: BucketMESH
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: HandSickle_MESH_01
     9500000: //RootNode
-    13700000: BucketMESH
   materials:
     importMaterials: 1
     materialName: 0
@@ -23,7 +18,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 

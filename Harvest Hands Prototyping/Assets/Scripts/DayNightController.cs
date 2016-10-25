@@ -6,404 +6,396 @@ using UnityEngine.Networking;
 
 public class DayNightController : NetworkBehaviour
 {
-    [SyncVar] public int ingameDay = 0;
-    [Tooltip("Real world second per in-game day")]
-    public float secondsInDay = 120f;
+	[SyncVar] public int ingameDay = 0;
+	[Tooltip("Real world second per in-game day")]
+	public float secondsInDay = 120f;
 
-    [Tooltip("0 (midnight), 0.25 (sunrise), 0.5 (midday), 0.75(sunset), 1 (midnight)")]
-    //[Tooltip("0 (sunrise) - 1 (sunset)")]
+	[Tooltip("0 (midnight), 0.25 (sunrise), 0.5 (midday), 0.75(sunset), 1 (midnight)")]
+	//[Tooltip("0 (sunrise) - 1 (sunset)")]
 
-    [Range(0, 1)]
-    public float currentTimeOfDay = 0;
-    [SyncVar] public float timeMulitplier = 1f;
+	[Range(0, 1)]
+	public float currentTimeOfDay = 0;
+	[SyncVar] public float timeMulitplier = 1f;
 
-    public float startDayAt = 0.25f;
-    public float endDayAt = 0.75f;
-    public float nightPauseLength = 5f;
-    
-    public Light sun;
+	public float startDayAt = 0.25f;
+	public float endDayAt = 0.75f;
+	public float nightPauseLength = 5f;
 
-    public Transform stars;
-    Material sky;
+	public Light sun;
 
-    float sunInitialIntensity;
+	public Transform stars;
+	Material sky;
 
-    private NetworkStartPosition[] spawnPoints;
-    private ShopScript shop;
-    public MushroomSpawner[] mushroomSpawners;
-    public List<StorageCatapult> storageCatapults;
-    //public StorageCatapult storageCatapult;
+	float sunInitialIntensity;
 
-
-    public List<Mushroom> mushrooms;
+	private NetworkStartPosition[] spawnPoints;
+	private ShopScript shop;
+	public MushroomSpawner[] mushroomSpawners;
+	public List<StorageCatapult> storageCatapults;
+	//public StorageCatapult storageCatapult;
 
 
-    [SerializeField]
-    [Tooltip("Score lost per player that died")]
-    int deathPenalty = 0;
-
-    private bool nightTimeCheckDone = false;
-
-    public int playerdeathcount;
-
-    RaycastHit Hit;
-    public float GrabDistance = 3.0f;
-
-    // Use this for initialization
-    void Start ()
-    {
-        sky = RenderSettings.skybox;
-        sunInitialIntensity = sun.intensity;
-        spawnPoints = FindObjectsOfType<NetworkStartPosition>();
-        shop = FindObjectOfType<ShopScript>();
-        mushroomSpawners = FindObjectsOfType<MushroomSpawner>();
-        playerdeathcount = 0;
+	public List<Mushroom> mushrooms;
 
 
+	[SerializeField]
+	[Tooltip("Score lost per player that died")]
+	int deathPenalty = 0;
 
-        //mushrooms = FindObjectsOfType<Mushroom>();
-    }
+	private bool nightTimeCheckDone = false;
 
-    // Update is called once per frame
-    void Update ()
-    {
-        //only run if server?
-        //if (!isServer)
-        //    return;
-    //    PlayerDeathPenalty();
+	public int playerdeathcount;
+
+	RaycastHit Hit;
+	public float GrabDistance = 3.0f;
+
+	// Use this for initialization
+	void Start ()
+	{
+		sky = RenderSettings.skybox;
+		sunInitialIntensity = sun.intensity;
+		spawnPoints = FindObjectsOfType<NetworkStartPosition>();
+		shop = FindObjectOfType<ShopScript>();
+		mushroomSpawners = FindObjectsOfType<MushroomSpawner>();
+		playerdeathcount = 0;
 
 
 
-        //insta sells catapaults items
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //
-        //    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-        //
-        //    Physics.Raycast(ray, out Hit, GrabDistance);
-        //
-        //    if (Hit.collider.gameObject == GameObject.Find("CatapaultButton"))
-        //    {
-        //        foreach (StorageCatapult catapult in storageCatapults)
-        //        {
-        //            catapult.CmdEmptyCatapult();
-        //        }
-        //    }
-        //}
+		//mushrooms = FindObjectsOfType<Mushroom>();
+	}
+
+	// Update is called once per frame
+	void Update ()
+	{
+		//only run if server?
+		//if (!isServer)
+		//    return;
+		//    PlayerDeathPenalty();
+
+		//Returns player spped back to default after the next day
+		if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.77 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.78)
+		{
+			GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 10;
+			GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed = 20;      
+		}
+
+		//insta sells catapaults items
+		//if (Input.GetMouseButtonDown(0))
+		//{
+		//
+		//    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+		//
+		//    Physics.Raycast(ray, out Hit, GrabDistance);
+		//
+		//    if (Hit.collider.gameObject == GameObject.Find("CatapaultButton"))
+		//    {
+		//        foreach (StorageCatapult catapult in storageCatapults)
+		//        {
+		//            catapult.CmdEmptyCatapult();
+		//        }
+		//    }
+		//}
 
 
-        //Returns player spped back to default after the next day
-        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.75 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.76)
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 10;
-            GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed = 20;
+				//destroys mushrooms after certain time in day
+		if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.35 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.36)
+		{
+			//   Destroy(this.gameObject);
 
-            //spawns mushrooms at night
-           // foreach (MushroomSpawner spawner in mushroomSpawners)
-          //  {
-          //      spawner.AttemptSpawn();
-          //  }        
-        }
+			//Destroy(GameObject.FindGameObjectWithTag("Mushroom"));
 
-        //destroys mushrooms after certain time in day
-        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.35 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.36)
-        {
-            //   Destroy(this.gameObject);
-
-            //Destroy(GameObject.FindGameObjectWithTag("Mushroom"));
-
-          //  Destroy(GameObject.Find("MushroomSpawner").GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
+			//  Destroy(GameObject.Find("MushroomSpawner").GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
 
 
 
 
 
-           // Destroy(GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
+			// Destroy(GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
 
 
-           // Destroy(GameObject.Find("mushroom_Common1"));
-           // Destroy(GameObject.Find("mushroom_Common2"));
-          //  Destroy(GameObject.Find("mushroom_Rare"));
-           // Destroy(GameObject.Find("mushroom_Uncommon1"));
-          //  Destroy(GameObject.Find("mushroom_Uncommon2"));
-        }
+			// Destroy(GameObject.Find("mushroom_Common1"));
+			// Destroy(GameObject.Find("mushroom_Common2"));
+			//  Destroy(GameObject.Find("mushroom_Rare"));
+			// Destroy(GameObject.Find("mushroom_Uncommon1"));
+			//  Destroy(GameObject.Find("mushroom_Uncommon2"));
+		}
 
 
-        //Update Sun rotation according to time of day
-        UpdateSun();
-        UpdateStars();
+		//Update Sun rotation according to time of day
+		UpdateSun();
+		UpdateStars();
 
-        currentTimeOfDay += (Time.deltaTime / secondsInDay) * timeMulitplier;
-        GetComponent<FogEffect>().UpdateFog(currentTimeOfDay);
+		currentTimeOfDay += (Time.deltaTime / secondsInDay) * timeMulitplier;
+		GetComponent<FogEffect>().UpdateFog(currentTimeOfDay);
 
-        if (!isServer)
-            return;
+		if (!isServer)
+			return;
 
-        //Check if the day is over
-        //if (currentTimeOfDay >= 1)
-        if (currentTimeOfDay >= endDayAt)
-        {
-            if (!nightTimeCheckDone)
-            {
-                nightTimeCheckDone = true;
-                CmdCheckPlayersSafe();
+		//Check if the day is over
+		//if (currentTimeOfDay >= 1)
+		if (currentTimeOfDay >= endDayAt)
+		{
+			if (!nightTimeCheckDone)
+			{
+				nightTimeCheckDone = true;
+				CmdCheckPlayersSafe();
 
-                //yield return new WaitForSeconds(10);
-                Invoke("RespawnDeadPlayers", nightPauseLength / 2);
-                Invoke("CmdUpdateNightStuff", nightPauseLength / 2);
-                Invoke("CmdSetTimeOfDayMorning", nightPauseLength);
-            }
-        }
+				//yield return new WaitForSeconds(10);
+				Invoke("RespawnDeadPlayers", nightPauseLength / 2);
+				Invoke("CmdUpdateNightStuff", nightPauseLength / 2);
+				Invoke("CmdSetTimeOfDayMorning", nightPauseLength);
+			}
+		}
 
 
 	}
 
-    [Command]
-    void CmdUpdateNightStuff()
-    {
-        ingameDay++;
-        CmdUpdatePlants();
-        CmdSetTimeOfDayMorning();
-        CmdIncrementDay();
-        CmdUpdateMushroomSpawners();
-        //storageCatapult.CmdEmptyCatapult();
-        foreach(StorageCatapult catapult in storageCatapults)
-        {
-            catapult.CmdEmptyCatapult();
-        }
-    }
+	[Command]
+	void CmdUpdateNightStuff()
+	{
+		ingameDay++;
+		CmdUpdatePlants();
+		CmdSetTimeOfDayMorning();
+		CmdIncrementDay();
+		CmdUpdateMushroomSpawners();
+		//storageCatapult.CmdEmptyCatapult();
+		foreach(StorageCatapult catapult in storageCatapults)
+		{
+			catapult.CmdEmptyCatapult();
+		}
+	}
 
-    void UpdateSun()
-    {
-        //float daylightTime = endDayAt - startDayAt;
-        //float wholeDayTime = (1 / daylightTime) *  //* secondsInDay;
-        //Debug.Log(wholeDayTime);
+	void UpdateSun()
+	{
+		//float daylightTime = endDayAt - startDayAt;
+		//float wholeDayTime = (1 / daylightTime) *  //* secondsInDay;
+		//Debug.Log(wholeDayTime);
 
-        //-90 so that sun rise is at 0.25 instead of 0
-        sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 360f) - 90, 170, 0);
-        //sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 360f) - 90, 170, 0);
+		//-90 so that sun rise is at 0.25 instead of 0
+		sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 360f) - 90, 170, 0);
+		//sun.transform.localRotation = Quaternion.Euler((currentTimeOfDay * 360f) - 90, 170, 0);
 
-        float intensityMultiplier = 1;
-        //set intensity to low during night
-        if (currentTimeOfDay <= 0.23f || currentTimeOfDay >= 0.75f)
-        {
-            intensityMultiplier = 0;
-        }
-        //Increase sunlight intensity over time at sunrise
-        else if (currentTimeOfDay <= 0.25f)
-        {
-            intensityMultiplier = Mathf.Clamp01((currentTimeOfDay - 0.23f) * (1 / 0.02f));
-        }
-        //Fade out sunlight over time at sunset
-        else if (currentTimeOfDay >= 0.73f)
-        {
-            intensityMultiplier = Mathf.Clamp01(1 - ((currentTimeOfDay - 0.73f) * (1 / 0.02f)));
-            
-        }
+		float intensityMultiplier = 1;
+		//set intensity to low during night
+		if (currentTimeOfDay <= 0.23f || currentTimeOfDay >= 0.75f)
+		{
+			intensityMultiplier = 0;
+		}
+		//Increase sunlight intensity over time at sunrise
+		else if (currentTimeOfDay <= 0.25f)
+		{
+			intensityMultiplier = Mathf.Clamp01((currentTimeOfDay - 0.23f) * (1 / 0.02f));
+		}
+		//Fade out sunlight over time at sunset
+		else if (currentTimeOfDay >= 0.73f)
+		{
+			intensityMultiplier = Mathf.Clamp01(1 - ((currentTimeOfDay - 0.73f) * (1 / 0.02f)));
 
-        //Set sun intensity
-        sun.intensity = sunInitialIntensity * intensityMultiplier;
+		}
 
-    }
+		//Set sun intensity
+		sun.intensity = sunInitialIntensity * intensityMultiplier;
 
-    void UpdateStars()
-    {
-        if (stars != null)
-            stars.transform.rotation = sun.transform.rotation;
-    }
-    
-    [Command]
-    void CmdUpdatePlants()
-    {
-        foreach(GameObject plant in GameObject.FindGameObjectsWithTag("Plant"))
-        {
-            if (!plant.GetComponent<Plantscript>())
-                continue;
+	}
 
-            Plantscript plantScript = plant.GetComponent<Plantscript>();
-            //if watered
-            if (plantScript.isWatered)
-            {
-                //If creeper plant, attempt spread
-                if (plantScript.currentPlantType == Plantscript.PlantType.Creeper)
-                {
-                    if (plantScript.currentPlantState == Plantscript.PlantState.Growing || plantScript.currentPlantState == Plantscript.PlantState.Grown)
-                        plantScript.GetComponent<CreeperPlant>().AttemptSpread();
-                }
-                plantScript.daySinceLastHarvest++;
-                //if not grown yet
-                if (!plantScript.ReadyToHarvest)
-                {
-                    plantScript.currentDryStreak = 0;
-                    //if ready to grow
-                    if (ingameDay >= plantScript.dayPlanted + plantScript.TimeToGrow - plantScript.dryDays)
-                    {
-                        plantScript.ReadyToHarvest = true;
-                        RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Grown);
-                        plantScript.CmdSwapPlantMaterial(Plantscript.PlantStateMat.Grown);
-                    }
-                    else
-                    {
-                        plantScript.isWatered = false;
-                        RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Growing);
-                        plantScript.CmdSwapPlantMaterial(Plantscript.PlantStateMat.Dry);
-                    }
-                }
-            }
-            //plant not watered
-            else
-            {
-                plantScript.currentDryStreak++;
-                plantScript.dryDays++;
+	void UpdateStars()
+	{
+		if (stars != null)
+			stars.transform.rotation = sun.transform.rotation;
+	}
 
+	[Command]
+	void CmdUpdatePlants()
+	{
+		foreach(GameObject plant in GameObject.FindGameObjectsWithTag("Plant"))
+		{
+			if (!plant.GetComponent<Plantscript>())
+				continue;
 
-                //plant dies
-                if (plantScript.currentDryStreak >= plantScript.dryDaysToDie)
-                {
-                    plantScript.ReadyToHarvest = true;
-                    plantScript.isAlive = false;
-                    RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Dead);
-                    plantScript.CmdSwapPlantMaterial(Plantscript.PlantStateMat.Dead);
-                }
-            }
-
-            //plantScript.isWatered = false;
-        }
-    }
-
-    [ClientRpc]
-    void RpcSwapPlantGraphics(NetworkInstanceId id, Plantscript.PlantState state)
-    {
-        var plant = ClientScene.FindLocalObject(id);
-        if(plant == null)
-        {
-            Debug.LogError("Where is plant? ID: " + id.ToString());
-            return;
-        }
-
-        var plantScript = plant.GetComponent<Plantscript>();
-        plantScript.SwitchPlantState(state);
-    }
-
-    [Command]
-    void CmdCheckPlayersSafe()
-    {
-        GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
-        int playersDead = 0;
-
-        Debug.Log("There are  players - "+ Players.Length);
-        foreach(GameObject player in Players)
-        {
-            //player.GetComponent<DeathFade>().RpcFadeIn();
-            if (!player.GetComponent<PlayerInventory>().isSafe)
-            {
-                player.GetComponent<DeathFade>().RpcFadeIn(false);
-                playersDead++;
-                //int respawnIndex = Random.Range(0, spawnPoints.Length -1);
-                //player.transform.position = spawnPoints[respawnIndex].transform.position;
-                //player.transform.rotation = spawnPoints[respawnIndex].transform.rotation;
-                
-            }
-            else
-            {
-                player.GetComponent<DeathFade>().RpcFadeIn(true);
-            }
-        }
-        int scoreLost = deathPenalty * playersDead;
-        //Debug.Log(shop.Score + " - " + scoreLost);
-        if(shop != null)
-            shop.Score -= scoreLost;
-        //Debug.Log(shop.Score);
-    }
-        
-    [ClientRpc]
-    public void RpcRespawnPlayer(NetworkInstanceId id, Vector3 newPos)
-    {
-        GameObject player = ClientScene.FindLocalObject(id);
-        player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().Respawn(newPos);
-        //transform.position = newPos;
-    }
-
-    void RespawnDeadPlayers()
-    {
-        //Debug.Log("Respawning!");
-        GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject player in Players)
-        {
-            //player.GetComponent<DeathFade>().RpcFadeOut();
-            //if player is NOT safe
-            if (!player.GetComponent<PlayerInventory>().isSafe)
-            {
-                int respawnIndex = Random.Range(0, spawnPoints.Length - 1);
-                player.GetComponent<DeathFade>().RpcFadeOut(false);
-                //player.transform.position = spawnPoints[respawnIndex].transform.position;
-                //player.transform.rotation = spawnPoints[respawnIndex].transform.rotation;
-
-                RpcRespawnPlayer(player.GetComponent<NetworkIdentity>().netId, spawnPoints[respawnIndex].transform.position);
-
-                //player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().RpcRespawnPlayer(spawnPoints[respawnIndex].transform.position);
-
-                playerdeathcount += 1;
-                PlayerDeathPenalty();
-            }
-            else
-            {
-                player.GetComponent<DeathFade>().RpcFadeOut(true);
-            }
-        }
-    }
+			Plantscript plantScript = plant.GetComponent<Plantscript>();
+			//if watered
+			if (plantScript.isWatered)
+			{
+				//If creeper plant, attempt spread
+				if (plantScript.currentPlantType == Plantscript.PlantType.Creeper)
+				{
+					if (plantScript.currentPlantState == Plantscript.PlantState.Growing || plantScript.currentPlantState == Plantscript.PlantState.Grown)
+						plantScript.GetComponent<CreeperPlant>().AttemptSpread();
+				}
+				plantScript.daySinceLastHarvest++;
+				//if not grown yet
+				if (!plantScript.ReadyToHarvest)
+				{
+					plantScript.currentDryStreak = 0;
+					//if ready to grow
+					if (ingameDay >= plantScript.dayPlanted + plantScript.TimeToGrow - plantScript.dryDays)
+					{
+						plantScript.ReadyToHarvest = true;
+						RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Grown);
+						plantScript.CmdSwapPlantMaterial(Plantscript.PlantStateMat.Grown);
+					}
+					else
+					{
+						plantScript.isWatered = false;
+						RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Growing);
+						plantScript.CmdSwapPlantMaterial(Plantscript.PlantStateMat.Dry);
+					}
+				}
+			}
+			//plant not watered
+			else
+			{
+				plantScript.currentDryStreak++;
+				plantScript.dryDays++;
 
 
-    public void PlayerDeathPenalty()
-    {
-       
-        
-     
-            Debug.Log("PLAYERDEATHTEST");
-            GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
-            foreach (GameObject player in Players)
-            {
-                //default 10
-                player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed /= 2;
-                player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed /= 2;
+				//plant dies
+				if (plantScript.currentDryStreak >= plantScript.dryDaysToDie)
+				{
+					plantScript.ReadyToHarvest = true;
+					plantScript.isAlive = false;
+					RpcSwapPlantGraphics(plantScript.netId, Plantscript.PlantState.Dead);
+					plantScript.CmdSwapPlantMaterial(Plantscript.PlantStateMat.Dead);
+				}
+			}
 
-                Debug.Log(player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed);
-                player.GetComponent<StaffNo3>().CmdDropped();
-        }
+			//plantScript.isWatered = false;
+		}
+	}
 
-       
+	[ClientRpc]
+	void RpcSwapPlantGraphics(NetworkInstanceId id, Plantscript.PlantState state)
+	{
+		var plant = ClientScene.FindLocalObject(id);
+		if(plant == null)
+		{
+			Debug.LogError("Where is plant? ID: " + id.ToString());
+			return;
+		}
 
-    }
+		var plantScript = plant.GetComponent<Plantscript>();
+		plantScript.SwitchPlantState(state);
+	}
 
-    [Command]
-    void CmdSetTimeOfDayMorning()
-    {
-        currentTimeOfDay = startDayAt;
-        RpcSyncTimeOfDay(currentTimeOfDay);
-    }
+	[Command]
+	void CmdCheckPlayersSafe()
+	{
+		GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
+		int playersDead = 0;
 
-    [Command]
-    void CmdIncrementDay()
-    {
-        //ingameDay++;
-        currentTimeOfDay = startDayAt;
-        nightTimeCheckDone = false;
-    }
+		Debug.Log("There are  players - "+ Players.Length);
+		foreach(GameObject player in Players)
+		{
+			//player.GetComponent<DeathFade>().RpcFadeIn();
+			if (!player.GetComponent<PlayerInventory>().isSafe)
+			{
+				player.GetComponent<DeathFade>().RpcFadeIn(false);
+				playersDead++;
+				//int respawnIndex = Random.Range(0, spawnPoints.Length -1);
+				//player.transform.position = spawnPoints[respawnIndex].transform.position;
+				//player.transform.rotation = spawnPoints[respawnIndex].transform.rotation;
 
-    [ClientRpc]
-    void RpcSyncTimeOfDay(float _timeOfDay)
-    {
-        currentTimeOfDay = _timeOfDay;
-    }
+			}
+			else
+			{
+				player.GetComponent<DeathFade>().RpcFadeIn(true);
+			}
+		}
+		int scoreLost = deathPenalty * playersDead;
+		//Debug.Log(shop.Score + " - " + scoreLost);
+		if(shop != null)
+			shop.Score -= scoreLost;
+		//Debug.Log(shop.Score);
+	}
 
-    [Command]
-    void CmdUpdateMushroomSpawners()
-    {
-        foreach(MushroomSpawner spawner in mushroomSpawners)
-        {
-            spawner.AttemptSpawn();
-        }
-    }
+	[ClientRpc]
+	public void RpcRespawnPlayer(NetworkInstanceId id, Vector3 newPos)
+	{
+		GameObject player = ClientScene.FindLocalObject(id);
+		player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().Respawn(newPos);
+		//transform.position = newPos;
+	}
+
+	void RespawnDeadPlayers()
+	{
+		//Debug.Log("Respawning!");
+		GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject player in Players)
+		{
+			//player.GetComponent<DeathFade>().RpcFadeOut();
+			//if player is NOT safe
+			if (!player.GetComponent<PlayerInventory>().isSafe)
+			{
+				int respawnIndex = Random.Range(0, spawnPoints.Length - 1);
+				player.GetComponent<DeathFade>().RpcFadeOut(false);
+				//player.transform.position = spawnPoints[respawnIndex].transform.position;
+				//player.transform.rotation = spawnPoints[respawnIndex].transform.rotation;
+
+				RpcRespawnPlayer(player.GetComponent<NetworkIdentity>().netId, spawnPoints[respawnIndex].transform.position);
+
+				//player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().RpcRespawnPlayer(spawnPoints[respawnIndex].transform.position);
+
+				playerdeathcount += 1;
+				PlayerDeathPenalty();
+			}
+			else
+			{
+				player.GetComponent<DeathFade>().RpcFadeOut(true);
+			}
+		}
+	}
+
+
+	public void PlayerDeathPenalty()
+	{
+
+
+
+		Debug.Log("PLAYERDEATHTEST");
+		GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
+		foreach (GameObject player in Players)
+		{
+			//default 10
+			player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed /= 2;
+			player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed /= 2;
+
+			Debug.Log(player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed);
+			player.GetComponent<StaffNo3>().CmdDropped();
+		}
+
+
+
+	}
+
+	[Command]
+	void CmdSetTimeOfDayMorning()
+	{
+		currentTimeOfDay = startDayAt;
+		RpcSyncTimeOfDay(currentTimeOfDay);
+	}
+
+	[Command]
+	void CmdIncrementDay()
+	{
+		//ingameDay++;
+		currentTimeOfDay = startDayAt;
+		nightTimeCheckDone = false;
+	}
+
+	[ClientRpc]
+	void RpcSyncTimeOfDay(float _timeOfDay)
+	{
+		currentTimeOfDay = _timeOfDay;
+	}
+
+	[Command]
+	void CmdUpdateMushroomSpawners()
+	{
+		foreach(MushroomSpawner spawner in mushroomSpawners)
+		{
+			spawner.AttemptSpawn();
+		}
+	}
 
 
 }
