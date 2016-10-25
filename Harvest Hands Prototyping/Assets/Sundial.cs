@@ -11,7 +11,7 @@ public class Sundial : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
     {
-        dayNightController = FindObjectOfType<DayNightController>();
+        //dayNightController = FindObjectOfType<DayNightController>();
 
 	}
 	

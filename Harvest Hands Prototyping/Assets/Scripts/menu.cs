@@ -60,11 +60,11 @@ void Start()
 
         //resolutionDrop.options.Clear();
 
-        for(int i = 0; i < resolutions.Length; i++)
-        {
-            resolutionDrop.options[i].text = (resolutions[i]).ToString();
-            resolutionDrop.value = i;
-        }
+        //for(int i = 0; i < resolutions.Length; i++)
+        //{
+        //    resolutionDrop.options[i].text = (resolutions[i]).ToString();
+        //    resolutionDrop.value = i;
+        //}
 
     }
 

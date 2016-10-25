@@ -75,21 +75,21 @@ public class DayNightController : NetworkBehaviour
 
 
         //insta sells catapaults items
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-
-            Physics.Raycast(ray, out Hit, GrabDistance);
-
-            if (Hit.collider.gameObject == GameObject.Find("CatapaultButton"))
-            {
-                foreach (StorageCatapult catapult in storageCatapults)
-                {
-                    catapult.CmdEmptyCatapult();
-                }
-            }
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //
+        //    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+        //
+        //    Physics.Raycast(ray, out Hit, GrabDistance);
+        //
+        //    if (Hit.collider.gameObject == GameObject.Find("CatapaultButton"))
+        //    {
+        //        foreach (StorageCatapult catapult in storageCatapults)
+        //        {
+        //            catapult.CmdEmptyCatapult();
+        //        }
+        //    }
+        //}
 
 
         //Returns player spped back to default after the next day
