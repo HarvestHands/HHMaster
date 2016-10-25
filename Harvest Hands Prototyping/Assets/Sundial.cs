@@ -7,6 +7,7 @@ public class Sundial : MonoBehaviour
     public DayNightController dayNightController;
     public float rotationOffset = 0;
     public RectTransform rectTransform;
+    public Text dayCounter;
 
 	// Use this for initialization
 	void Awake ()
@@ -22,5 +23,7 @@ public class Sundial : MonoBehaviour
         rectTransform.localRotation = Quaternion.Euler(0.0f, 0, dayNightController.currentTimeOfDay * 360f + rotationOffset);
         //rectTransform.localRotation.eulerAngles.z.Set(rotation);
         //rectTransform.localRotation.z = dayNightController.currentTimeOfDay * 360f;
+
+        dayCounter.text = "Day: " + dayNightController.ingameDay;
     }
 }

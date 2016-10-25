@@ -337,16 +337,32 @@ public class Plantscript : NetworkBehaviour
 
     void OnWateredChange(bool watered)
     {
-        
-        if (watered)
+        if (!isAlive)
         {
-            skinnedMeshRenderer.material = growingMaterial;
-            renderer.material = growingMaterial;
+            skinnedMeshRenderer.material = deadMaterial;
+            renderer.material = deadMaterial;
+            currentPlantStateMat = PlantStateMat.Dead;
+        }
+        else if (watered)
+        {
+            if (ReadyToHarvest)
+            {
+                skinnedMeshRenderer.material = grownMaterial;
+                renderer.material = grownMaterial;
+                currentPlantStateMat = PlantStateMat.Grown;
+            }
+            else 
+            {
+                skinnedMeshRenderer.material = growingMaterial;
+                renderer.material = growingMaterial;
+                currentPlantStateMat = PlantStateMat.Growing;
+            }
         }
         else
         {
             skinnedMeshRenderer.material = dryMaterial;
             renderer.material = dryMaterial;
+            currentPlantStateMat = PlantStateMat.Dry;
         }
     }
 

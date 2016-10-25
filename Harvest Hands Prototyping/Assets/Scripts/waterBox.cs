@@ -8,7 +8,7 @@ public class waterBox : MonoBehaviour {
 	public float drownTimer = 10f;
 	public Slider oxySlider;
 	public GameObject spawnPoint;
-	public GameObject player;
+	//public GameObject player;
 
 	void Start(){
 
@@ -34,8 +34,11 @@ public class waterBox : MonoBehaviour {
               
 
                 GameObject.Find("GameManager").GetComponent<DayNightController>().playerdeathcount += 1;
-                GameObject.Find("GameManager").GetComponent<DayNightController>().PlayerDeathPenalty();
-                player.GetComponent<StaffNo3>().CmdDropped();
+                GameObject.Find("GameManager").GetComponent<DayNightController>().PlayerDeathPenalty();                
+                if (plr.GetComponent<StaffNo3>().ChosenObj != null)
+                    plr.GetComponent<StaffNo3>().CmdDropped();
+
+                plr.GetComponent<DeathFade>().CmdShowDrownText();
             }
 
 		}

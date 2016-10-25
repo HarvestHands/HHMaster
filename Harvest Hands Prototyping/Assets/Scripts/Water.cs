@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 
 
@@ -27,6 +28,8 @@ public class Water : NetworkBehaviour
     public GameObject refillParticles;
     public GameObject wateredParticles;
 
+    public Text waterLevelText;
+
     [FMODUnity.EventRef]
     public string emptyBucketSound = "event:/Done/Empty Bucket";
     [FMODUnity.EventRef]
@@ -37,6 +40,7 @@ public class Water : NetworkBehaviour
     {
         if (waterlevel <= 0)
             drippingParticleSystem.StopParticles();
+        waterLevelText.text = "Water Level:\n" + waterlevel;
     }
 
    
@@ -147,6 +151,8 @@ public class Water : NetworkBehaviour
             BucketWater.transform.localPosition = tmpPos; // Assign back all Vector3
             //BucketWater.transform.position.Set(BucketWater.transform.position.x, 0.7f, BucketWater.transform.position.z);
         }
+                
+        waterLevelText.text = "Water Level:\n" +  waterlevel;
     }
     
 
