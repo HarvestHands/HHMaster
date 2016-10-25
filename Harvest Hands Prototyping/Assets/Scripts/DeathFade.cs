@@ -44,6 +44,15 @@ public class DeathFade : NetworkBehaviour
         }
     }
 
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        FadeImage = GameObject.Find("FadeImage").GetComponent<RawImage>();
+        deadText = GameObject.Find("DeathText").GetComponent<Text>();
+        DNCont = GameObject.FindObjectOfType<DayNightController>();
+    }
+
     void Update()
     {
         if (!isLocalPlayer)
@@ -60,6 +69,7 @@ public class DeathFade : NetworkBehaviour
 
         if (DNCont.currentTimeOfDay >= imageFadeInStartTime && fadingIn == false)
         {
+            Debug.Log("Triggering fade in ");
             fadingIn = true;
             //              fade to 1, alpha == 1 at endDayAt
             FadeImage.CrossFadeAlpha(1, DNCont.secondsInDay * (DNCont.endDayAt - imageFadeInStartTime), false);

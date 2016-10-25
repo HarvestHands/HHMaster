@@ -25,13 +25,14 @@ public class PlayerInventory : NetworkBehaviour {
     public string withdrawSound = "event:/Done/Gold income";
 
     // Use this for initialization
-    void Start ()
+    void Awake ()
     {
         shop = GameObject.Find("GameManager").GetComponent<ShopScript>();
         farmBank = GameObject.Find("GameManager").GetComponent<BankScript>();
         if (isLocalPlayer)
         {
             //playerMoneyText = GetComponentInChildren<Canvas>().GetComponentInChildren<Text>();
+			playerMoneyText = GameObject.Find("PlayerMoneyText").GetComponent<Text>();
             //Debug.Log("FarmBank " + farmBank);
             //Debug.Log("FarmMoneyText " + farmMoneyText);
             farmBank.localPlayerFarmMoneyText = farmMoneyText;
@@ -40,6 +41,16 @@ public class PlayerInventory : NetworkBehaviour {
         }
         
 	}
+
+	public override void OnStartClient()
+	{
+		base.OnStartClient();
+        
+		playerMoneyText = GameObject.Find("PlayerMoneyText").GetComponent<Text>();
+	}
+
+
+
 	
 	// Update is called once per frame
 	void Update ()

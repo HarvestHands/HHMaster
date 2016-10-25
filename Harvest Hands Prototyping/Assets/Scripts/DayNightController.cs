@@ -290,8 +290,8 @@ public class DayNightController : NetworkBehaviour
     {
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
         int playersDead = 0;
-        
 
+        Debug.Log("There are  players - "+ Players.Length);
         foreach(GameObject player in Players)
         {
             //player.GetComponent<DeathFade>().RpcFadeIn();
@@ -311,7 +311,8 @@ public class DayNightController : NetworkBehaviour
         }
         int scoreLost = deathPenalty * playersDead;
         //Debug.Log(shop.Score + " - " + scoreLost);
-        shop.Score -= scoreLost;
+        if(shop != null)
+            shop.Score -= scoreLost;
         //Debug.Log(shop.Score);
     }
         

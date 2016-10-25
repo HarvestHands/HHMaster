@@ -4,14 +4,15 @@ using UnityEngine.UI;
 
 public class Sundial : MonoBehaviour
 {
-    DayNightController dayNightController;
+    public DayNightController dayNightController;
     public float rotationOffset = 0;
     public RectTransform rectTransform;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
         dayNightController = FindObjectOfType<DayNightController>();
+
 	}
 	
 	// Update is called once per frame
