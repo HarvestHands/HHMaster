@@ -152,7 +152,7 @@ public class DayNightController : NetworkBehaviour
                 CmdCheckPlayersSafe();
 
                 //yield return new WaitForSeconds(10);
-                Invoke("RespawnDeadPlayers", nightPauseLength / 2);
+                //Invoke("RespawnDeadPlayers", nightPauseLength / 2);
                 Invoke("CmdUpdateNightStuff", nightPauseLength / 2);
                 Invoke("CmdSetTimeOfDayMorning", nightPauseLength);
             }
@@ -164,6 +164,7 @@ public class DayNightController : NetworkBehaviour
     [Command]
     void CmdUpdateNightStuff()
     {
+		RespawnDeadPlayers ();
         ingameDay++;
         CmdUpdatePlants();
         //CmdSetTimeOfDayMorning();
@@ -387,8 +388,8 @@ public class DayNightController : NetworkBehaviour
     void CmdIncrementDay()
     {
         //ingameDay++;
-        currentTimeOfDay = startDayAt;
-		RpcSyncTimeOfDay(currentTimeOfDay);  
+        //currentTimeOfDay = startDayAt;
+		//RpcSyncTimeOfDay(currentTimeOfDay);  
         nightTimeCheckDone = false;
 
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))

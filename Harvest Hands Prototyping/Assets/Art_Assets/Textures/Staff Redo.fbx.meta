@@ -1,24 +1,16 @@
 fileFormatVersion: 2
-guid: 57b8a7c49d5f1f14bab40a0dd2c94a5d
-timeCreated: 1476147235
+guid: 657948d2bcdce9e45ac3222acbbb65ad
+timeCreated: 1477444258
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Staff_Hand_JNT
-    100002: Staff_MESH_01
-    100004: Staff_Root_JNT
-    100006: //RootNode
-    100008: Staff_Tip_JNT
-    400000: Staff_Hand_JNT
-    400002: Staff_MESH_01
-    400004: Staff_Root_JNT
-    400006: //RootNode
-    400008: Staff_Tip_JNT
-    4300000: Staff_MESH_01
-    7400000: WalkCycle
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Staff_14
     9500000: //RootNode
-    13700000: Staff_MESH_01
   materials:
     importMaterials: 1
     materialName: 0
@@ -26,58 +18,20 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleCurves: 0
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 0
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: WalkCycle
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 30
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Staff_MESH_01
-        weight: 1
-      - path: Staff_Root_JNT
-        weight: 1
-      - path: Staff_Root_JNT/Staff_Hand_JNT
-        weight: 1
-      - path: Staff_Root_JNT/Staff_Hand_JNT/Staff_Tip_JNT
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
