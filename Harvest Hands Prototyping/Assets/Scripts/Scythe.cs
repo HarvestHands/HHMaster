@@ -4,54 +4,31 @@ using System.Collections;
 
 public class Scythe : MonoBehaviour
 {
-    //public bool isCutting = false;
-    //public BoxCollider CutArea;
+    [FMODUnity.EventRef]
+    public string harvestSound = "event:/Priority/Harvesting";
 
     void Start()
     {
-        //if (!isCutting)
-        //{
-        //    CutArea.enabled = false;
-        //}
         
     }
 
     void OnTriggerEnter(Collider col)
-    {
-        //if (isCutting)
-        //{
-            if (col.gameObject.CompareTag("Plant"))
+    {    
+        if (col.gameObject.CompareTag("Plant"))
+        {
+            Plantscript plant = col.gameObject.GetComponent<Plantscript>();
             {
-                Plantscript plant = col.gameObject.GetComponent<Plantscript>();
+                if (plant.ReadyToHarvest)
                 {
-                    if (plant.ReadyToHarvest)
-                    {
-                        plant.CmdHarvest();
-                        GameObject leaffall = (GameObject)Instantiate(plant.leafFallParticles, plant.transform.position, plant.transform.rotation);
-                        Destroy(leaffall, plant.particlePlayDuration);
-                        //Play Sound
-                        FMODUnity.RuntimeManager.PlayOneShot(plant.harvestedSound, col.transform.position);
-                        Debug.Log("Calling cmdharvest");
-                    }
+                    plant.CmdHarvest();
+                    GameObject leaffall = (GameObject)Instantiate(plant.leafFallParticles, plant.transform.position, plant.transform.rotation);
+                    Destroy(leaffall, plant.particlePlayDuration);
+                    //Play Sound
+                    FMODUnity.RuntimeManager.PlayOneShot(harvestSound, col.transform.position);
+                    //Debug.Log("Calling cmdharvest");
                 }
             }
-        //}
-    }
-
-    //[Command]
-    //public void ActivateCutting()
-    //{
-    //    isCutting = true;
-    //    CutArea.enabled = true;
-    //}
-    //
-    //public void DeactiveCutting()
-    //{
-    //    isCutting = false;
-    //    CutArea.enabled = false;
-    //}
-
-    
-
+        }         
+    } 
 
 }
