@@ -166,7 +166,7 @@ public class DayNightController : NetworkBehaviour
     {
         ingameDay++;
         CmdUpdatePlants();
-        CmdSetTimeOfDayMorning();
+        //CmdSetTimeOfDayMorning();
         CmdIncrementDay();
         CmdUpdateMushroomSpawners();
         //storageCatapult.CmdEmptyCatapult();
@@ -314,7 +314,14 @@ public class DayNightController : NetworkBehaviour
         }
         int scoreLost = deathPenalty * playersDead;
         //Debug.Log(shop.Score + " - " + scoreLost);
-        shop.Score -= scoreLost;
+		if (shop != null) 
+		{
+			shop.Score -= scoreLost;
+		}
+		else
+		{
+			Debug.Log("DNCont.shop = null");
+		}
         //Debug.Log(shop.Score);
     }
         
@@ -381,6 +388,7 @@ public class DayNightController : NetworkBehaviour
     {
         //ingameDay++;
         currentTimeOfDay = startDayAt;
+		RpcSyncTimeOfDay(currentTimeOfDay);  
         nightTimeCheckDone = false;
 
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))

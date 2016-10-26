@@ -33,6 +33,8 @@ public class PlayerInventory : NetworkBehaviour {
         {
             //playerMoneyText = GetComponentInChildren<Canvas>().GetComponentInChildren<Text>();
 			playerMoneyText = GameObject.Find("PlayerMoneyText").GetComponent<Text>();
+
+			Debug.Log ("UICanvas = " + UICanvas);
             //Debug.Log("FarmBank " + farmBank);
             //Debug.Log("FarmMoneyText " + farmMoneyText);
             farmBank.localPlayerFarmMoneyText = farmMoneyText;
@@ -45,8 +47,15 @@ public class PlayerInventory : NetworkBehaviour {
 	public override void OnStartClient()
 	{
 		base.OnStartClient();
-        
+		shop = GameObject.Find("GameManager").GetComponent<ShopScript>();
+		farmBank = GameObject.Find("GameManager").GetComponent<BankScript>();
+
 		playerMoneyText = GameObject.Find("PlayerMoneyText").GetComponent<Text>();
+		farmMoneyText = GameObject.Find ("FarmMoneyText").GetComponent<Text> ();
+		UICanvas = GameObject.Find("UI").GetComponent<Canvas> ();
+		farmBank.localPlayerFarmMoneyText = farmMoneyText;
+		farmMoneyText.text = farmBank.Score.ToString();
+		GetComponentInChildren<MeshRenderer>().enabled = false;
 	}
 
 
@@ -179,7 +188,7 @@ public class PlayerInventory : NetworkBehaviour {
         if (UICanvas != null)
         {
             Text priceText = (Text)Instantiate(costText, playerMoneyText.rectTransform.position, playerMoneyText.rectTransform.rotation);
-            priceText.rectTransform.SetParent(UICanvas.transform, false);
+			priceText.rectTransform.SetParent(UICanvas.transform, false); 
             priceText.rectTransform.position = playerMoneyText.rectTransform.position;
             priceText.rectTransform.rotation = playerMoneyText.rectTransform.rotation;
 

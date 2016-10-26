@@ -67,6 +67,8 @@ public class DeathFade : NetworkBehaviour
 
         FadeImage = GameObject.Find("FadeImage").GetComponent<RawImage>();
         deadText = GameObject.Find("DeathText").GetComponent<Text>();
+		drownText = GameObject.Find("DrownText").GetComponent<Text>();
+		nightTimeWarningText = GameObject.Find("NightTimeWarningText").GetComponent<Text>();
         DNCont = GameObject.FindObjectOfType<DayNightController>();
     }
 
