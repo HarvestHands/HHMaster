@@ -26,9 +26,11 @@ public class StaffNo3 : NetworkBehaviour
     float timeLeft;
 
     public GameObject ChosenObj;
+    GameObject StaffEmitter;
 
 
-    [SyncVar]
+
+[SyncVar]
     public float GrabDistance = 3.0f;
     [SyncVar]
     public NetworkInstanceId carriedItemID = NetworkInstanceId.Invalid;
@@ -69,6 +71,7 @@ public class StaffNo3 : NetworkBehaviour
         objectheld = false;
         timeLeft = 0.02f;
         //   GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>().enabled = false;
+       StaffEmitter = transform.GetChild(0).GetChild(2).GetChild(1).GetChild(0).GetChild(0).GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -147,6 +150,8 @@ public class StaffNo3 : NetworkBehaviour
                             objectheld = true;
 
                             anim.SetTrigger("Pickup");
+                            // StaffEmitter.SetActive(true);
+                            StaffEmitter.GetComponent<ParticleSystem>().Play();
 
                             ChosenObj.GetComponent<Pickupable>().BeingHeld = true;
                             //Debug.Log(ChosenObj.GetComponent<Pickupable>().beingHeld);
@@ -232,15 +237,20 @@ public class StaffNo3 : NetworkBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 anim.SetTrigger("Charge");
+                StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(40, 60);
+                StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.3f, 0.6f);
             }
             if (Input.GetMouseButtonUp(1))
             {
                 anim.SetTrigger("Release");
+                StaffEmitter.GetComponent<ParticleSystem>().Stop();
+                StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10,20);
+                StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
             }
 
             if (Input.GetMouseButtonDown(0))
             {
-                anim.SetTrigger("Drop");
+                Drop();
             }
 
             if (Input.GetMouseButton(1))
@@ -288,6 +298,16 @@ public class StaffNo3 : NetworkBehaviour
             //  Physics.IgnoreLayerCollision(GameObject.FindGameObjectWithTag("Player").layer, ChosenObj.layer);
         }
     }
+
+    public void Drop()
+    {
+        anim.SetTrigger("Drop");
+        StaffEmitter.GetComponent<ParticleSystem>().Stop();
+        StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
+        StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
+
+    }
+
     [Command]
     void CmdTipBucket(NetworkInstanceId id)
     {
@@ -296,7 +316,7 @@ public class StaffNo3 : NetworkBehaviour
         //o.GetComponent<Water>().GetComponent<ParticleSystem>().CmdPlayParticles();
         //o.GetComponent<Water>().pouringParticleSystem.CmdPlayParticles();
         //o.GetComponent<Water>().RpcPlayParticles();
-
+       
     }
 
     [Command]
