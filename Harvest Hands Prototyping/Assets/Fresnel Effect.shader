@@ -3,7 +3,7 @@
 // Shader created with Shader Forge v1.26 
 // Shader Forge (c) Neat Corporation / Joachim Holmer - http://www.acegikmo.com/shaderforge/
 // Note: Manually altering this data may prevent you from opening it in Shader Forge
-/*SF_DATA;ver:1.26;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:1,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-2030-OUT,spec-5916-OUT,gloss-5232-OUT,emission-2825-OUT;n:type:ShaderForge.SFN_Multiply,id:6343,x:32361,y:32718,varname:node_6343,prsc:2|A-7736-RGB,B-6665-RGB;n:type:ShaderForge.SFN_Color,id:6665,x:32172,y:32718,ptovrint:False,ptlb:Color Tint,ptin:_ColorTint,varname:_Color,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;n:type:ShaderForge.SFN_Tex2d,id:7736,x:32172,y:32539,ptovrint:True,ptlb:Diffuse Map,ptin:_MainTex,varname:_MainTex,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Fresnel,id:4818,x:32511,y:33144,varname:node_4818,prsc:2|EXP-7782-OUT;n:type:ShaderForge.SFN_Slider,id:7782,x:32111,y:33179,ptovrint:False,ptlb:Fresnel Exponent,ptin:_FresnelExponent,varname:node_7782,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:4,max:4;n:type:ShaderForge.SFN_Color,id:589,x:32268,y:33002,ptovrint:False,ptlb:Fresnel Colour,ptin:_FresnelColour,varname:node_589,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;n:type:ShaderForge.SFN_Multiply,id:2042,x:32511,y:33002,varname:node_2042,prsc:2|A-589-RGB,B-4818-OUT;n:type:ShaderForge.SFN_Slider,id:4778,x:32111,y:32894,ptovrint:False,ptlb:Fresnel Amount,ptin:_FresnelAmount,varname:node_4778,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0,max:1;n:type:ShaderForge.SFN_Multiply,id:2825,x:32511,y:32853,varname:node_2825,prsc:2|A-4778-OUT,B-2042-OUT;n:type:ShaderForge.SFN_Vector1,id:5232,x:32511,y:32792,varname:node_5232,prsc:2,v1:1;n:type:ShaderForge.SFN_ValueProperty,id:9301,x:32361,y:32536,ptovrint:False,ptlb:Multiply,ptin:_Multiply,varname:node_9301,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:2;n:type:ShaderForge.SFN_Multiply,id:2030,x:32361,y:32592,varname:node_2030,prsc:2|A-9301-OUT,B-6343-OUT;n:type:ShaderForge.SFN_Vector1,id:5916,x:32511,y:32724,varname:node_5916,prsc:2,v1:0;proporder:7736-6665-589-4778-7782-9301;pass:END;sub:END;*/
+/*SF_DATA;ver:1.26;sub:START;pass:START;ps:flbk:,iptp:0,cusa:False,bamd:0,lico:1,lgpr:1,limd:3,spmd:1,trmd:0,grmd:1,uamb:True,mssp:True,bkdf:True,hqlp:False,rprd:True,enco:False,rmgx:True,rpth:0,vtps:0,hqsc:True,nrmq:1,nrsp:0,vomd:0,spxs:False,tesm:0,olmd:1,culm:0,bsrc:0,bdst:1,dpts:2,wrdp:True,dith:0,rfrpo:True,rfrpn:Refraction,coma:15,ufog:True,aust:True,igpj:False,qofs:0,qpre:1,rntp:1,fgom:False,fgoc:False,fgod:False,fgor:False,fgmd:0,fgcr:0.5,fgcg:0.5,fgcb:0.5,fgca:1,fgde:0.01,fgrn:0,fgrf:300,stcl:False,stva:128,stmr:255,stmw:255,stcp:6,stps:0,stfa:0,stfz:0,ofsf:0,ofsu:0,f2p0:False,fnsp:False,fnfb:False;n:type:ShaderForge.SFN_Final,id:2865,x:32719,y:32712,varname:node_2865,prsc:2|diff-2030-OUT,spec-5916-OUT,gloss-5232-OUT,emission-2825-OUT;n:type:ShaderForge.SFN_Multiply,id:6343,x:32361,y:32718,varname:node_6343,prsc:2|A-7736-RGB,B-6665-RGB;n:type:ShaderForge.SFN_Color,id:6665,x:32172,y:32718,ptovrint:False,ptlb:Color Tint,ptin:_ColorTint,varname:_Color,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;n:type:ShaderForge.SFN_Tex2d,id:7736,x:32172,y:32539,ptovrint:True,ptlb:Diffuse Map,ptin:_MainTex,varname:_MainTex,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,ntxv:0,isnm:False;n:type:ShaderForge.SFN_Fresnel,id:4818,x:32511,y:33144,varname:node_4818,prsc:2|EXP-7782-OUT;n:type:ShaderForge.SFN_Slider,id:7782,x:32111,y:33195,ptovrint:False,ptlb:Fresnel Exponent,ptin:_FresnelExponent,varname:node_7782,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:4,max:4;n:type:ShaderForge.SFN_Color,id:589,x:32268,y:33002,ptovrint:False,ptlb:Fresnel Colour,ptin:_FresnelColour,varname:node_589,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,c1:1,c2:1,c3:1,c4:1;n:type:ShaderForge.SFN_Multiply,id:2042,x:32511,y:33002,varname:node_2042,prsc:2|A-589-RGB,B-4818-OUT;n:type:ShaderForge.SFN_Slider,id:4778,x:32111,y:32894,ptovrint:False,ptlb:Fresnel Amount,ptin:_FresnelAmount,varname:node_4778,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,min:0,cur:0,max:1;n:type:ShaderForge.SFN_Multiply,id:2825,x:32511,y:32853,varname:node_2825,prsc:2|A-4778-OUT,B-2042-OUT;n:type:ShaderForge.SFN_Vector1,id:5232,x:32511,y:32792,varname:node_5232,prsc:2,v1:1.3;n:type:ShaderForge.SFN_ValueProperty,id:9301,x:32361,y:32536,ptovrint:False,ptlb:Multiply,ptin:_Multiply,varname:node_9301,prsc:2,glob:False,taghide:False,taghdr:False,tagprd:False,tagnsco:False,tagnrm:False,v1:1;n:type:ShaderForge.SFN_Multiply,id:2030,x:32361,y:32592,varname:node_2030,prsc:2|A-9301-OUT,B-6343-OUT;n:type:ShaderForge.SFN_Vector1,id:5916,x:32511,y:32724,varname:node_5916,prsc:2,v1:0;proporder:7736-6665-589-4778-7782-9301;pass:END;sub:END;*/
 
 Shader "Harvest Hands/Fresnel Effect" {
     Properties {
@@ -12,7 +12,7 @@ Shader "Harvest Hands/Fresnel Effect" {
         _FresnelColour ("Fresnel Colour", Color) = (1,1,1,1)
         _FresnelAmount ("Fresnel Amount", Range(0, 1)) = 0
         _FresnelExponent ("Fresnel Exponent", Range(0, 4)) = 4
-        _Multiply ("Multiply", Float ) = 2
+        _Multiply ("Multiply", Float ) = 1
     }
     SubShader {
         Tags {
@@ -110,7 +110,7 @@ Shader "Harvest Hands/Fresnel Effect" {
                 float Pi = 3.141592654;
                 float InvPi = 0.31830988618;
 ///////// Gloss:
-                float gloss = 1.0 - 1.0; // Convert roughness to gloss
+                float gloss = 1.0 - 1.3; // Convert roughness to gloss
                 float specPow = exp2( gloss * 10.0+1.0);
 /////// GI Data:
                 UnityLight light;
@@ -266,7 +266,7 @@ Shader "Harvest Hands/Fresnel Effect" {
                 float Pi = 3.141592654;
                 float InvPi = 0.31830988618;
 ///////// Gloss:
-                float gloss = 1.0 - 1.0; // Convert roughness to gloss
+                float gloss = 1.0 - 1.3; // Convert roughness to gloss
                 float specPow = exp2( gloss * 10.0+1.0);
 ////// Specular:
                 float NdotL = max(0, dot( normalDirection, lightDirection ));
@@ -369,7 +369,7 @@ Shader "Harvest Hands/Fresnel Effect" {
                 float specularMonochrome;
                 float3 specColor;
                 diffColor = DiffuseAndSpecularFromMetallic( diffColor, 0.0, specColor, specularMonochrome );
-                float roughness = 1.0;
+                float roughness = 1.3;
                 o.Albedo = diffColor + specColor * roughness * roughness * 0.5;
                 
                 return UnityMetaFragment( o );
