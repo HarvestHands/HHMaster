@@ -96,7 +96,7 @@ public class DayNightController : NetworkBehaviour
 
 
         //Returns player spped back to default after the next day
-        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.75 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.76)
+        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.77 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.78)
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 10;
             GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed = 20;
