@@ -306,6 +306,9 @@ public class StaffNo3 : NetworkBehaviour
         StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
         StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
 
+        
+        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(),false);
+       
     }
 
     [Command]
