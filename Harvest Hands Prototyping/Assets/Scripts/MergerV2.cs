@@ -20,11 +20,12 @@ public class MergerV2 : MonoBehaviour
     public float particleLifeTime = 4f;
 
     private Transform closestMerge;
-    
 
+    [FMODUnity.EventRef]
+    public string launchSpaghettiSound = "event:/Done/MergeSound";
 
-	// Use this for initialization
-	void Awake ()
+    // Use this for initialization
+    void Awake ()
     {
         //StartCoroutine(FindMergeTarget());
         InvokeRepeating("FindMergeTarget", 0f, 0.5f);
@@ -46,41 +47,6 @@ public class MergerV2 : MonoBehaviour
             }
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<StaffNo3>().ChosenObj.tag == "Produce")
-        {
-
-        for (int i = 0; i < GameObject.FindGameObjectsWithTag("Produce").Length; i++)
-        {
-            // Debug.Log(GameObject.FindGameObjectsWithTag("ShopItemA").Length);
-
-
-            if (Vector3.Distance(GameObject.FindGameObjectWithTag("Player").GetComponent<StaffNo3>().ChosenObj.transform.position, GameObject.FindGameObjectsWithTag("Produce")[i].transform.position) <= 1 && GameObject.FindGameObjectWithTag("Player").GetComponent<StaffNo3>().ChosenObj != GameObject.FindGameObjectsWithTag("Produce")[i]) // > 2 && SpawnA == true)
-            {
-
-                Instantiate(Resources.Load("PlantProduceMed"), GameObject.FindGameObjectsWithTag("Produce")[i].transform.position, GameObject.FindGameObjectsWithTag("Produce")[i].transform.rotation);
-
-
-                Destroy(GameObject.FindGameObjectsWithTag("Produce")[i]);
-                Destroy(GameObject.FindGameObjectWithTag("Player").GetComponent<StaffNo3>().ChosenObj);
-
-            }
-        }
-       }
-       */    
 	}
 
     //IEnumerator FindMergeTarget()
@@ -222,6 +188,9 @@ public class MergerV2 : MonoBehaviour
             }
             Destroy(particles, particleLifeTime);
         }
+
+        //play sound
+        FMODUnity.RuntimeManager.PlayOneShot(launchSpaghettiSound, transform.position);
 
         //See if new merge target is around
         FindMergeTarget();
