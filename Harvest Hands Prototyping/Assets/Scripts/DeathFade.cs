@@ -33,6 +33,8 @@ public class DeathFade : NetworkBehaviour
     public Text nightTimeWarningText;
     public float nightWarningDisplayLength = 5f;
 
+    public RawImage deathPenaltyImage;
+
     // Use this for initialization
     void Start()
     {
@@ -48,6 +50,7 @@ public class DeathFade : NetworkBehaviour
             drownText.enabled = false;
             nightTimeWarningText.enabled = false;
         }
+            deathPenaltyImage.enabled = false;
 
         FadeImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
 
@@ -69,6 +72,7 @@ public class DeathFade : NetworkBehaviour
         deadText = GameObject.Find("DeathText").GetComponent<Text>();
 		drownText = GameObject.Find("DrownText").GetComponent<Text>();
 		nightTimeWarningText = GameObject.Find("NightTimeWarningText").GetComponent<Text>();
+        deathPenaltyImage = GameObject.Find("DeathPenaltyRawImage").GetComponent<RawImage>();
         DNCont = GameObject.FindObjectOfType<DayNightController>();
     }
 
@@ -270,4 +274,21 @@ public class DeathFade : NetworkBehaviour
     {
 
     }
+
+    [Command]
+    public void CmdSetShowDeathPenaltyImage(bool show)
+    {
+        RpcSetShowDeathPenaltyImage(show);
+    }
+
+    [ClientRpc]
+    public void RpcSetShowDeathPenaltyImage(bool show)
+    {
+        if (!isLocalPlayer)
+            return;
+
+        deathPenaltyImage.enabled = show;
+    }
+
+
 }
