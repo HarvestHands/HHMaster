@@ -302,6 +302,11 @@ public class DayNightController : NetworkBehaviour
             {
                 player.GetComponent<PlayerInventory>().RpcApplyDeathPenalty();
                 playersDead++;
+                player.GetComponent<DeathFade>().RpcSetShowDeathPenaltyImage(true);
+            }
+            else
+            {
+                player.GetComponent<DeathFade>().RpcSetShowDeathPenaltyImage(false);
             }
         }
     }
