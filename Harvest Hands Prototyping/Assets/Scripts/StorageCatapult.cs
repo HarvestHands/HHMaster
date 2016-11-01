@@ -25,6 +25,14 @@ public class StorageCatapult : NetworkBehaviour
     public List<GameObject> loadedObjects;
     public int maxCrates = 8;
 
+    public GameObject Spaghetti;
+    public Transform SpaghettiSpawnPoint;
+    public float SpaghettiForce;
+    public float SpaghettiDuration;
+    [FMODUnity.EventRef]
+    public string launchSpaghettiSound = "event:/Done/Gold income";
+
+
     void Start()
     {
         loadedObjects = new List<GameObject>();
@@ -57,6 +65,7 @@ public class StorageCatapult : NetworkBehaviour
                 return;
 
             CmdAddCrate(col.GetComponent<NetworkIdentity>().netId);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<StaffNo3>().Drop();
         }
     }
 
@@ -108,6 +117,9 @@ public class StorageCatapult : NetworkBehaviour
     [ClientRpc]
     void RpcEmptyCatapultLists()
     {
+        if (loadedObjects.Count > 0)
+            LaunchSpaghetti();
+
         foreach(GameObject crate in loadedObjects)
         {
             if (crate != null)
@@ -123,5 +135,16 @@ public class StorageCatapult : NetworkBehaviour
         expectedIncome = 0;
         if (priceText != null)
             priceText.text = "$" + expectedIncome.ToString();
+    }
+
+    public void LaunchSpaghetti()
+    {
+        Debug.Log("Inside LaunchSpaghetti Catapult");
+        GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoint.position, SpaghettiSpawnPoint.rotation);
+        newSpawn.GetComponent<Rigidbody>().AddForce(SpaghettiSpawnPoint.transform.forward * SpaghettiForce, ForceMode.Impulse);
+        Destroy(newSpawn, SpaghettiDuration);
+
+        //play sound
+        FMODUnity.RuntimeManager.PlayOneShot(launchSpaghettiSound, transform.position);
     }
 }

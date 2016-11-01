@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
-public class WinObjectTrigger : MonoBehaviour
+public class WinObjectTrigger : NetworkBehaviour
 {
     public GameObject gameOverCanvasObject;
 
@@ -46,15 +47,41 @@ public class WinObjectTrigger : MonoBehaviour
             //int finalScore = 1;
 
             //PlayerPrefs.SetFloat("finalScore1", finalScore);
-            Debug.Log(gameOverCanvasObject.name + " - trying to set active");
+            //Debug.Log(gameOverCanvasObject.name + " - trying to set active");
             gameOverCanvasObject.SetActive(true);
             gameOverCanvasObject.GetComponent<Canvas>().enabled = true;
-            Debug.Log(gameOverCanvasObject.active + " = active?");
-            gameOverCanvasObject.GetComponent<EndGameMenu>().EndGameStuff(finalScore);
-            Debug.Log("Cursos Visible = " + Cursor.visible);
+            //Debug.Log(gameOverCanvasObject.active + " = active?");
+            
+            UnityStandardAssets.Characters.FirstPerson.FirstPersonController[] Players = GameObject.FindObjectsOfType<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
+            foreach (UnityStandardAssets.Characters.FirstPerson.FirstPersonController player in Players)
+            {
+                player.allowInput = false;
+            }
+            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            Debug.Log("Cursos Visible = " + Cursor.visible);
 
+
+            gameOverCanvasObject.GetComponent<EndGameMenu>().EndGameStuff(finalScore);
         }
     }
+
+
+    [Command]
+    void CmdLockPlayersAndShowCursors()
+    {
+        RpcLockPlayersAndShowCursors();
+    }
+
+    [ClientRpc]
+    void RpcLockPlayersAndShowCursors()
+    {
+        UnityStandardAssets.Characters.FirstPerson.FirstPersonController[] Players = GameObject.FindObjectsOfType<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>();
+        foreach (UnityStandardAssets.Characters.FirstPerson.FirstPersonController player in Players)
+        {
+            player.allowInput = false;
+        }
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+    }
+
 }

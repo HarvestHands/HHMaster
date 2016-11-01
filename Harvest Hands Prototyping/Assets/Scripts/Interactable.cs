@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Interactable : MonoBehaviour
+public class Interactable : NetworkBehaviour
 {
-    public delegate void OnInteract();
+    //Takes ID of player who is interacting with object
+    public delegate void OnInteract(NetworkInstanceId playerID);
     public OnInteract onInteract = delegate { };
 
     // Use this for initialization

@@ -174,25 +174,24 @@ public class StaffNo3 : NetworkBehaviour
                     }
                     else if (Hit.transform.GetComponent<Interactable>() != null)
                     {
-                        Hit.transform.GetComponent<Interactable>().onInteract();
+                        Hit.transform.GetComponent<Interactable>().onInteract(GetComponent<NetworkIdentity>().netId);
                         ChosenObj = null;
                     }
                     //ChosenObj = null;
                 }
             }
-        }
+        }        
         //plants get destroyed sometimes while being held
         else if (ChosenObj == null)
         {
             objectheld = false;
             SeedNumber.text = "";
             SeedType.text = "";
+            anim.SetTrigger("Drop");
         }
         else
-        {
+        {                            
             //ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, StaffGrabber.transform.position, 0.5f);
-
-
 
             float posRatio = throwforce / (throwForceMax - throwForceMin);
             Vector3 idealPos = Vector3.Lerp(StaffGrabber.transform.position, pullBackPosition.transform.position, posRatio);
@@ -210,29 +209,7 @@ public class StaffNo3 : NetworkBehaviour
 
             Quaternion grabbedRotation = StaffGrabber.transform.rotation;
             ChosenObj.GetComponent<Rigidbody>().MoveRotation(grabbedRotation * Quaternion.Euler(objectXRotation, objectYRotation, 0));
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-
-            }
-
-           
-
-
-            if (ChosenObj.tag == "Seed")
-            {
-                var ChosenSeed = ChosenObj.GetComponent<SeedScript>();
-
-                SeedNumber.text = ChosenSeed.NumberOfSeeds.ToString();
-
-                SeedType.text = ChosenObj.GetComponent<SeedScript>().plantPrefab.GetComponent<Plantscript>().plantName;
-            }
-
-            if (ChosenObj.tag != "Seed")
-            {
-                SeedNumber.text = "";
-                SeedType.text = "";
-            }
+             
 
             if (Input.GetMouseButtonDown(1))
             {
@@ -244,7 +221,7 @@ public class StaffNo3 : NetworkBehaviour
             {
                 anim.SetTrigger("Release");
                 StaffEmitter.GetComponent<ParticleSystem>().Stop();
-                StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10,20);
+                StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
                 StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
             }
 
@@ -252,10 +229,8 @@ public class StaffNo3 : NetworkBehaviour
             {
                 Drop();
             }
-
             if (Input.GetMouseButton(1))
             {
-
                 throwforce += ((throwForceMax - throwForceMin) / throwMaxChargeTime) * Time.deltaTime;
                 throwforce = Mathf.Clamp(throwforce, throwForceMin, throwForceMax);
             }
@@ -279,24 +254,17 @@ public class StaffNo3 : NetworkBehaviour
                 //Play Sound
                 FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
             }
-            RotateObject();
-
-
-            //  Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
-            //   Physics.IgnoreLayerCollision(GameObject.FindGameObjectWithTag("Player").layer, ChosenObj.layer);
-
-
-
-            //    Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
-
-
-
-
-
             Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
 
-            //  Physics.IgnoreLayerCollision(GameObject.FindGameObjectWithTag("Player").layer, ChosenObj.layer);
+
+            //Catapult crates get set to inactive        
+            //if (ChosenObj.activeSelf == false)
+            //{
+            //    ChosenObj = null;
+            //    anim.SetTrigger("Drop");
+            //}
         }
+
     }
 
     public void Drop()
@@ -306,6 +274,9 @@ public class StaffNo3 : NetworkBehaviour
         StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
         StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
 
+        
+        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(),false);
+       
     }
 
     [Command]
