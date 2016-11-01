@@ -19,7 +19,7 @@ public class Bed : NetworkBehaviour
 	}
 
     [Command]
-    public void CmdActivate()
+    public void CmdActivate(NetworkInstanceId playerID)
     {
         GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay = setTimeTo;
         TriggerFadeIn();

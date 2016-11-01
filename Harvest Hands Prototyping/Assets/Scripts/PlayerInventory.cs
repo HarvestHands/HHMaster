@@ -14,6 +14,8 @@ public class PlayerInventory : NetworkBehaviour {
     
     public int money = 0;
     private int oldMoney = -1;
+    [Tooltip("0 = 0% lost, 0.4 = 40% lost, 1 = 100% lost")]    
+    public float deathPenalty = 0.2f;
 
     public Canvas UICanvas;
     public Text costText;
@@ -200,6 +202,12 @@ public class PlayerInventory : NetworkBehaviour {
 
             Destroy(priceText.gameObject, costTextLifeTime);
         }
+    }
+
+    [ClientRpc]
+    public void RpcApplyDeathPenalty()
+    {
+        money -= Mathf.CeilToInt(money * deathPenalty);
     }
 
 }

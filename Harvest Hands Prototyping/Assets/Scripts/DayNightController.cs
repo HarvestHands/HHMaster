@@ -149,12 +149,11 @@ public class DayNightController : NetworkBehaviour
             if (!nightTimeCheckDone)
             {
                 nightTimeCheckDone = true;
-                CmdCheckPlayersSafe();
+                //CmdCheckPlayersSafe();
 
                 //yield return new WaitForSeconds(10);
                 //Invoke("RespawnDeadPlayers", nightPauseLength / 2);
                 Invoke("CmdUpdateNightStuff", nightPauseLength / 2);
-                Invoke("CmdSetTimeOfDayMorning", nightPauseLength);
             }
         }
 
@@ -164,8 +163,9 @@ public class DayNightController : NetworkBehaviour
     [Command]
     void CmdUpdateNightStuff()
     {
-		RespawnDeadPlayers ();
         ingameDay++;
+        CmdCheckPlayersSafe();
+        RespawnDeadPlayers ();
         CmdUpdatePlants();
         //CmdSetTimeOfDayMorning();
         CmdIncrementDay();
@@ -175,6 +175,7 @@ public class DayNightController : NetworkBehaviour
         {
             catapult.CmdEmptyCatapult();
         }
+        Invoke("CmdSetTimeOfDayMorning", nightPauseLength / 2);
     }
 
     void UpdateSun()
@@ -294,36 +295,15 @@ public class DayNightController : NetworkBehaviour
     {
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
         int playersDead = 0;
-        
-
-        foreach(GameObject player in Players)
+        foreach (GameObject player in Players)
         {
             //player.GetComponent<DeathFade>().RpcFadeIn();
             if (!player.GetComponent<PlayerInventory>().isSafe)
             {
-                //player.GetComponent<DeathFade>().RpcFadeIn(false);
+                player.GetComponent<PlayerInventory>().RpcApplyDeathPenalty();
                 playersDead++;
-                //int respawnIndex = Random.Range(0, spawnPoints.Length -1);
-                //player.transform.position = spawnPoints[respawnIndex].transform.position;
-                //player.transform.rotation = spawnPoints[respawnIndex].transform.rotation;
-                
             }
-            //else
-            //{
-                //player.GetComponent<DeathFade>().RpcFadeIn(true);
-            //}
         }
-        int scoreLost = deathPenalty * playersDead;
-        //Debug.Log(shop.Score + " - " + scoreLost);
-		if (shop != null) 
-		{
-			shop.Score -= scoreLost;
-		}
-		else
-		{
-			Debug.Log("DNCont.shop = null");
-		}
-        //Debug.Log(shop.Score);
     }
         
     [ClientRpc]
@@ -345,7 +325,7 @@ public class DayNightController : NetworkBehaviour
             if (!player.GetComponent<PlayerInventory>().isSafe)
             {
                 int respawnIndex = Random.Range(0, spawnPoints.Length - 1);
-                player.GetComponent<DeathFade>().RpcFadeOut(false);
+                //player.GetComponent<DeathFade>().RpcFadeOut(false);
 
                 RpcRespawnPlayer(player.GetComponent<NetworkIdentity>().netId, spawnPoints[respawnIndex].transform.position);
 
@@ -355,7 +335,7 @@ public class DayNightController : NetworkBehaviour
             }
             else
             {
-                player.GetComponent<DeathFade>().RpcFadeOut(true);
+                //player.GetComponent<DeathFade>().RpcFadeOut(true);
             }
         }
     }
@@ -380,8 +360,16 @@ public class DayNightController : NetworkBehaviour
     [Command]
     void CmdSetTimeOfDayMorning()
     {
+        Debug.Log("Inside CmdSetTimeOfDayMorning");
         currentTimeOfDay = startDayAt;
-        RpcSyncTimeOfDay(currentTimeOfDay);                 
+        nightTimeCheckDone = false;
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            player.GetComponent<DeathFade>().CmdMorningFadeOut();
+        }
+        //RpcSyncTimeOfDay(currentTimeOfDay);
+        
+        //RpcSyncTimeOfDay(startDayAt);
     }
 
     [Command]
@@ -390,12 +378,7 @@ public class DayNightController : NetworkBehaviour
         //ingameDay++;
         //currentTimeOfDay = startDayAt;
 		//RpcSyncTimeOfDay(currentTimeOfDay);  
-        nightTimeCheckDone = false;
 
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            player.GetComponent<DeathFade>().CmdMorningFadeOut();
-        }
         //bedUsed = false;
     }
 

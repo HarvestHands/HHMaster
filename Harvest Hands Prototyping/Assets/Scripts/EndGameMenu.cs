@@ -60,6 +60,10 @@ public class EndGameMenu : MonoBehaviour
         {
             inputField.ActivateInputField();
         }
+        else
+        {
+            Debug.Log("Score isn't new highScore");
+        }
     }
 
     public void SaveScores()
