@@ -11,6 +11,10 @@ public class BankScript : NetworkBehaviour
 
     public Text localPlayerFarmMoneyText;
 
+    public Canvas UICanvas;
+    public Text costText;
+    public float costTextLifeTime = 2.5f;
+
     public string playerTag = "Player";
     
 
@@ -26,8 +30,10 @@ public class BankScript : NetworkBehaviour
         
         if (oldScore != Score)
         {
+            Debug.Log("inside oldscore != score");
+            SpawnPriceText(Score - oldScore);
             oldScore = Score;
-            if(localPlayerFarmMoneyText)
+            if (localPlayerFarmMoneyText)
                 localPlayerFarmMoneyText.text = "$" + Score.ToString();
             //Do stuff
 
@@ -55,6 +61,26 @@ public class BankScript : NetworkBehaviour
         
     }
 
+    public void SpawnPriceText(int price)
+    {
+        Debug.Log("Inside Bankscript Spawn Price Text");
+        
 
+        if (UICanvas != null)
+        {
+            Text priceText = (Text)Instantiate(costText, localPlayerFarmMoneyText.rectTransform.position, localPlayerFarmMoneyText.rectTransform.rotation);
+            priceText.rectTransform.SetParent(UICanvas.transform, false);
+            priceText.rectTransform.position = localPlayerFarmMoneyText.rectTransform.position;
+            priceText.rectTransform.rotation = localPlayerFarmMoneyText.rectTransform.rotation;
+
+            //if (price > 0)
+            //    priceText.text = "-";
+            //else
+            //    priceText.text = "+";
+            priceText.text = "$" + price;
+
+            Destroy(priceText.gameObject, costTextLifeTime);
+        }
+    }
 
 }

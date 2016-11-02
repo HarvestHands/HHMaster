@@ -38,6 +38,7 @@ public class waterBox : MonoBehaviour {
                 if (plr.GetComponent<StaffNo3>().ChosenObj != null)
                     plr.GetComponent<StaffNo3>().CmdDropped();
 
+                plr.GetComponent<StaffNo3>().Drop();
                 plr.GetComponent<DeathFade>().CmdShowDrownText();
                 plr.GetComponent<DeathFade>().RpcSetShowDeathPenaltyImage(true);
             }
