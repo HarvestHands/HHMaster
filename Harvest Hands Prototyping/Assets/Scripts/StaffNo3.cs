@@ -346,12 +346,15 @@ public class StaffNo3 : NetworkBehaviour
     [Command]
     public void CmdDropped()
     {
-        ChosenObj.GetComponent<Rigidbody>().useGravity = true;
+        if (ChosenObj.GetComponent<Rigidbody>() != null)
+            ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         carriedItemID = NetworkInstanceId.Invalid;
-        ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
+        if (ChosenObj.GetComponent<Pickupable>() != null)
+                ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
         //ChosenObj.GetComponent<Rigidbody>().isKinematic = false;
         objectheld = false;
-        ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
+        if (ChosenObj.GetComponent<NetworkIdentity>() != null)
+            ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
     }
 
     [Command]

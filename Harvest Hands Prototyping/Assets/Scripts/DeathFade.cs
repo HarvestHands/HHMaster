@@ -33,7 +33,7 @@ public class DeathFade : NetworkBehaviour
     public Text nightTimeWarningText;
     public float nightWarningDisplayLength = 5f;
 
-    public RawImage deathPenaltyImage;
+    public Image deathPenaltyImage;
 
     // Use this for initialization
     void Start()
@@ -72,7 +72,7 @@ public class DeathFade : NetworkBehaviour
         deadText = GameObject.Find("DeathText").GetComponent<Text>();
 		drownText = GameObject.Find("DrownText").GetComponent<Text>();
 		nightTimeWarningText = GameObject.Find("NightTimeWarningText").GetComponent<Text>();
-        deathPenaltyImage = GameObject.Find("DeathPenaltyRawImage").GetComponent<RawImage>();
+        deathPenaltyImage = GameObject.Find("DeathPenaltyImage").GetComponent<Image>();
         DNCont = GameObject.FindObjectOfType<DayNightController>();
     }
 
