@@ -13,7 +13,7 @@ public class SameSpawne : MonoBehaviour
     {
 	
 	}
-	
+	/*
 	// Update is called once per frame
 	void Update ()
     {
@@ -27,5 +27,5 @@ public class SameSpawne : MonoBehaviour
                 }
             }
         }
-	}
+	}*/
 }
