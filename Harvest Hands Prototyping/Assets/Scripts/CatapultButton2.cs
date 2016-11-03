@@ -16,7 +16,9 @@ public class CatapultButton2 : MonoBehaviour
 	
     void LaunchCatapult(NetworkInstanceId playerId)
     {
+        int i = catapult.expectedIncome;
         catapult.CmdEmptyCatapult();
+        catapult.farmbank.RpcSpawnPriceText(catapult.expectedIncome);
     }
     
 }

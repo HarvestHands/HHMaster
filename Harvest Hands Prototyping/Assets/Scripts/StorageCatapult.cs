@@ -15,11 +15,13 @@ public class StorageCatapult : NetworkBehaviour
 
     GameObject gameManager;
     //ShopScript shop;
-    BankScript farmbank;
+    [HideInInspector]
+    public BankScript farmbank;
 
     public float scoreMultiplier = 1;
     public Text priceText;
-    private int expectedIncome = 0;
+    [HideInInspector]
+    public int expectedIncome = 0;
 
     public List<GameObject> catapultCrates;
     public List<GameObject> loadedObjects;
@@ -27,6 +29,7 @@ public class StorageCatapult : NetworkBehaviour
 
     public GameObject Spaghetti;
     public Transform SpaghettiSpawnPoint;
+    public List<Transform> SpaghettiSpawnPoints;
     public float SpaghettiForce;
     public float SpaghettiDuration;
     [FMODUnity.EventRef]
@@ -140,9 +143,17 @@ public class StorageCatapult : NetworkBehaviour
     public void LaunchSpaghetti()
     {
         Debug.Log("Inside LaunchSpaghetti Catapult");
-        GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoint.position, SpaghettiSpawnPoint.rotation);
-        newSpawn.GetComponent<Rigidbody>().AddForce(SpaghettiSpawnPoint.transform.forward * SpaghettiForce, ForceMode.Impulse);
-        Destroy(newSpawn, SpaghettiDuration);
+        for (int i = 0; i < loadedObjects.Count; ++i)
+        {
+            GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoints[i].position, SpaghettiSpawnPoints[i].rotation);
+            newSpawn.GetComponent<Rigidbody>().AddForce(SpaghettiSpawnPoints[i].transform.forward * SpaghettiForce, ForceMode.Impulse);
+            Destroy(newSpawn, SpaghettiDuration);
+        }
+
+
+        //GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoint.position, SpaghettiSpawnPoint.rotation);
+        //newSpawn.GetComponent<Rigidbody>().AddForce(SpaghettiSpawnPoint.transform.forward * SpaghettiForce, ForceMode.Impulse);
+        //Destroy(newSpawn, SpaghettiDuration);
 
         //play sound
         FMODUnity.RuntimeManager.PlayOneShot(launchSpaghettiSound, transform.position);

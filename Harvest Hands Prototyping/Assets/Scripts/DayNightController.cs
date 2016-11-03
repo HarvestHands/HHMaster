@@ -78,60 +78,22 @@ public class DayNightController : NetworkBehaviour
 
 
         //insta sells catapaults items
-        if (Input.GetMouseButtonDown(0))
-        {
-
-            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-
-            Physics.Raycast(ray, out Hit, GrabDistance);
-
-            if (Hit.collider.gameObject == GameObject.Find("CatapaultButton"))
-            {
-                foreach (StorageCatapult catapult in storageCatapults)
-                {
-                    catapult.CmdEmptyCatapult();
-                }
-            }
-        }
-
-
-        //Returns player spped back to default after the next day
-        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.77 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.78)
-        {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 10;
-            GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed = 20;
-
-            //spawns mushrooms at night
-           // foreach (MushroomSpawner spawner in mushroomSpawners)
-          //  {
-          //      spawner.AttemptSpawn();
-          //  }        
-        }
-
-        //destroys mushrooms after certain time in day
-        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.35 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.36)
-        {
-            //   Destroy(this.gameObject);
-
-            //Destroy(GameObject.FindGameObjectWithTag("Mushroom"));
-
-          //  Destroy(GameObject.Find("MushroomSpawner").GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
-
-
-
-
-
-           // Destroy(GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
-
-
-           // Destroy(GameObject.Find("mushroom_Common1"));
-           // Destroy(GameObject.Find("mushroom_Common2"));
-          //  Destroy(GameObject.Find("mushroom_Rare"));
-           // Destroy(GameObject.Find("mushroom_Uncommon1"));
-          //  Destroy(GameObject.Find("mushroom_Uncommon2"));
-        }
-
-
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //
+        //    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+        //
+        //    Physics.Raycast(ray, out Hit, GrabDistance);
+        //
+        //    if (Hit.collider.gameObject == GameObject.Find("CatapaultButton"))
+        //    {
+        //        foreach (StorageCatapult catapult in storageCatapults)
+        //        {
+        //            catapult.CmdEmptyCatapult();
+        //        }
+        //    }
+        //}
+        
         //Update Sun rotation according to time of day
         UpdateSun();
         UpdateStars();
@@ -165,16 +127,24 @@ public class DayNightController : NetworkBehaviour
     {
         ingameDay++;
         CmdCheckPlayersSafe();
-        RespawnDeadPlayers ();
+        //RespawnDeadPlayers ();
         CmdUpdatePlants();
         //CmdSetTimeOfDayMorning();
         CmdIncrementDay();
         CmdUpdateMushroomSpawners();
         //storageCatapult.CmdEmptyCatapult();
-        foreach(StorageCatapult catapult in storageCatapults)
+        BankScript bank = GetComponent<BankScript>();
+        int money = bank.Score;
+        //Debug.Log("Money = " + money);
+        foreach (StorageCatapult catapult in storageCatapults)
         {
             catapult.CmdEmptyCatapult();
         }
+        if (money != bank.Score)
+        {
+            bank.RpcSpawnPriceText(bank.Score - money);
+        }
+        Debug.Log("Bank.Score = " + bank.Score);
         Invoke("CmdSetTimeOfDayMorning", nightPauseLength / 2);
     }
 
@@ -297,12 +267,20 @@ public class DayNightController : NetworkBehaviour
         int playersDead = 0;
         foreach (GameObject player in Players)
         {
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 10;
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed = 20;
             //player.GetComponent<DeathFade>().RpcFadeIn();
             if (!player.GetComponent<PlayerInventory>().isSafe)
             {
+                int respawnIndex = Random.Range(0, spawnPoints.Length - 1);
+                RpcRespawnPlayer(player.GetComponent<NetworkIdentity>().netId, spawnPoints[respawnIndex].transform.position);
+                player.GetComponent<DeathFade>().CmdShowDeadText();
+                playerdeathcount += 1;
+                PlayerDeathPenalty();
+
                 player.GetComponent<PlayerInventory>().RpcApplyDeathPenalty();
                 playersDead++;
-                player.GetComponent<DeathFade>().RpcSetShowDeathPenaltyImage(true);
+                player.GetComponent<DeathFade>().RpcSetShowDeathPenaltyImage(true);                
             }
             else
             {
@@ -325,10 +303,13 @@ public class DayNightController : NetworkBehaviour
         GameObject[] Players = GameObject.FindGameObjectsWithTag("Player");
         foreach (GameObject player in Players)
         {
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 10;
+            player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed = 20;
             //player.GetComponent<DeathFade>().RpcFadeOut();
             //if player is NOT safe
             if (!player.GetComponent<PlayerInventory>().isSafe)
             {
+
                 int respawnIndex = Random.Range(0, spawnPoints.Length - 1);
                 //player.GetComponent<DeathFade>().RpcFadeOut(false);
 
@@ -359,6 +340,7 @@ public class DayNightController : NetworkBehaviour
             Debug.Log(player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed);
             if (player.GetComponent<StaffNo3>().ChosenObj != null)
                 player.GetComponent<StaffNo3>().CmdDropped();
+            player.GetComponent<StaffNo3>().Drop();
         }
     }
 
