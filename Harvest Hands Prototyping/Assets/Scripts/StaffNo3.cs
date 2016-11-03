@@ -190,6 +190,13 @@ public class StaffNo3 : NetworkBehaviour
             SeedType.text = "";
             anim.SetTrigger("Drop");
         }
+        else if (!ChosenObj.gameObject.activeInHierarchy)
+        {
+            objectheld = false;
+            SeedNumber.text = "";
+            SeedType.text = "";
+            anim.SetTrigger("Drop");
+        }
         else
         {                            
             //ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, StaffGrabber.transform.position, 0.5f);
