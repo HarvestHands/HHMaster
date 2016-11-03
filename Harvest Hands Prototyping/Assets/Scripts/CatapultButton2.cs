@@ -18,7 +18,9 @@ public class CatapultButton2 : MonoBehaviour
     {
         int i = catapult.expectedIncome;
         catapult.CmdEmptyCatapult();
-        catapult.farmbank.RpcSpawnPriceText(catapult.expectedIncome);
+        if (i != 0)
+            catapult.farmbank.RpcSpawnPriceText(catapult.expectedIncome);
+        catapult.CmdPlayAnimation();
     }
     
 }

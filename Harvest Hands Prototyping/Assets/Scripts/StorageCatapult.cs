@@ -35,10 +35,14 @@ public class StorageCatapult : NetworkBehaviour
     [FMODUnity.EventRef]
     public string launchSpaghettiSound = "event:/Done/Gold income";
 
+    private Animator animator;
+    public string animatorTrigger = "Shoot";
+
 
     void Start()
     {
         loadedObjects = new List<GameObject>();
+        animator = GetComponent<Animator>();
     }
 
     // Use this for initialization
@@ -157,5 +161,17 @@ public class StorageCatapult : NetworkBehaviour
 
         //play sound
         FMODUnity.RuntimeManager.PlayOneShot(launchSpaghettiSound, transform.position);
+    }
+
+    [Command]
+    public void CmdPlayAnimation()
+    {
+        RpcPlayAnimation();
+    }
+
+    [ClientRpc]
+    public void RpcPlayAnimation()
+    {
+        animator.SetTrigger(animatorTrigger);
     }
 }
