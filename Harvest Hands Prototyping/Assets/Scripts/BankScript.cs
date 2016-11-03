@@ -31,7 +31,7 @@ public class BankScript : NetworkBehaviour
         if (oldScore != Score)
         {
             Debug.Log("inside oldscore != score");
-            SpawnPriceText(Score - oldScore);
+            //SpawnPriceText(Score - oldScore);
             oldScore = Score;
             if (localPlayerFarmMoneyText)
                 localPlayerFarmMoneyText.text = "$" + Score.ToString();
@@ -61,6 +61,12 @@ public class BankScript : NetworkBehaviour
         
     }
 
+    [ClientRpc]
+    public void RpcSpawnPriceText(int price)
+    {
+        SpawnPriceText(price);
+    }
+
     public void SpawnPriceText(int price)
     {
         Debug.Log("Inside Bankscript Spawn Price Text");
@@ -72,13 +78,13 @@ public class BankScript : NetworkBehaviour
             priceText.rectTransform.SetParent(UICanvas.transform, false);
             priceText.rectTransform.position = localPlayerFarmMoneyText.rectTransform.position;
             priceText.rectTransform.rotation = localPlayerFarmMoneyText.rectTransform.rotation;
-
+            
             //if (price > 0)
             //    priceText.text = "-";
             //else
             //    priceText.text = "+";
             priceText.text = "$" + price;
-
+            
             Destroy(priceText.gameObject, costTextLifeTime);
         }
     }

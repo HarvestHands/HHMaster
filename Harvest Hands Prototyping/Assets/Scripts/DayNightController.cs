@@ -133,10 +133,18 @@ public class DayNightController : NetworkBehaviour
         CmdIncrementDay();
         CmdUpdateMushroomSpawners();
         //storageCatapult.CmdEmptyCatapult();
-        foreach(StorageCatapult catapult in storageCatapults)
+        BankScript bank = GetComponent<BankScript>();
+        int money = bank.Score;
+        //Debug.Log("Money = " + money);
+        foreach (StorageCatapult catapult in storageCatapults)
         {
             catapult.CmdEmptyCatapult();
         }
+        if (money != bank.Score)
+        {
+            bank.RpcSpawnPriceText(bank.Score - money);
+        }
+        Debug.Log("Bank.Score = " + bank.Score);
         Invoke("CmdSetTimeOfDayMorning", nightPauseLength / 2);
     }
 

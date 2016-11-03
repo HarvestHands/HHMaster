@@ -15,11 +15,13 @@ public class StorageCatapult : NetworkBehaviour
 
     GameObject gameManager;
     //ShopScript shop;
-    BankScript farmbank;
+    [HideInInspector]
+    public BankScript farmbank;
 
     public float scoreMultiplier = 1;
     public Text priceText;
-    private int expectedIncome = 0;
+    [HideInInspector]
+    public int expectedIncome = 0;
 
     public List<GameObject> catapultCrates;
     public List<GameObject> loadedObjects;
