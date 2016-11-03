@@ -29,7 +29,10 @@ public class StorageCatapult : NetworkBehaviour
 
     public GameObject Spaghetti;
     public Transform SpaghettiSpawnPoint;
+<<<<<<< HEAD
     public List<Transform> SpaghettiSpawnPoints;
+=======
+>>>>>>> c569af3dbb46c75d6b3a9904dcd8970479a8fd4e
     public float SpaghettiForce;
     public float SpaghettiDuration;
     [FMODUnity.EventRef]
@@ -143,6 +146,7 @@ public class StorageCatapult : NetworkBehaviour
     public void LaunchSpaghetti()
     {
         Debug.Log("Inside LaunchSpaghetti Catapult");
+<<<<<<< HEAD
         for (int i = 0; i < loadedObjects.Count; ++i)
         {
             GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoints[i].position, SpaghettiSpawnPoints[i].rotation);
@@ -154,6 +158,11 @@ public class StorageCatapult : NetworkBehaviour
         //GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoint.position, SpaghettiSpawnPoint.rotation);
         //newSpawn.GetComponent<Rigidbody>().AddForce(SpaghettiSpawnPoint.transform.forward * SpaghettiForce, ForceMode.Impulse);
         //Destroy(newSpawn, SpaghettiDuration);
+=======
+        GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoint.position, SpaghettiSpawnPoint.rotation);
+        newSpawn.GetComponent<Rigidbody>().AddForce(SpaghettiSpawnPoint.transform.forward * SpaghettiForce, ForceMode.Impulse);
+        Destroy(newSpawn, SpaghettiDuration);
+>>>>>>> c569af3dbb46c75d6b3a9904dcd8970479a8fd4e
 
         //play sound
         FMODUnity.RuntimeManager.PlayOneShot(launchSpaghettiSound, transform.position);

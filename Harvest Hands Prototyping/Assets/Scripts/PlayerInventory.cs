@@ -195,11 +195,19 @@ public class PlayerInventory : NetworkBehaviour {
             priceText.rectTransform.position = playerMoneyText.rectTransform.position;
             priceText.rectTransform.rotation = playerMoneyText.rectTransform.rotation;
 
+<<<<<<< HEAD
             //if (price > 0)
             //    priceText.text = "-";
             //else
             //    priceText.text = "+";
             priceText.text = "$" + price; 
+=======
+            if (price > 0)
+                priceText.text = "-";
+            else
+                priceText.text = "+";
+            priceText.text += "$" + price; 
+>>>>>>> c569af3dbb46c75d6b3a9904dcd8970479a8fd4e
 
             Destroy(priceText.gameObject, costTextLifeTime);
         }

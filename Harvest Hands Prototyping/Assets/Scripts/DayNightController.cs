@@ -78,6 +78,7 @@ public class DayNightController : NetworkBehaviour
 
 
         //insta sells catapaults items
+<<<<<<< HEAD
         //if (Input.GetMouseButtonDown(0))
         //{
         //
@@ -94,6 +95,62 @@ public class DayNightController : NetworkBehaviour
         //    }
         //}
         
+=======
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+
+            Physics.Raycast(ray, out Hit, GrabDistance);
+
+            if (Hit.collider.gameObject == GameObject.Find("CatapaultButton"))
+            {
+                foreach (StorageCatapult catapult in storageCatapults)
+                {
+                    catapult.CmdEmptyCatapult();
+                }
+            }
+        }
+
+
+        //Returns player spped back to default after the next day
+        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.77 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.78)
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_WalkSpeed = 10;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().m_RunSpeed = 20;
+
+            //spawns mushrooms at night
+           // foreach (MushroomSpawner spawner in mushroomSpawners)
+          //  {
+          //      spawner.AttemptSpawn();
+          //  }        
+        }
+
+        //destroys mushrooms after certain time in day
+        if (GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay >= 0.35 && GameObject.Find("GameManager").GetComponent<DayNightController>().currentTimeOfDay <= 0.36)
+        {
+            //   Destroy(this.gameObject);
+
+            //Destroy(GameObject.FindGameObjectWithTag("Mushroom"));
+
+          //  Destroy(GameObject.Find("MushroomSpawner").GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
+
+
+
+
+
+           // Destroy(GetComponent<MushroomSpawner.MushroomInfo>().mushroom);
+
+
+           // Destroy(GameObject.Find("mushroom_Common1"));
+           // Destroy(GameObject.Find("mushroom_Common2"));
+          //  Destroy(GameObject.Find("mushroom_Rare"));
+           // Destroy(GameObject.Find("mushroom_Uncommon1"));
+          //  Destroy(GameObject.Find("mushroom_Uncommon2"));
+        }
+
+
+>>>>>>> c569af3dbb46c75d6b3a9904dcd8970479a8fd4e
         //Update Sun rotation according to time of day
         UpdateSun();
         UpdateStars();
@@ -127,7 +184,11 @@ public class DayNightController : NetworkBehaviour
     {
         ingameDay++;
         CmdCheckPlayersSafe();
+<<<<<<< HEAD
         //RespawnDeadPlayers ();
+=======
+        RespawnDeadPlayers ();
+>>>>>>> c569af3dbb46c75d6b3a9904dcd8970479a8fd4e
         CmdUpdatePlants();
         //CmdSetTimeOfDayMorning();
         CmdIncrementDay();
@@ -140,11 +201,14 @@ public class DayNightController : NetworkBehaviour
         {
             catapult.CmdEmptyCatapult();
         }
+<<<<<<< HEAD
         if (money != bank.Score)
         {
             bank.RpcSpawnPriceText(bank.Score - money);
         }
         Debug.Log("Bank.Score = " + bank.Score);
+=======
+>>>>>>> c569af3dbb46c75d6b3a9904dcd8970479a8fd4e
         Invoke("CmdSetTimeOfDayMorning", nightPauseLength / 2);
     }
 
@@ -272,6 +336,7 @@ public class DayNightController : NetworkBehaviour
             //player.GetComponent<DeathFade>().RpcFadeIn();
             if (!player.GetComponent<PlayerInventory>().isSafe)
             {
+<<<<<<< HEAD
                 int respawnIndex = Random.Range(0, spawnPoints.Length - 1);
                 RpcRespawnPlayer(player.GetComponent<NetworkIdentity>().netId, spawnPoints[respawnIndex].transform.position);
                 player.GetComponent<DeathFade>().CmdShowDeadText();
@@ -281,6 +346,11 @@ public class DayNightController : NetworkBehaviour
                 player.GetComponent<PlayerInventory>().RpcApplyDeathPenalty();
                 playersDead++;
                 player.GetComponent<DeathFade>().RpcSetShowDeathPenaltyImage(true);                
+=======
+                player.GetComponent<PlayerInventory>().RpcApplyDeathPenalty();
+                playersDead++;
+                player.GetComponent<DeathFade>().RpcSetShowDeathPenaltyImage(true);
+>>>>>>> c569af3dbb46c75d6b3a9904dcd8970479a8fd4e
             }
             else
             {

@@ -31,7 +31,11 @@ public class SpawnPad : NetworkBehaviour
             //bank.Score -= cost;
             GameObject newSpawn = (GameObject)Instantiate(ObjectToSpawn, spawnPoint.position, transform.rotation);
             RpcPlaySound(id);
+<<<<<<< HEAD
             //RpcPriceText(id, cost);
+=======
+            RpcPriceText(id, cost);
+>>>>>>> c569af3dbb46c75d6b3a9904dcd8970479a8fd4e
         }
     }
 

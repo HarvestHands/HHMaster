@@ -273,7 +273,14 @@ public class StaffNo3 : NetworkBehaviour
         StaffEmitter.GetComponent<ParticleSystem>().Stop();
         StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
         StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
+<<<<<<< HEAD
         throwforce = 0;
+=======
+
+        
+        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(),false);
+       
+>>>>>>> c569af3dbb46c75d6b3a9904dcd8970479a8fd4e
     }
 
     [Command]
@@ -343,12 +350,15 @@ public class StaffNo3 : NetworkBehaviour
     [Command]
     public void CmdDropped()
     {
-        ChosenObj.GetComponent<Rigidbody>().useGravity = true;
+        if (ChosenObj.GetComponent<Rigidbody>() != null)
+            ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         carriedItemID = NetworkInstanceId.Invalid;
-        ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
+        if (ChosenObj.GetComponent<Pickupable>() != null)
+                ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
         //ChosenObj.GetComponent<Rigidbody>().isKinematic = false;
         objectheld = false;
-        ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
+        if (ChosenObj.GetComponent<NetworkIdentity>() != null)
+            ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
     }
 
     [Command]
