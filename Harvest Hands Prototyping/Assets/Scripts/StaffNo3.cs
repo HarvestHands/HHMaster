@@ -225,11 +225,7 @@ public class StaffNo3 : NetworkBehaviour
                 StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
                 StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
             }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                Drop();
-            }
+                        
             if (Input.GetMouseButton(1))
             {
                 throwforce += ((throwForceMax - throwForceMin) / throwMaxChargeTime) * Time.deltaTime;
@@ -238,26 +234,27 @@ public class StaffNo3 : NetworkBehaviour
             //if object held , drops the object
             if (Input.GetMouseButtonDown(0))
             {
+                Drop();
                 anim.SetTrigger("Drop");
                 CmdDropped();
                 CmdNullChosen();
                 throwforce = throwForceMin;
                 //Play Sound
                 FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
-                Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
+                //Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
             }
             //if object held , throws the object
             if (Input.GetMouseButtonUp(1))
             {
 
+                Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
                 CmdThrowed(throwforce);
                 CmdNullChosen();
                 throwforce = throwForceMin;
                 //Play Sound
                 FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
-                Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
             }
-            Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+            //Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
 
 
             //Catapult crates get set to inactive        
@@ -277,7 +274,8 @@ public class StaffNo3 : NetworkBehaviour
         StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
         StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
         throwforce = 0;
-        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
+        if (ChosenObj != null)
+            Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
     }
 
     [Command]
