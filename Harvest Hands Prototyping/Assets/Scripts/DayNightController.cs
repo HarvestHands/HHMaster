@@ -314,6 +314,7 @@ public class DayNightController : NetworkBehaviour
                 //player.GetComponent<DeathFade>().RpcFadeOut(false);
 
                 RpcRespawnPlayer(player.GetComponent<NetworkIdentity>().netId, spawnPoints[respawnIndex].transform.position);
+                player.GetComponent<StaffNo3>().Drop();
 
                 player.GetComponent<DeathFade>().CmdShowDeadText();
                 playerdeathcount += 1;

@@ -74,7 +74,6 @@ public class PlayerInventory : NetworkBehaviour {
         if (oldMoney != money)
         {
             playerMoneyText.text = "$" + money.ToString();
-            SpawnPriceText(money - oldMoney);
             oldMoney = money;
         }
 
@@ -195,11 +194,11 @@ public class PlayerInventory : NetworkBehaviour {
             priceText.rectTransform.position = playerMoneyText.rectTransform.position;
             priceText.rectTransform.rotation = playerMoneyText.rectTransform.rotation;
 
-            //if (price > 0)
-            //    priceText.text = "-";
-            //else
-            //    priceText.text = "+";
-            priceText.text = "$" + price; 
+            if (price > 0)
+                priceText.text = "-";
+            else
+                priceText.text = "+";
+            priceText.text += "$" + price; 
 
             Destroy(priceText.gameObject, costTextLifeTime);
         }

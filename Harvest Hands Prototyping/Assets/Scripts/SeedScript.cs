@@ -24,6 +24,10 @@ public class SeedScript : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (NumberOfSeeds <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
 

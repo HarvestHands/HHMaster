@@ -164,7 +164,6 @@ public class StaffNo3 : NetworkBehaviour
 
                             //Play Sound
                             FMODUnity.RuntimeManager.PlayOneShot(pickUpSound, ChosenObj.transform.position);
-                            Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
 
                         }
                         else
@@ -184,13 +183,6 @@ public class StaffNo3 : NetworkBehaviour
         }        
         //plants get destroyed sometimes while being held
         else if (ChosenObj == null)
-        {
-            objectheld = false;
-            SeedNumber.text = "";
-            SeedType.text = "";
-            anim.SetTrigger("Drop");
-        }
-        else if (!ChosenObj.gameObject.activeInHierarchy)
         {
             objectheld = false;
             SeedNumber.text = "";
@@ -232,7 +224,11 @@ public class StaffNo3 : NetworkBehaviour
                 StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
                 StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
             }
-                        
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                Drop();
+            }
             if (Input.GetMouseButton(1))
             {
                 throwforce += ((throwForceMax - throwForceMin) / throwMaxChargeTime) * Time.deltaTime;
@@ -241,27 +237,24 @@ public class StaffNo3 : NetworkBehaviour
             //if object held , drops the object
             if (Input.GetMouseButtonDown(0))
             {
-                Drop();
                 anim.SetTrigger("Drop");
                 CmdDropped();
                 CmdNullChosen();
                 throwforce = throwForceMin;
                 //Play Sound
                 FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
-                //Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
             }
             //if object held , throws the object
             if (Input.GetMouseButtonUp(1))
             {
 
-                Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
                 CmdThrowed(throwforce);
                 CmdNullChosen();
                 throwforce = throwForceMin;
                 //Play Sound
                 FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
             }
-            //Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+            Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
 
 
             //Catapult crates get set to inactive        
@@ -280,9 +273,10 @@ public class StaffNo3 : NetworkBehaviour
         StaffEmitter.GetComponent<ParticleSystem>().Stop();
         StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
         StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
-        throwforce = 0;
-        if (ChosenObj != null)
-            Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
+
+        
+        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(),false);
+       
     }
 
     [Command]
@@ -352,12 +346,11 @@ public class StaffNo3 : NetworkBehaviour
     [Command]
     public void CmdDropped()
     {
-        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
         if (ChosenObj.GetComponent<Rigidbody>() != null)
             ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         carriedItemID = NetworkInstanceId.Invalid;
         if (ChosenObj.GetComponent<Pickupable>() != null)
-            ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
+                ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
         //ChosenObj.GetComponent<Rigidbody>().isKinematic = false;
         objectheld = false;
         if (ChosenObj.GetComponent<NetworkIdentity>() != null)
@@ -367,7 +360,6 @@ public class StaffNo3 : NetworkBehaviour
     [Command]
     void CmdThrowed(float _throwForce)
     {
-        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
         ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         ChosenObj.GetComponent<Rigidbody>().AddForce(StaffGrabber.transform.forward * _throwForce);
         carriedItemID = NetworkInstanceId.Invalid;

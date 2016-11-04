@@ -16,18 +16,18 @@ public class BankScript : NetworkBehaviour
     public float costTextLifeTime = 2.5f;
 
     public string playerTag = "Player";
-    
+
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
 
         //RpcStore();
-        
+
         if (oldScore != Score)
         {
             Debug.Log("inside oldscore != score");
@@ -58,7 +58,7 @@ public class BankScript : NetworkBehaviour
     public void RpcGivePlayerMoney(NetworkInstanceId playerId, int amount)
     {
         ClientScene.FindLocalObject(playerId).GetComponent<PlayerInventory>().money += amount;
-        
+
     }
 
     [ClientRpc]
@@ -70,7 +70,7 @@ public class BankScript : NetworkBehaviour
     public void SpawnPriceText(int price)
     {
         Debug.Log("Inside Bankscript Spawn Price Text");
-        
+
 
         if (UICanvas != null)
         {
@@ -78,13 +78,13 @@ public class BankScript : NetworkBehaviour
             priceText.rectTransform.SetParent(UICanvas.transform, false);
             priceText.rectTransform.position = localPlayerFarmMoneyText.rectTransform.position;
             priceText.rectTransform.rotation = localPlayerFarmMoneyText.rectTransform.rotation;
-            
+
             //if (price > 0)
             //    priceText.text = "-";
             //else
             //    priceText.text = "+";
             priceText.text = "$" + price;
-            
+
             Destroy(priceText.gameObject, costTextLifeTime);
         }
     }
