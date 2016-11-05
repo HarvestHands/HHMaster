@@ -130,65 +130,73 @@ public class StaffNo3 : NetworkBehaviour
             return;
         }
 
-        if (objectheld == false)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+		if (objectheld == false) 
+		{
+			if (Input.GetMouseButtonDown (0)) 
+			{
+				Ray ray = Camera.main.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0.0f));
 
-                if (Physics.Raycast(ray, out Hit, GrabDistance))
-                {
-                    ChosenObj = Hit.collider.gameObject;
+				if (Physics.Raycast (ray, out Hit, GrabDistance)) 
+				{
+					ChosenObj = Hit.collider.gameObject;
 
-                    if ((Hit.collider.gameObject.GetComponent<Pickupable>() != null))
-                    {
-                        //check that another player isn't holding the object
-                        if (!ChosenObj.GetComponent<Pickupable>().BeingHeld)
-                        {
-                            //ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
-                            //CmdAssignAuthority();
-                            objectheld = true;
+					if ((Hit.collider.gameObject.GetComponent<Pickupable> () != null)) 
+					{
+						//check that another player isn't holding the object
+						if (!ChosenObj.GetComponent<Pickupable> ().BeingHeld) 
+						{
+							//ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+							//CmdAssignAuthority();
+							objectheld = true;
 
-                            anim.SetTrigger("Pickup");
-                            // StaffEmitter.SetActive(true);
-                            StaffEmitter.GetComponent<ParticleSystem>().Play();
+							anim.SetTrigger ("Pickup");
+							// StaffEmitter.SetActive(true);
+							StaffEmitter.GetComponent<ParticleSystem> ().Play ();
 
-                            ChosenObj.GetComponent<Pickupable>().BeingHeld = true;
-                            //Debug.Log(ChosenObj.GetComponent<Pickupable>().beingHeld);
-                            ChosenObj.GetComponent<Rigidbody>().useGravity = false;
-                            carriedItemID = ChosenObj.GetComponent<NetworkIdentity>().netId;
+							ChosenObj.GetComponent<Pickupable> ().BeingHeld = true;
+							//Debug.Log(ChosenObj.GetComponent<Pickupable>().beingHeld);
+							ChosenObj.GetComponent<Rigidbody> ().useGravity = false;
+							carriedItemID = ChosenObj.GetComponent<NetworkIdentity> ().netId;
 
-                            //ChosenObj.GetComponent<Rigidbody>().isKinematic = true;
+							//ChosenObj.GetComponent<Rigidbody>().isKinematic = true;
 
-                            CmdPickedUp(carriedItemID);
+							CmdPickedUp (carriedItemID);
 
-                            //Play Sound
-                            FMODUnity.RuntimeManager.PlayOneShot(pickUpSound, ChosenObj.transform.position);
+							//Play Sound
+							FMODUnity.RuntimeManager.PlayOneShot (pickUpSound, ChosenObj.transform.position);
+							Physics.IgnoreCollision (GameObject.FindGameObjectWithTag ("Player").GetComponent<Collider> (), ChosenObj.GetComponent<Collider> ());
 
-                        }
-                        else
-                        {
-                            ChosenObj = null;
-                        }
+						} 
+						else 
+						{
+							ChosenObj = null;
+						}
 
-                    }
-                    else if (Hit.transform.GetComponent<Interactable>() != null)
-                    {
-                        Hit.transform.GetComponent<Interactable>().onInteract(GetComponent<NetworkIdentity>().netId);
-                        ChosenObj = null;
-                    }
-                    //ChosenObj = null;
-                }
-            }
-        }        
+					} 
+					else if (Hit.transform.GetComponent<Interactable> () != null) 
+					{
+						Hit.transform.GetComponent<Interactable> ().onInteract (GetComponent<NetworkIdentity> ().netId);
+						ChosenObj = null;
+					}
+					//ChosenObj = null;
+				}
+			}
+		}        
         //plants get destroyed sometimes while being held
-        else if (ChosenObj == null)
-        {
-            objectheld = false;
-            SeedNumber.text = "";
-            SeedType.text = "";
-            anim.SetTrigger("Drop");
-        }
+        else if (ChosenObj == null) 
+		{
+			objectheld = false;
+			SeedNumber.text = "";
+			SeedType.text = "";
+			anim.SetTrigger ("Drop");
+		} 
+		else if (!ChosenObj.gameObject.activeInHierarchy) 
+		{
+			objectheld = false;
+			SeedNumber.text = "";
+			SeedType.text = "";
+			anim.SetTrigger ("Drop");
+		}
         else
         {                            
             //ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, StaffGrabber.transform.position, 0.5f);
@@ -247,7 +255,7 @@ public class StaffNo3 : NetworkBehaviour
             //if object held , throws the object
             if (Input.GetMouseButtonUp(1))
             {
-
+				Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
                 CmdThrowed(throwforce);
                 CmdNullChosen();
                 throwforce = throwForceMin;
@@ -273,9 +281,10 @@ public class StaffNo3 : NetworkBehaviour
         StaffEmitter.GetComponent<ParticleSystem>().Stop();
         StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
         StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
-
-        
-        Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(),false);
+		throwforce = 0;
+		if (ChosenObj != null)
+			Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
+		
        
     }
 
@@ -346,6 +355,7 @@ public class StaffNo3 : NetworkBehaviour
     [Command]
     public void CmdDropped()
     {
+		Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
         if (ChosenObj.GetComponent<Rigidbody>() != null)
             ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         carriedItemID = NetworkInstanceId.Invalid;
@@ -360,6 +370,7 @@ public class StaffNo3 : NetworkBehaviour
     [Command]
     void CmdThrowed(float _throwForce)
     {
+		Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
         ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         ChosenObj.GetComponent<Rigidbody>().AddForce(StaffGrabber.transform.forward * _throwForce);
         carriedItemID = NetworkInstanceId.Invalid;
