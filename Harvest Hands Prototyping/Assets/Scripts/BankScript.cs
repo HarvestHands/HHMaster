@@ -64,7 +64,8 @@ public class BankScript : NetworkBehaviour
     [ClientRpc]
     public void RpcSpawnPriceText(int price)
     {
-        SpawnPriceText(price);
+        if (price != 0)
+            SpawnPriceText(price);
     }
 
     public void SpawnPriceText(int price)
@@ -78,6 +79,8 @@ public class BankScript : NetworkBehaviour
             priceText.rectTransform.SetParent(UICanvas.transform, false);
             priceText.rectTransform.position = localPlayerFarmMoneyText.rectTransform.position;
             priceText.rectTransform.rotation = localPlayerFarmMoneyText.rectTransform.rotation;
+
+            Debug.Log(priceText.name + " - pricetextName");
 
             //if (price > 0)
             //    priceText.text = "-";

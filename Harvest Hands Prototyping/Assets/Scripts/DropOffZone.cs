@@ -30,6 +30,7 @@ public class DropOffZone : NetworkBehaviour
             //Make Command?
             PlantProduce produce = col.gameObject.GetComponent<PlantProduce>();
             //shop.Score += produce.score;
+            farmbank.RpcSpawnPriceText(produce.score);
             farmbank.Score += produce.score * produce.ProduceAmount;
             Destroy(produce.gameObject);
         }

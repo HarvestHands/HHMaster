@@ -164,7 +164,7 @@ public class StaffNo3 : NetworkBehaviour
 
 							//Play Sound
 							FMODUnity.RuntimeManager.PlayOneShot (pickUpSound, ChosenObj.transform.position);
-							Physics.IgnoreCollision (GameObject.FindGameObjectWithTag ("Player").GetComponent<Collider> (), ChosenObj.GetComponent<Collider> ());
+							Physics.IgnoreCollision (GameObject.FindGameObjectWithTag ("Player").GetComponent<Collider> (), ChosenObj.GetComponent<Collider>());
 
 						} 
 						else 
@@ -188,14 +188,19 @@ public class StaffNo3 : NetworkBehaviour
 			objectheld = false;
 			SeedNumber.text = "";
 			SeedType.text = "";
-			anim.SetTrigger ("Drop");
+            //anim.SetTrigger ("Drop");
+            Drop();
+            anim.ResetTrigger("Drop");
 		} 
 		else if (!ChosenObj.gameObject.activeInHierarchy) 
 		{
 			objectheld = false;
 			SeedNumber.text = "";
 			SeedType.text = "";
-			anim.SetTrigger ("Drop");
+			//anim.SetTrigger ("Drop");
+            Drop();
+            anim.ResetTrigger("Drop");
+            ChosenObj = null;
 		}
         else
         {                            
@@ -232,11 +237,7 @@ public class StaffNo3 : NetworkBehaviour
                 StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
                 StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
             }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                Drop();
-            }
+                        
             if (Input.GetMouseButton(1))
             {
                 throwforce += ((throwForceMax - throwForceMin) / throwMaxChargeTime) * Time.deltaTime;
@@ -245,6 +246,7 @@ public class StaffNo3 : NetworkBehaviour
             //if object held , drops the object
             if (Input.GetMouseButtonDown(0))
             {
+                Drop();
                 anim.SetTrigger("Drop");
                 CmdDropped();
                 CmdNullChosen();
@@ -262,7 +264,7 @@ public class StaffNo3 : NetworkBehaviour
                 //Play Sound
                 FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
             }
-            Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+            //Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
 
 
             //Catapult crates get set to inactive        
