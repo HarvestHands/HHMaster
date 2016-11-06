@@ -148,8 +148,8 @@ public class StaffNo3 : NetworkBehaviour
 							//ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
 							//CmdAssignAuthority();
 							objectheld = true;
-
-							anim.SetTrigger ("Pickup");
+                            anim.SetBool("Drop", false);
+                            anim.SetTrigger ("Pickup");
 							// StaffEmitter.SetActive(true);
 							StaffEmitter.GetComponent<ParticleSystem> ().Play ();
 
@@ -188,9 +188,9 @@ public class StaffNo3 : NetworkBehaviour
 			objectheld = false;
 			SeedNumber.text = "";
 			SeedType.text = "";
-            //anim.SetTrigger ("Drop");
+            //anim.SetBool ("Drop") = true;
             Drop();
-            anim.ResetTrigger("Drop");
+            //anim.ResetTrigger("Drop");
 		} 
 		else if (!ChosenObj.gameObject.activeInHierarchy) 
 		{
@@ -199,7 +199,7 @@ public class StaffNo3 : NetworkBehaviour
 			SeedType.text = "";
 			//anim.SetTrigger ("Drop");
             Drop();
-            anim.ResetTrigger("Drop");
+            //anim.ResetTrigger("Drop");
             ChosenObj = null;
 		}
         else
@@ -247,7 +247,7 @@ public class StaffNo3 : NetworkBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 Drop();
-                anim.SetTrigger("Drop");
+                anim.SetBool("Drop", true);
                 CmdDropped();
                 CmdNullChosen();
                 throwforce = throwForceMin;
@@ -279,7 +279,7 @@ public class StaffNo3 : NetworkBehaviour
 
     public void Drop()
     {
-        anim.SetTrigger("Drop");
+        anim.SetBool("Drop", true);
         StaffEmitter.GetComponent<ParticleSystem>().Stop();
         StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
         StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
