@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: cbe89dd8545983f499d08a5a7ae9a6ee
-timeCreated: 1474255505
+guid: 0b7a5d4e39fc7bf41b60288f61af8bb8
+timeCreated: 1478235920
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Contents01_MESH_01
-    100002: Crate01_MESH_01
-    100004: //RootNode
-    400000: Contents01_MESH_01
-    400002: Crate01_MESH_01
-    400004: //RootNode
-    2300000: Contents01_MESH_01
+    100000: Contents01_Mesh_01
+    100002: //RootNode
+    100004: Crate01_MESH_01
+    400000: Contents01_Mesh_01
+    400002: //RootNode
+    400004: Crate01_MESH_01
+    2300000: Contents01_Mesh_01
     2300002: Crate01_MESH_01
-    3300000: Contents01_MESH_01
+    3300000: Contents01_Mesh_01
     3300002: Crate01_MESH_01
-    4300000: Contents01_MESH_01
-    4300002: Crate01_MESH_01
+    4300000: Crate01_MESH_01
+    4300002: Contents01_Mesh_01
   materials:
     importMaterials: 1
     materialName: 0

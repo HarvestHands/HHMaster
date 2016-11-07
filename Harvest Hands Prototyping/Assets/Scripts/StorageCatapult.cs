@@ -23,9 +23,16 @@ public class StorageCatapult : NetworkBehaviour
     [HideInInspector]
     public int expectedIncome = 0;
 
+    //testing
+    private float timer;
+    public float rate;
+    private bool fire;
+
     public List<GameObject> catapultCrates;
     public List<GameObject> loadedObjects;
     public int maxCrates = 8;
+
+    private Animator anim;
 
     public GameObject Spaghetti;
     public Transform SpaghettiSpawnPoint;
@@ -35,14 +42,15 @@ public class StorageCatapult : NetworkBehaviour
     [FMODUnity.EventRef]
     public string launchSpaghettiSound = "event:/Done/Gold income";
 
-    private Animator animator;
-    public string animatorTrigger = "Shoot";
-
 
     void Start()
     {
         loadedObjects = new List<GameObject>();
-        animator = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+
+        //testing
+        //rate = 0.3f;
+        timer = rate;
     }
 
     // Use this for initialization
@@ -62,6 +70,17 @@ public class StorageCatapult : NetworkBehaviour
     void Update()
     {
         //TO DO CATAPULT        ---------------------------------------------------------------------------------------------------------
+        if (fire)
+        {
+            timer -= Time.deltaTime;
+            if (timer < 0)
+            {
+                fire = false;
+                GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoint.position, SpaghettiSpawnPoint.rotation);
+                newSpawn.GetComponent<Rigidbody>().AddForce(SpaghettiSpawnPoint.transform.forward * SpaghettiForce, ForceMode.Impulse);
+                Destroy(newSpawn, SpaghettiDuration);
+            }
+        }
     }
 
     void OnTriggerEnter(Collider col)
@@ -149,9 +168,9 @@ public class StorageCatapult : NetworkBehaviour
         Debug.Log("Inside LaunchSpaghetti Catapult");
         for (int i = 0; i < loadedObjects.Count; ++i)
         {
-            GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoints[i].position, SpaghettiSpawnPoints[i].rotation);
-            newSpawn.GetComponent<Rigidbody>().AddForce(SpaghettiSpawnPoints[i].transform.forward * SpaghettiForce, ForceMode.Impulse);
-            Destroy(newSpawn, SpaghettiDuration);
+            //GameObject newSpawn = (GameObject)Instantiate(Spaghetti, SpaghettiSpawnPoints[i].position, SpaghettiSpawnPoints[i].rotation);
+            //newSpawn.GetComponent<Rigidbody>().AddForce(SpaghettiSpawnPoints[i].transform.forward * SpaghettiForce, ForceMode.Impulse);
+           // Destroy(newSpawn, SpaghettiDuration);
         }
 
 
@@ -161,17 +180,7 @@ public class StorageCatapult : NetworkBehaviour
 
         //play sound
         FMODUnity.RuntimeManager.PlayOneShot(launchSpaghettiSound, transform.position);
-    }
-
-    [Command]
-    public void CmdPlayAnimation()
-    {
-        RpcPlayAnimation();
-    }
-
-    [ClientRpc]
-    public void RpcPlayAnimation()
-    {
-        animator.SetTrigger(animatorTrigger);
+        anim.SetTrigger("Shoot");
+        fire = true;
     }
 }

@@ -10,9 +10,12 @@ public class Shredder : NetworkBehaviour
     public static List<Debris> debrisList = new List<Debris>();
 
     public ParticleSystemScript shreddedParticles;
-    
-	// Use this for initialization
-	void Start ()
+
+    [FMODUnity.EventRef]
+    public string shredderSound = "event:/Done/Shredder";
+
+    // Use this for initialization
+    void Start ()
     {
         if (tier > Shredder.highestTierShredder)
         {
@@ -50,6 +53,8 @@ public class Shredder : NetworkBehaviour
             shreddedParticles.CmdPlayParticles();
             shreddedParticles.StopLooping();
             //Destroy(col.gameObject);
+
+            FMODUnity.RuntimeManager.PlayOneShot(shredderSound, transform.position);
 
             col.gameObject.SetActive(false);
         }

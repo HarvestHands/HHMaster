@@ -102,7 +102,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			if (!allowInput)
 				return;
 
-            RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -122,6 +121,11 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+        }
+
+        private void LateUpdate()
+        {
+            RotateView();
         }
 
         public void Respawn(Vector3 newPos)

@@ -6,6 +6,8 @@ public class Scythe : MonoBehaviour
 {
     [FMODUnity.EventRef]
     public string harvestSound = "event:/Priority/Harvesting";
+    [FMODUnity.EventRef]
+    public string harvestDeadSound = "event:/Priority/HarvestDead";
 
     void Start()
     {
@@ -20,12 +22,17 @@ public class Scythe : MonoBehaviour
             {
                 if (plant.ReadyToHarvest)
                 {
+                    if (plant.isAlive)
+                        FMODUnity.RuntimeManager.PlayOneShot(harvestSound, col.transform.position);
+                    else
+                        FMODUnity.RuntimeManager.PlayOneShot(harvestDeadSound, col.transform.position);
+
                     plant.CmdHarvest();
                     GameObject leaffall = (GameObject)Instantiate(plant.leafFallParticles, plant.transform.position, plant.transform.rotation);
                     Destroy(leaffall, plant.particlePlayDuration);
-                    //Play Sound
-                    FMODUnity.RuntimeManager.PlayOneShot(harvestSound, col.transform.position);
                     //Debug.Log("Calling cmdharvest");
+
+                
                 }
             }
         }         

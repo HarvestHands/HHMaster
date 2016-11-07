@@ -55,8 +55,19 @@ public class StaffNo3 : NetworkBehaviour
     public Text SeedNumber;
     public Text SeedType;
 
-    public float lerpStrength = 0.5f;
+    public float stillLerpStrength = 0.3f;
+    public float movingLerpStrength = 1f;
 
+
+    private Vector3 targetPosition;
+    private Vector3 followPosition;
+    private Vector3 pastTargetPosition;
+    private Vector3 pastFollowPosition;
+    public float superSmoothLerpStrength = 20f;
+
+    private Rigidbody heldRigidBody;
+
+    Vector3 idealPos;
 
     float walkTimer;
     // Use this for initialization
@@ -130,73 +141,110 @@ public class StaffNo3 : NetworkBehaviour
             return;
         }
 
-        if (objectheld == false)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+		if (objectheld == false) 
+		{
+			if (Input.GetMouseButtonDown (0)) 
+			{
+				Ray ray = Camera.main.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0.0f));
 
-                if (Physics.Raycast(ray, out Hit, GrabDistance))
-                {
-                    ChosenObj = Hit.collider.gameObject;
+				if (Physics.Raycast (ray, out Hit, GrabDistance)) 
+				{
+					ChosenObj = Hit.collider.gameObject;
 
-                    if ((Hit.collider.gameObject.GetComponent<Pickupable>() != null))
-                    {
-                        //check that another player isn't holding the object
-                        if (!ChosenObj.GetComponent<Pickupable>().BeingHeld)
-                        {
-                            //ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
-                            //CmdAssignAuthority();
-                            objectheld = true;
+					if ((Hit.collider.gameObject.GetComponent<Pickupable> () != null)) 
+					{
+						//check that another player isn't holding the object
+						if (!ChosenObj.GetComponent<Pickupable> ().BeingHeld) 
+						{
+                            heldRigidBody = ChosenObj.GetComponent<Rigidbody>();
+							//ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+							//CmdAssignAuthority();
+							objectheld = true;
+                            anim.SetBool("Drop", false);
+                            anim.SetTrigger ("Pickup");
+							// StaffEmitter.SetActive(true);
+							StaffEmitter.GetComponent<ParticleSystem> ().Play ();
 
-                            anim.SetTrigger("Pickup");
-                            // StaffEmitter.SetActive(true);
-                            StaffEmitter.GetComponent<ParticleSystem>().Play();
+							ChosenObj.GetComponent<Pickupable> ().BeingHeld = true;
+							//Debug.Log(ChosenObj.GetComponent<Pickupable>().beingHeld);
+							ChosenObj.GetComponent<Rigidbody> ().useGravity = false;
+							carriedItemID = ChosenObj.GetComponent<NetworkIdentity> ().netId;
 
-                            ChosenObj.GetComponent<Pickupable>().BeingHeld = true;
-                            //Debug.Log(ChosenObj.GetComponent<Pickupable>().beingHeld);
-                            ChosenObj.GetComponent<Rigidbody>().useGravity = false;
-                            carriedItemID = ChosenObj.GetComponent<NetworkIdentity>().netId;
+							//ChosenObj.GetComponent<Rigidbody>().isKinematic = true;
 
-                            //ChosenObj.GetComponent<Rigidbody>().isKinematic = true;
+							CmdPickedUp (carriedItemID);
 
-                            CmdPickedUp(carriedItemID);
+							//Play Sound
+							FMODUnity.RuntimeManager.PlayOneShot (pickUpSound, ChosenObj.transform.position);
+							Physics.IgnoreCollision (GameObject.FindGameObjectWithTag ("Player").GetComponent<Collider> (), ChosenObj.GetComponent<Collider>());
 
-                            //Play Sound
-                            FMODUnity.RuntimeManager.PlayOneShot(pickUpSound, ChosenObj.transform.position);
-
+						} 
+						else 
+						{
+							ChosenObj = null;
+                            heldRigidBody = null;
                         }
-                        else
-                        {
-                            ChosenObj = null;
-                        }
+
+					} 
+					else if (Hit.transform.GetComponent<Interactable> () != null) 
+					{
+						Hit.transform.GetComponent<Interactable> ().onInteract (GetComponent<NetworkIdentity> ().netId);
+						ChosenObj = null;
+                        heldRigidBody = null;
 
                     }
-                    else if (Hit.transform.GetComponent<Interactable>() != null)
+                    else
                     {
-                        Hit.transform.GetComponent<Interactable>().onInteract(GetComponent<NetworkIdentity>().netId);
                         ChosenObj = null;
+                        heldRigidBody = null;
                     }
-                    //ChosenObj = null;
-                }
-            }
-        }        
+					//ChosenObj = null;
+				}
+			}
+		}        
         //plants get destroyed sometimes while being held
-        else if (ChosenObj == null)
-        {
-            objectheld = false;
+        else if (ChosenObj == null) 
+		{
+			objectheld = false;
+            heldRigidBody = null;
             SeedNumber.text = "";
-            SeedType.text = "";
-            anim.SetTrigger("Drop");
-        }
+			SeedType.text = "";
+            //anim.SetBool ("Drop") = true;
+            Drop();
+            //anim.ResetTrigger("Drop");
+		} 
+		else if (!ChosenObj.gameObject.activeInHierarchy) 
+		{
+			objectheld = false;
+            heldRigidBody = null;
+            SeedNumber.text = "";
+			SeedType.text = "";
+			//anim.SetTrigger ("Drop");
+            Drop();
+            //anim.ResetTrigger("Drop");
+            ChosenObj = null;
+		}
         else
         {                            
             //ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, StaffGrabber.transform.position, 0.5f);
 
-            float posRatio = throwforce / (throwForceMax - throwForceMin);
+            /*float posRatio = throwforce / (throwForceMax - throwForceMin);
             Vector3 idealPos = Vector3.Lerp(StaffGrabber.transform.position, pullBackPosition.transform.position, posRatio);
 
-            ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, idealPos, lerpStrength);
+            Debug.Log(Input.GetAxis("Vertical"));
+            if (Input.GetAxis("Horizontal") > 0.1f || Input.GetAxis("Horizontal") < -0.1f ||
+                Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f)
+            {
+                ChosenObj.GetComponent<Rigidbody>().MovePosition(idealPos);
+                
+            }
+            else
+            {
+                ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, idealPos, stillLerpStrength);
+            }*/
+
+
+
             //ChosenObj.transform.position = Vector3.MoveTowards(ChosenObj.transform.position, idealPos, lerpStrength * Time.deltaTime);
             //ChosenObj.GetComponent<Rigidbody>().MovePosition(idealPos);
 
@@ -208,7 +256,7 @@ public class StaffNo3 : NetworkBehaviour
             timeLeft -= Time.deltaTime;
 
             Quaternion grabbedRotation = StaffGrabber.transform.rotation;
-            ChosenObj.GetComponent<Rigidbody>().MoveRotation(grabbedRotation * Quaternion.Euler(objectXRotation, objectYRotation, 0));
+            //ChosenObj.GetComponent<Rigidbody>().MoveRotation(grabbedRotation * Quaternion.Euler(objectXRotation, objectYRotation, 0));
              
 
             if (Input.GetMouseButtonDown(1))
@@ -224,11 +272,7 @@ public class StaffNo3 : NetworkBehaviour
                 StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
                 StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
             }
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                Drop();
-            }
+                        
             if (Input.GetMouseButton(1))
             {
                 throwforce += ((throwForceMax - throwForceMin) / throwMaxChargeTime) * Time.deltaTime;
@@ -237,7 +281,8 @@ public class StaffNo3 : NetworkBehaviour
             //if object held , drops the object
             if (Input.GetMouseButtonDown(0))
             {
-                anim.SetTrigger("Drop");
+                Drop();
+                anim.SetBool("Drop", true);
                 CmdDropped();
                 CmdNullChosen();
                 throwforce = throwForceMin;
@@ -247,14 +292,14 @@ public class StaffNo3 : NetworkBehaviour
             //if object held , throws the object
             if (Input.GetMouseButtonUp(1))
             {
-
+				Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
                 CmdThrowed(throwforce);
                 CmdNullChosen();
                 throwforce = throwForceMin;
                 //Play Sound
                 FMODUnity.RuntimeManager.PlayOneShot(dropSound, ChosenObj.transform.position);
             }
-            Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
+            //Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>());
 
 
             //Catapult crates get set to inactive        
@@ -267,13 +312,38 @@ public class StaffNo3 : NetworkBehaviour
 
     }
 
+    Vector3 dampingVelocity;
+    void FixedUpdate()
+    {
+        if (ChosenObj != null)
+        {
+            if (heldRigidBody != null)
+            {
+                heldRigidBody.MovePosition(Vector3.SmoothDamp(heldRigidBody.position, idealPos, ref dampingVelocity, 0.05f, stillLerpStrength, Time.fixedDeltaTime));//Vector3.Lerp(heldRigidBody.position, idealPos, stillLerpStrength * Time.fixedDeltaTime));
+                heldRigidBody.MoveRotation(Quaternion.Lerp(heldRigidBody.rotation, StaffGrabber.transform.rotation, stillLerpStrength * Time.fixedDeltaTime));
+            }
+            else
+                Debug.Log("Trying to move chosen object but heldRigidBody == null");
+        }
+    }
+
+    void LateUpdate()
+    {
+        float posRatio = throwforce / (throwForceMax - throwForceMin);
+        idealPos = Vector3.Lerp(StaffGrabber.transform.position, pullBackPosition.transform.position, posRatio);
+    }
+
     public void Drop()
     {
-        anim.SetTrigger("Drop");
+        anim.SetBool("Drop", true);
         StaffEmitter.GetComponent<ParticleSystem>().Stop();
         StaffEmitter.GetComponent<ParticleSystem>().emissionRate = Random.Range(10, 20);
         StaffEmitter.GetComponent<ParticleSystem>().startSize = Random.Range(0.1f, 0.25f);
-        throwforce = 0;
+		throwforce = 0;
+		if (ChosenObj != null)
+			Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
+		
+       
     }
 
     [Command]
@@ -343,17 +413,22 @@ public class StaffNo3 : NetworkBehaviour
     [Command]
     public void CmdDropped()
     {
-        ChosenObj.GetComponent<Rigidbody>().useGravity = true;
+		Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
+        if (ChosenObj.GetComponent<Rigidbody>() != null)
+            ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         carriedItemID = NetworkInstanceId.Invalid;
-        ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
+        if (ChosenObj.GetComponent<Pickupable>() != null)
+                ChosenObj.GetComponent<Pickupable>().BeingHeld = false;
         //ChosenObj.GetComponent<Rigidbody>().isKinematic = false;
         objectheld = false;
-        ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
+        if (ChosenObj.GetComponent<NetworkIdentity>() != null)
+            ChosenObj.GetComponent<NetworkIdentity>().localPlayerAuthority = false;
     }
 
     [Command]
     void CmdThrowed(float _throwForce)
     {
+		Physics.IgnoreCollision(GameObject.FindGameObjectWithTag("Player").GetComponent<Collider>(), ChosenObj.GetComponent<Collider>(), false);
         ChosenObj.GetComponent<Rigidbody>().useGravity = true;
         ChosenObj.GetComponent<Rigidbody>().AddForce(StaffGrabber.transform.forward * _throwForce);
         carriedItemID = NetworkInstanceId.Invalid;
@@ -370,6 +445,11 @@ public class StaffNo3 : NetworkBehaviour
     }
 
 
+    Vector3 SuperSmoothLerp ( Vector3 pastPosition, Vector3 pastTargetPosition, Vector3 targetPosition, float time, float speed)
+    {
+        Vector3 f = pastPosition - pastTargetPosition + (targetPosition - pastTargetPosition) / (speed * time);
+        return targetPosition - (targetPosition - pastTargetPosition) / (speed * time) + f * Mathf.Exp(-speed * time);
+    }
 
 }
 

@@ -14,7 +14,7 @@ public class PlayerRaycast : NetworkBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        inventory = GetComponent<PlayerInventory>();	
+        inventory = GetComponent<PlayerInventory>();
 	}
 	
 	// Update is called once per frame

@@ -33,7 +33,14 @@ public class DeathFade : NetworkBehaviour
     public Text nightTimeWarningText;
     public float nightWarningDisplayLength = 5f;
 
-    public RawImage deathPenaltyImage;
+    public Image deathPenaltyImage;
+    [FMODUnity.EventRef]
+    public string deathSound = "event:/Done/Death Sound";
+
+    [FMODUnity.EventRef]
+    public string nightWarningSound = "event:/Done/Wolf Howl";
+    [FMODUnity.EventRef]
+    public string morningSound = "event:/Done/Rooster Howl";
 
     // Use this for initialization
     void Start()
@@ -72,7 +79,7 @@ public class DeathFade : NetworkBehaviour
         deadText = GameObject.Find("DeathText").GetComponent<Text>();
 		drownText = GameObject.Find("DrownText").GetComponent<Text>();
 		nightTimeWarningText = GameObject.Find("NightTimeWarningText").GetComponent<Text>();
-        deathPenaltyImage = GameObject.Find("DeathPenaltyRawImage").GetComponent<RawImage>();
+        deathPenaltyImage = GameObject.Find("DeathPenaltyImage").GetComponent<Image>();
         DNCont = GameObject.FindObjectOfType<DayNightController>();
     }
 
@@ -89,10 +96,12 @@ public class DeathFade : NetworkBehaviour
             }
         }
         if (nightTimeWarning == true)
-        {
+        {            
             if (DNCont.currentTimeOfDay < nightTimeWarningTime)
             {
                 nightTimeWarning = false;
+                FMODUnity.RuntimeManager.PlayOneShot(morningSound, transform.position);
+                
                 Invoke("HideNightWarning", 0.01f);
             }            
         }
@@ -102,6 +111,7 @@ public class DeathFade : NetworkBehaviour
         {
             Debug.Log("Triggering fade in ");
             fadingIn = true;
+
             //              fade to 1, alpha == 1 at endDayAt
             if (DNCont.currentTimeOfDay < DNCont.endDayAt)
             {
@@ -116,6 +126,7 @@ public class DeathFade : NetworkBehaviour
             nightTimeWarning = true;
             if (DNCont.currentTimeOfDay < DNCont.endDayAt)
             {
+                FMODUnity.RuntimeManager.PlayOneShot(nightWarningSound, transform.position);
                 nightTimeWarningText.CrossFadeAlpha(1, deadTextFadeTime, false);
                 Invoke("HideNightWarning", nightWarningDisplayLength);
             }
@@ -290,5 +301,17 @@ public class DeathFade : NetworkBehaviour
         deathPenaltyImage.enabled = show;
     }
 
+    public void PlayDeathSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(deathSound, transform.position);
+    }
 
+    [ClientRpc]
+    public void RpcPlayDeathSound()
+    {
+        if (!isLocalPlayer)
+            return;
+
+        FMODUnity.RuntimeManager.PlayOneShot(deathSound, transform.position);
+    }
 }

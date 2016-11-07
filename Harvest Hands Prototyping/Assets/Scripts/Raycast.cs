@@ -5,6 +5,7 @@ public class Raycast : MonoBehaviour
 {
 
     private GameObject last;
+	public float rayCastDistance = 3f;
 
 
     // Use this for initialization
@@ -18,7 +19,10 @@ public class Raycast : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, transform.forward, out hit))
+		Ray ray = Camera.main.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0.0f));
+
+		if (Physics.Raycast (ray, out hit, rayCastDistance)) 
+        //if (Physics.Raycast(transform.position, transform.forward, out hit))
         {
 			if (hit.transform.GetComponent<pickupable2>() != null)
     		{

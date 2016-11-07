@@ -17,7 +17,7 @@ public class SameSpawne : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-	    if (Input.GetKeyDown(spawnKey))
+	    //if (Input.GetKeyDown(spawnKey))
         {
             if (thingPrefab != null && spawnLocation != null)
             {

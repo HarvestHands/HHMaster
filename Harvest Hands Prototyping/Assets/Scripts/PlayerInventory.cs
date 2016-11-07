@@ -199,16 +199,20 @@ public class PlayerInventory : NetworkBehaviour {
             //    priceText.text = "-";
             //else
             //    priceText.text = "+";
-            priceText.text = "$" + price; 
+            //priceText.text += "$" + price;
+            priceText.text = "$" + price;
 
             Destroy(priceText.gameObject, costTextLifeTime);
         }
     }
+
+    
 
     [ClientRpc]
     public void RpcApplyDeathPenalty()
     {
         money -= Mathf.CeilToInt(money * deathPenalty);
     }
+       
 
 }
