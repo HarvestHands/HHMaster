@@ -10,6 +10,56 @@ public class menu : MonoBehaviour {
     Resolution[] resolutions;
     public Dropdown resolutionDrop;
     public Dropdown qualityDrop;
+    public Text qualityLevel;
+    private int currentQuality;
+
+public void Update()
+    {
+
+        currentQuality = QualitySettings.GetQualityLevel();
+
+        if(currentQuality == 0)
+        {
+
+            qualityLevel.text = "Lowest";
+
+        }
+
+        if(currentQuality == 1)
+        {
+
+            qualityLevel.text = "Low";
+
+        }
+
+        if(currentQuality == 2)
+        {
+
+            qualityLevel.text = "Medium";
+
+        }
+
+        if(currentQuality == 3)
+        {
+
+            qualityLevel.text = "Good";
+
+        }
+
+        if(currentQuality == 4)
+        {
+
+            qualityLevel.text = "Great";
+
+        }
+
+        if(currentQuality == 5)
+        {
+
+            qualityLevel.text = "Awesome";
+
+        }
+    }
 
 public void singlePlayer()
     {
@@ -50,21 +100,6 @@ public void team()
 
         //Our facebook page/website
         Application.OpenURL("www.facebook.com/harvesthandsgame");
-
-    }
-
-void Start()
-    {
-
-        resolutions = Screen.resolutions;
-
-        //resolutionDrop.options.Clear();
-
-        //for(int i = 0; i < resolutions.Length; i++)
-        //{
-        //    resolutionDrop.options[i].text = (resolutions[i]).ToString();
-        //    resolutionDrop.value = i;
-        //}
 
     }
 
