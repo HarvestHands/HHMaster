@@ -88,21 +88,6 @@ public class StaffNo3 : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        walkTimer -= Time.deltaTime;
-
-        if (walkTimer < 0)
-            anim.SetBool("Walking", false);
-
-
-        if (Input.GetAxis("Horizontal") > 0.1f || Input.GetAxis("Horizontal") < -0.1f ||
-            Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f)
-        {
-            anim.SetBool("Walking", true);
-            walkTimer = 0.075f;
-        }
-
-
-
         if (!isLocalPlayer)
         {
             if (!objectheld)
@@ -139,6 +124,19 @@ public class StaffNo3 : NetworkBehaviour
                 }
             }
             return;
+        }
+
+        walkTimer -= Time.deltaTime;
+
+        if (walkTimer < 0)
+            anim.SetBool("Walking", false);
+
+
+        if (Input.GetAxis("Horizontal") > 0.1f || Input.GetAxis("Horizontal") < -0.1f ||
+            Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f)
+        {
+            anim.SetBool("Walking", true);
+            walkTimer = 0.075f;
         }
 
 		if (objectheld == false) 
