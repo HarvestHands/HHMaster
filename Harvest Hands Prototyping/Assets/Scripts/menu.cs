@@ -12,6 +12,7 @@ public class menu : MonoBehaviour {
     public Dropdown qualityDrop;
     public Text qualityLevel;
     private int currentQuality;
+    public GameObject creditsCanvas;
 
 public void Update()
     {
@@ -84,6 +85,22 @@ public void menuButton()
 
         menuCanvas.GetComponent<Canvas>().enabled = true;
         settingsCanvas.GetComponent<Canvas>().enabled = false;
+
+    }
+
+public void credits()
+    {
+
+        creditsCanvas.GetComponent<Canvas>().enabled = true;
+        menuCanvas.GetComponent<Canvas>().enabled = false;
+
+    }
+
+public void creditsMenu()
+    {
+
+        menuCanvas.GetComponent<Canvas>().enabled = true;
+        creditsCanvas.GetComponent<Canvas>().enabled = false;
 
     }
 
