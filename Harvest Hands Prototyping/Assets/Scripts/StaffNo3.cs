@@ -55,8 +55,19 @@ public class StaffNo3 : NetworkBehaviour
     public Text SeedNumber;
     public Text SeedType;
 
-    public float lerpStrength = 0.5f;
+    public float stillLerpStrength = 0.3f;
+    public float movingLerpStrength = 1f;
 
+
+    private Vector3 targetPosition;
+    private Vector3 followPosition;
+    private Vector3 pastTargetPosition;
+    private Vector3 pastFollowPosition;
+    public float superSmoothLerpStrength = 20f;
+
+    private Rigidbody heldRigidBody;
+
+    Vector3 idealPos;
 
     float walkTimer;
     // Use this for initialization
@@ -145,6 +156,7 @@ public class StaffNo3 : NetworkBehaviour
 						//check that another player isn't holding the object
 						if (!ChosenObj.GetComponent<Pickupable> ().BeingHeld) 
 						{
+                            heldRigidBody = ChosenObj.GetComponent<Rigidbody>();
 							//ChosenObj.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
 							//CmdAssignAuthority();
 							objectheld = true;
@@ -170,14 +182,22 @@ public class StaffNo3 : NetworkBehaviour
 						else 
 						{
 							ChosenObj = null;
-						}
+                            heldRigidBody = null;
+                        }
 
 					} 
 					else if (Hit.transform.GetComponent<Interactable> () != null) 
 					{
 						Hit.transform.GetComponent<Interactable> ().onInteract (GetComponent<NetworkIdentity> ().netId);
 						ChosenObj = null;
-					}
+                        heldRigidBody = null;
+
+                    }
+                    else
+                    {
+                        ChosenObj = null;
+                        heldRigidBody = null;
+                    }
 					//ChosenObj = null;
 				}
 			}
@@ -186,7 +206,8 @@ public class StaffNo3 : NetworkBehaviour
         else if (ChosenObj == null) 
 		{
 			objectheld = false;
-			SeedNumber.text = "";
+            heldRigidBody = null;
+            SeedNumber.text = "";
 			SeedType.text = "";
             //anim.SetBool ("Drop") = true;
             Drop();
@@ -195,7 +216,8 @@ public class StaffNo3 : NetworkBehaviour
 		else if (!ChosenObj.gameObject.activeInHierarchy) 
 		{
 			objectheld = false;
-			SeedNumber.text = "";
+            heldRigidBody = null;
+            SeedNumber.text = "";
 			SeedType.text = "";
 			//anim.SetTrigger ("Drop");
             Drop();
@@ -206,10 +228,23 @@ public class StaffNo3 : NetworkBehaviour
         {                            
             //ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, StaffGrabber.transform.position, 0.5f);
 
-            float posRatio = throwforce / (throwForceMax - throwForceMin);
+            /*float posRatio = throwforce / (throwForceMax - throwForceMin);
             Vector3 idealPos = Vector3.Lerp(StaffGrabber.transform.position, pullBackPosition.transform.position, posRatio);
 
-            ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, idealPos, lerpStrength);
+            Debug.Log(Input.GetAxis("Vertical"));
+            if (Input.GetAxis("Horizontal") > 0.1f || Input.GetAxis("Horizontal") < -0.1f ||
+                Input.GetAxis("Vertical") > 0.1f || Input.GetAxis("Vertical") < -0.1f)
+            {
+                ChosenObj.GetComponent<Rigidbody>().MovePosition(idealPos);
+                
+            }
+            else
+            {
+                ChosenObj.transform.position = Vector3.Lerp(ChosenObj.transform.position, idealPos, stillLerpStrength);
+            }*/
+
+
+
             //ChosenObj.transform.position = Vector3.MoveTowards(ChosenObj.transform.position, idealPos, lerpStrength * Time.deltaTime);
             //ChosenObj.GetComponent<Rigidbody>().MovePosition(idealPos);
 
@@ -221,7 +256,7 @@ public class StaffNo3 : NetworkBehaviour
             timeLeft -= Time.deltaTime;
 
             Quaternion grabbedRotation = StaffGrabber.transform.rotation;
-            ChosenObj.GetComponent<Rigidbody>().MoveRotation(grabbedRotation * Quaternion.Euler(objectXRotation, objectYRotation, 0));
+            //ChosenObj.GetComponent<Rigidbody>().MoveRotation(grabbedRotation * Quaternion.Euler(objectXRotation, objectYRotation, 0));
              
 
             if (Input.GetMouseButtonDown(1))
@@ -275,6 +310,27 @@ public class StaffNo3 : NetworkBehaviour
             //}
         }
 
+    }
+
+    Vector3 dampingVelocity;
+    void FixedUpdate()
+    {
+        if (ChosenObj != null)
+        {
+            if (heldRigidBody != null)
+            {
+                heldRigidBody.MovePosition(Vector3.SmoothDamp(heldRigidBody.position, idealPos, ref dampingVelocity, 0.05f, stillLerpStrength, Time.fixedDeltaTime));//Vector3.Lerp(heldRigidBody.position, idealPos, stillLerpStrength * Time.fixedDeltaTime));
+                heldRigidBody.MoveRotation(Quaternion.Lerp(heldRigidBody.rotation, StaffGrabber.transform.rotation, stillLerpStrength * Time.fixedDeltaTime));
+            }
+            else
+                Debug.Log("Trying to move chosen object but heldRigidBody == null");
+        }
+    }
+
+    void LateUpdate()
+    {
+        float posRatio = throwforce / (throwForceMax - throwForceMin);
+        idealPos = Vector3.Lerp(StaffGrabber.transform.position, pullBackPosition.transform.position, posRatio);
     }
 
     public void Drop()
@@ -389,6 +445,11 @@ public class StaffNo3 : NetworkBehaviour
     }
 
 
+    Vector3 SuperSmoothLerp ( Vector3 pastPosition, Vector3 pastTargetPosition, Vector3 targetPosition, float time, float speed)
+    {
+        Vector3 f = pastPosition - pastTargetPosition + (targetPosition - pastTargetPosition) / (speed * time);
+        return targetPosition - (targetPosition - pastTargetPosition) / (speed * time) + f * Mathf.Exp(-speed * time);
+    }
 
 }
 

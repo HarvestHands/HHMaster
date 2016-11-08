@@ -295,6 +295,7 @@ public class DayNightController : NetworkBehaviour
         GameObject player = ClientScene.FindLocalObject(id);
         player.GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().Respawn(newPos);
         //transform.position = newPos;
+        player.GetComponent<DeathFade>().RpcPlayDeathSound();
     }
 
     void RespawnDeadPlayers()

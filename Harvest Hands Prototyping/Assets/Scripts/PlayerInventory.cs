@@ -213,5 +213,6 @@ public class PlayerInventory : NetworkBehaviour {
     {
         money -= Mathf.CeilToInt(money * deathPenalty);
     }
+       
 
 }
