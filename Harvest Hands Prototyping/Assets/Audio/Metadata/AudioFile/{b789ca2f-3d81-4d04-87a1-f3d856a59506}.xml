@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{b789ca2f-3d81-4d04-87a1-f3d856a59506}">
+        <property name="assetPath">
+            <value>removing dead plant.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.1816780045351474</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{336d1a56-541b-496c-86dd-50450524a222}</destination>
+        </relationship>
+    </object>
+</objects>

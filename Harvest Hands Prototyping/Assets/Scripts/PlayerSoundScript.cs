@@ -44,6 +44,7 @@ public class PlayerSoundScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        playerState.setParameterValue("health", 1);
+        //wtf was this for?
+        //playerState.setParameterValue("health", 1);
 	}
 }

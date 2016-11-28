@@ -32,7 +32,7 @@
             <destination>{f28c3c77-3be1-4dcd-a3b7-9a0194c20f75}</destination>
         </relationship>
         <relationship name="folder">
-            <destination>{7905c802-73a5-4b55-a932-97266489a60f}</destination>
+            <destination>{ab77803e-5755-4009-a8a7-f5de31c8c20a}</destination>
         </relationship>
     </object>
     <object class="EventMixer" id="{149a18b0-e884-4e5c-a202-9121d157277f}">
@@ -53,7 +53,7 @@
             <destination>{5d6f81c3-ca0f-4dea-9b53-a6f0410bc185}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{95391962-d012-4920-a7a5-e6bb67034b49}</destination>
+            <destination>{b72d6f6d-1dac-4f18-9a52-9ba224695db7}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{71c50ec1-641a-4c79-b863-c404e8ea7262}"/>
@@ -93,7 +93,10 @@
             <value>0</value>
         </property>
         <property name="length">
-            <value>1.0042630385487528</value>
+            <value>0.75</value>
+        </property>
+        <property name="pitch">
+            <value>8</value>
         </property>
         <relationship name="fadeInCurve">
             <destination>{10b94465-3612-4421-83f5-2b693259b54c}</destination>
@@ -184,7 +187,7 @@
     </object>
     <object class="AutomationPoint" id="{ff77bb94-c633-4a1a-92f8-0006f15c046f}">
         <property name="position">
-            <value>0.97999999999999998</value>
+            <value>0.4457369614512473</value>
         </property>
         <property name="value">
             <value>1</value>
@@ -195,7 +198,7 @@
     </object>
     <object class="AutomationPoint" id="{bdf2838c-5215-4a34-80d1-a13d4fb0a145}">
         <property name="position">
-            <value>1.0042630385487528</value>
+            <value>0.75</value>
         </property>
         <property name="value">
             <value>0</value>

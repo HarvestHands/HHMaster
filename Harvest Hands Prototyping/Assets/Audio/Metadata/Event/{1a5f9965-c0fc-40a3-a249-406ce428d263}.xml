@@ -35,7 +35,7 @@
             <destination>{f28c3c77-3be1-4dcd-a3b7-9a0194c20f75}</destination>
         </relationship>
         <relationship name="folder">
-            <destination>{7905c802-73a5-4b55-a932-97266489a60f}</destination>
+            <destination>{ab77803e-5755-4009-a8a7-f5de31c8c20a}</destination>
         </relationship>
     </object>
     <object class="EventMixer" id="{649e63aa-624f-4644-a28f-e942d25d959d}">
@@ -56,7 +56,7 @@
             <destination>{35d51d2b-7ea2-492c-ba17-4346473bd062}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{95391962-d012-4920-a7a5-e6bb67034b49}</destination>
+            <destination>{b72d6f6d-1dac-4f18-9a52-9ba224695db7}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{57ba747a-008e-46cf-a0be-a4612e6dfd52}"/>
@@ -102,6 +102,9 @@
         </property>
         <property name="length">
             <value>2.25</value>
+        </property>
+        <property name="pitch">
+            <value>4</value>
         </property>
         <relationship name="fadeInCurve">
             <destination>{010b56cc-2172-4c77-b97e-598c0ff68241}</destination>

@@ -5,7 +5,7 @@
             <value>Rooster Call</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{d23c59c5-c116-4363-a86d-ace8798f5baa}</destination>
@@ -32,7 +32,7 @@
             <destination>{53bdd872-28a3-427d-8e18-8e20d1115aa9}</destination>
         </relationship>
         <relationship name="folder">
-            <destination>{444f6f77-7602-455d-8f41-bbeabfb624d0}</destination>
+            <destination>{9f84a8ea-5f0a-43d5-8c25-8a2a09bdba75}</destination>
         </relationship>
     </object>
     <object class="EventMixer" id="{d23c59c5-c116-4363-a86d-ace8798f5baa}">
@@ -53,17 +53,24 @@
             <destination>{04965994-fbf8-4c9c-82a2-b3fa3883e87c}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{95391962-d012-4920-a7a5-e6bb67034b49}</destination>
+            <destination>{c00b5088-a1b6-4dfa-b8de-b30322d73623}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{4cb78600-f2ad-4f8f-b3eb-68dcc4f35496}"/>
     <object class="MarkerTrack" id="{147b9a39-3ed2-42e9-a7b3-c64e0a53a7ab}"/>
     <object class="GroupTrack" id="{2128a8b2-2279-4d44-965b-bafc53fe15cd}">
+        <relationship name="modules">
+            <destination>{aef66681-fb4a-40d0-a913-55b7ddfa220d}</destination>
+        </relationship>
         <relationship name="mixerGroup">
             <destination>{54f3e220-fb3f-4dda-8729-96854f4aee9c}</destination>
         </relationship>
     </object>
-    <object class="Timeline" id="{7d14e1b0-cb75-4bf5-aac3-69425d036076}"/>
+    <object class="Timeline" id="{7d14e1b0-cb75-4bf5-aac3-69425d036076}">
+        <relationship name="modules">
+            <destination>{aef66681-fb4a-40d0-a913-55b7ddfa220d}</destination>
+        </relationship>
+    </object>
     <object class="EventMixerMaster" id="{78460199-7ef8-4f05-84c9-f5a680596000}">
         <relationship name="effectChain">
             <destination>{dca818ea-4b63-4d21-8d99-b98881b6b7c9}</destination>
@@ -81,7 +88,21 @@
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{04965994-fbf8-4c9c-82a2-b3fa3883e87c}"/>
+    <object class="SingleSound" id="{aef66681-fb4a-40d0-a913-55b7ddfa220d}">
+        <property name="start">
+            <value>0</value>
+        </property>
+        <property name="length">
+            <value>2.1250113378684805</value>
+        </property>
+        <relationship name="audioFile">
+            <destination>{c5a3db92-07ed-49fb-8a6e-c4d5520d5aa6}</destination>
+        </relationship>
+    </object>
     <object class="EventMixerGroup" id="{54f3e220-fb3f-4dda-8729-96854f4aee9c}">
+        <property name="volume">
+            <value>-8</value>
+        </property>
         <property name="name">
             <value>Audio 1</value>
         </property>
@@ -98,7 +119,6 @@
     <object class="MixerBusEffectChain" id="{dca818ea-4b63-4d21-8d99-b98881b6b7c9}">
         <relationship name="effects">
             <destination>{3654d9db-13f1-4821-bc6c-1ec07b946f24}</destination>
-            <destination>{c9a674ba-6d3a-456a-be6c-9f3396cc6f2e}</destination>
             <destination>{b571f666-1222-4612-a7bb-12bc510d0151}</destination>
         </relationship>
     </object>
@@ -111,10 +131,12 @@
     </object>
     <object class="MixerBusPanner" id="{ec446ecf-1eed-42c2-9221-22094e729137}"/>
     <object class="MixerBusFader" id="{3654d9db-13f1-4821-bc6c-1ec07b946f24}"/>
-    <object class="SpatialiserEffect" id="{c9a674ba-6d3a-456a-be6c-9f3396cc6f2e}"/>
     <object class="MixerSend" id="{b571f666-1222-4612-a7bb-12bc510d0151}">
+        <property name="level">
+            <value>-21</value>
+        </property>
         <property name="inputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixerReturn">
             <destination>{2aa29a42-0f6e-405d-96f5-24503a259acd}</destination>

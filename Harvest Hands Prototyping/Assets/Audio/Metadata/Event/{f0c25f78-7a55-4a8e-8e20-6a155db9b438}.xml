@@ -5,7 +5,7 @@
             <value>Footsteps</value>
         </property>
         <property name="outputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixer">
             <destination>{624a77d3-0d65-4a60-a015-d61a0c0856b4}</destination>
@@ -35,7 +35,7 @@
             <destination>{aeecdd17-61bd-4a70-ac69-8f2f4c456b2e}</destination>
         </relationship>
         <relationship name="folder">
-            <destination>{973ccecc-b5c8-4cd7-985d-ea69aefcac0b}</destination>
+            <destination>{488c0501-dd55-4207-aec9-eabc76e223bd}</destination>
         </relationship>
     </object>
     <object class="EventMixer" id="{624a77d3-0d65-4a60-a015-d61a0c0856b4}">
@@ -56,7 +56,7 @@
             <destination>{4922bbd8-f3e7-4f10-95b9-258d2617fbc4}</destination>
         </relationship>
         <relationship name="output">
-            <destination>{95391962-d012-4920-a7a5-e6bb67034b49}</destination>
+            <destination>{2f64d025-a130-4ac0-926c-046193012468}</destination>
         </relationship>
     </object>
     <object class="EventAutomatableProperties" id="{5d28e683-eeec-45d0-ab15-34b308660e0f}"/>
@@ -128,13 +128,10 @@
             <value>Dirt</value>
         </property>
         <property name="volume">
-            <value>-12</value>
+            <value>-4</value>
         </property>
         <property name="pitch">
             <value>-0.5</value>
-        </property>
-        <property name="looping">
-            <value>true</value>
         </property>
         <relationship name="modulators">
             <destination>{7b0925d5-a578-41a8-8f46-ff92c97fbd8e}</destination>
@@ -179,8 +176,8 @@
         <property name="name">
             <value>Town (Multi Sound)</value>
         </property>
-        <property name="looping">
-            <value>true</value>
+        <property name="volume">
+            <value>-5.5</value>
         </property>
         <relationship name="sounds">
             <destination>{d16bee17-dccf-4c92-afc7-edbfa06de02b}</destination>
@@ -207,7 +204,6 @@
     <object class="MixerBusEffectChain" id="{b6455825-b7d2-403b-b09d-cf8d8a7bb25e}">
         <relationship name="effects">
             <destination>{153cd40b-6fc1-43cf-8c73-8b057d300a4a}</destination>
-            <destination>{17666394-ea8e-418b-a5b9-22ebd6aec6ae}</destination>
             <destination>{25b4923c-36c6-4153-a31a-43e379ffa526}</destination>
         </relationship>
     </object>
@@ -230,9 +226,6 @@
         </property>
     </object>
     <object class="SingleSound" id="{8475b0cf-4640-452b-af8d-3474a22d73d0}">
-        <property name="volume">
-            <value>0.5</value>
-        </property>
         <relationship name="audioFile">
             <destination>{4bf3a4da-dc1c-48c1-b815-d2c7c7b85ee4}</destination>
         </relationship>
@@ -314,20 +307,12 @@
     </object>
     <object class="MixerBusPanner" id="{5dde49b6-45a2-412f-919f-914d34d7f61a}"/>
     <object class="MixerBusFader" id="{153cd40b-6fc1-43cf-8c73-8b057d300a4a}"/>
-    <object class="SpatialiserEffect" id="{17666394-ea8e-418b-a5b9-22ebd6aec6ae}">
-        <property name="minimumDistance">
-            <value>0</value>
-        </property>
-        <property name="maximumDistance">
-            <value>8.54999924</value>
-        </property>
-    </object>
     <object class="MixerSend" id="{25b4923c-36c6-4153-a31a-43e379ffa526}">
         <property name="level">
-            <value>-58</value>
+            <value>-32</value>
         </property>
         <property name="inputFormat">
-            <value>2</value>
+            <value>1</value>
         </property>
         <relationship name="mixerReturn">
             <destination>{2aa29a42-0f6e-405d-96f5-24503a259acd}</destination>

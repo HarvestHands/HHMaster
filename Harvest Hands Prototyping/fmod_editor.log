@@ -23,98 +23,341 @@
 [LOG] Thread::initThread                       : Initializing FMOD Studio bank load thread.  priority 0
 [LOG] Thread::initThread                       : - Stacksize 65536.  Stack pointer 0000000000000000 : usesemaphore = 0 : sleeptime = 1
 [LOG] Thread::callback                         : * FMOD Studio bank load thread started
+[LOG] Manager::readBank                        : fileversion = 79, compatVersion = 70 (oldest = 44, newest = 80)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 79, compatVersion = 70 (oldest = 44, newest = 80)
+[LOG] SystemI::createSoundInternal             : filename =  : mode 02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 5420928
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 30976
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000000052C1FB38
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 000007FECAB44C00
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 000007FECAB44BD0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 000007FECAB44CD0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 000007FECAB44D80
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000000001E83FAB8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             : Format has 1 subsounds.
+[LOG] SystemI::createSoundInternal             : Create as FMOD_CREATESAMPLE
+[LOG] SystemI::createSoundInternal             : Multi-sample sound (1 subsounds), create a sample container.
+[LOG] SystemI::createSoundInternal             : creating subsound 0/1
+[LOG] SystemI::createSample                    : mode 02000202 length 84000 samples, lengthbytes 23360
+[LOG] SystemI::createSample                    : channels = 2
+[LOG] SystemI::createSample                    : output = 000000005BF7B728
+[LOG] OutputSoftware::createSample             : lengthpcm 84000, lengthbytes 23360, channels 2, format 2, freq 48000, mode 0200020a
+[LOG] SystemI::createSoundInternal             : No name found in file, use filename.
+[LOG] SystemI::createSoundInternal             : done.  OpenState now = FMOD_OPENSTATE_READY.
+
+[LOG] SystemI::createSoundInternal             : filename =  : mode 02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 5420928
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 30976
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000000052C1FB38
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 000007FECAB44C00
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 000007FECAB44BD0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 000007FECAB44CD0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 000007FECAB44D80
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000000001E83FAB8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             : Format has 1 subsounds.
+[LOG] SystemI::createSoundInternal             : Create as FMOD_CREATESAMPLE
+[LOG] SystemI::createSoundInternal             : Multi-sample sound (1 subsounds), create a sample container.
+[LOG] SystemI::createSoundInternal             : creating subsound 0/1
+[LOG] SystemI::createSample                    : mode 02000202 length 84000 samples, lengthbytes 23680
+[LOG] SystemI::createSample                    : channels = 2
+[LOG] SystemI::createSample                    : output = 000000005BF7B728
+[LOG] OutputSoftware::createSample             : lengthpcm 84000, lengthbytes 23680, channels 2, format 2, freq 48000, mode 0200020a
+[LOG] SystemI::createSoundInternal             : No name found in file, use filename.
+[LOG] SystemI::createSoundInternal             : done.  OpenState now = FMOD_OPENSTATE_READY.
+
+[LOG] SystemI::createSoundInternal             : filename =  : mode 02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 5420928
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 30976
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000000052C1FB38
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 000007FECAB44C00
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 000007FECAB44BD0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 000007FECAB44CD0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 000007FECAB44D80
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000000001E83FAB8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             : Format has 1 subsounds.
+[LOG] SystemI::createSoundInternal             : Create as FMOD_CREATESAMPLE
+[LOG] SystemI::createSoundInternal             : Multi-sample sound (1 subsounds), create a sample container.
+[LOG] SystemI::createSoundInternal             : creating subsound 0/1
+[LOG] SystemI::createSample                    : mode 02000202 length 84000 samples, lengthbytes 23936
+[LOG] SystemI::createSample                    : channels = 2
+[LOG] SystemI::createSample                    : output = 000000005BF7B728
+[LOG] OutputSoftware::createSample             : lengthpcm 84000, lengthbytes 23936, channels 2, format 2, freq 48000, mode 0200020a
+[LOG] SystemI::createSoundInternal             : No name found in file, use filename.
+[LOG] SystemI::createSoundInternal             : done.  OpenState now = FMOD_OPENSTATE_READY.
+
+[LOG] SystemI::createSoundInternal             : filename =  : mode 02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 5420928
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 30976
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000000052C1FB38
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 000007FECAB44C00
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 000007FECAB44BD0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 000007FECAB44CD0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 000007FECAB44D80
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000000001E83FAB8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             : Format has 1 subsounds.
+[LOG] SystemI::createSoundInternal             : Create as FMOD_CREATESAMPLE
+[LOG] SystemI::createSoundInternal             : Multi-sample sound (1 subsounds), create a sample container.
+[LOG] SystemI::createSoundInternal             : creating subsound 0/1
+[LOG] SystemI::createSample                    : mode 02000202 length 84000 samples, lengthbytes 23616
+[LOG] SystemI::createSample                    : channels = 2
+[LOG] SystemI::createSample                    : output = 000000005BF7B728
+[LOG] OutputSoftware::createSample             : lengthpcm 84000, lengthbytes 23616, channels 2, format 2, freq 48000, mode 0200020a
+[LOG] SystemI::createSoundInternal             : No name found in file, use filename.
+[LOG] SystemI::createSoundInternal             : done.  OpenState now = FMOD_OPENSTATE_READY.
+
+[LOG] SoundI::release                          :  (000000006ABA8028)
+[LOG] SoundI::release                          : release subsounds. (000000006ABA8028)
+[LOG] SoundI::release                          :     Goat (000000006F56C5E8)
+[LOG] SoundI::release                          : release codec. (000000006ABA8028)
+[LOG] SoundI::release                          :  (000000006ABA8198)
+[LOG] SoundI::release                          : release subsounds. (000000006ABA8198)
+[LOG] SoundI::release                          :     Goat2 (000000006F56CA98)
+[LOG] SoundI::release                          : release codec. (000000006ABA8198)
+[LOG] SoundI::release                          :  (000000006ABA7EB8)
+[LOG] SoundI::release                          : release subsounds. (000000006ABA7EB8)
+[LOG] SoundI::release                          :     Goat3 (000000006F56C2C8)
+[LOG] SoundI::release                          : release codec. (000000006ABA7EB8)
+[LOG] SoundI::release                          :  (000000006ABA8308)
+[LOG] SoundI::release                          : release subsounds. (000000006ABA8308)
+[LOG] SoundI::release                          :     Goat4 (000000006F56C908)
+[LOG] SoundI::release                          : release codec. (000000006ABA8308)
+[LOG] Manager::readBank                        : fileversion = 79, compatVersion = 70 (oldest = 44, newest = 80)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 79, compatVersion = 70 (oldest = 44, newest = 80)
+[LOG] SystemI::createSound                     : filename = C:\Users\nicholas.byrne\Documents\HHMaster\Harvest Hands Prototyping\Assets\Audio\Build\Desktop\Enviroment.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000000005C320A78 : node = 000000006A2F6840
+[LOG] SystemI::createSound                     : add node to async list : head = 000000006A4F9D88.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000005C320A78
+[LOG] SystemI::createSoundInternal             :     filename = C:\Users\nicholas.byrne\Documents\HHMaster\Harvest Hands Prototyping\Assets\Audio\Build\Desktop\Enviroment.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 5420928
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 30976
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000006A2F6958
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Format has 1 subsounds.
+[LOG] SystemI::createSoundInternal             :     Create as FMOD_CREATESTREAM
+[LOG] System::createSoundInternal              :     decode buffersize = 19200 : blocksize = 256 : format = 2
+[LOG] SystemI::createSample                    :     mode 02010082 length 19200 samples, lengthbytes 949792
+[LOG] SystemI::createSample                    :     channels = 2
+[LOG] SystemI::createSample                    :     output = 000000005BF7B728
+[LOG] OutputSoftware::createSample             :     lengthpcm 19200, lengthbytes 949792, channels 2, format 2, freq 48000, mode 0201008a
+[LOG] System::createSoundInternal              :     1 subsounds detected.
+[LOG] System::createSoundInternal              :     Seek stream to start
+[LOG] System::createSoundInternal              :     flush stream buffer
+[LOG] System::createSoundInternal              :     flush successful.
+[LOG] System::createSoundInternal              :     switch file handle from small blocking single buffered to large nonblocking doublebuffered.
+[LOG] SystemI::createSoundInternal             :     done.  OpenState now = FMOD_OPENSTATE_READY.
+
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000005C320A78
+[LOG] SoundI::getSubSound                      : sound 000000005C320A78.  Subsound index 0 / 1
+[LOG] SoundI::release                          : rain (000000005C320A78)
+[LOG] SoundI::release                          : remove stream samples. (000000005C320A78)
+[LOG] SoundI::release                          :     rain (0000000040CED6E8)
+[LOG] SoundI::release                          : release subsounds. (000000005C320A78)
+[LOG] SoundI::release                          :     rain (000000005C320F58)
+[LOG] SoundI::release                          : release codec. (000000005C320A78)
+[LOG] Manager::readBank                        : fileversion = 79, compatVersion = 70 (oldest = 44, newest = 80)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 79, compatVersion = 70 (oldest = 44, newest = 80)
+[LOG] SystemI::createSoundInternal             : filename =  : mode 02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 96416
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 5920
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 0000000052C1FB38
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 000007FECAB44C00
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 000007FECAB44BD0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 000007FECAB44CD0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 000007FECAB44D80
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000000001E83FAB8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             : Format has 1 subsounds.
+[LOG] SystemI::createSoundInternal             : Create as FMOD_CREATESAMPLE
+[LOG] SystemI::createSoundInternal             : Multi-sample sound (1 subsounds), create a sample container.
+[LOG] SystemI::createSoundInternal             : creating subsound 0/1
+[LOG] SystemI::createSample                    : mode 02000202 length 192000 samples, lengthbytes 39872
+[LOG] SystemI::createSample                    : channels = 2
+[LOG] SystemI::createSample                    : output = 000000005BF7B728
+[LOG] OutputSoftware::createSample             : lengthpcm 192000, lengthbytes 39872, channels 2, format 2, freq 48000, mode 0200020a
+[LOG] SystemI::createSoundInternal             : No name found in file, use filename.
+[LOG] SystemI::createSoundInternal             : done.  OpenState now = FMOD_OPENSTATE_READY.
+
+[LOG] SoundI::release                          :  (000000006ABA7D48)
+[LOG] SoundI::release                          : release subsounds. (000000006ABA7D48)
+[LOG] SoundI::release                          :     Wolf Howl (000000006F56C908)
+[LOG] SoundI::release                          : release codec. (000000006ABA7D48)
+[LOG] Manager::readBank                        : fileversion = 79, compatVersion = 70 (oldest = 44, newest = 80)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 79, compatVersion = 70 (oldest = 44, newest = 80)
+[LOG] SystemI::createSound                     : filename = C:\Users\nicholas.byrne\Documents\HHMaster\Harvest Hands Prototyping\Assets\Audio\Build\Desktop\Enviroment.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000000005C320A78 : node = 000000006A2F6840
+[LOG] SystemI::createSound                     : add node to async list : head = 000000006A4F9D88.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000005C320A78
+[LOG] SystemI::createSound                     : filename = C:\Users\nicholas.byrne\Documents\HHMaster\Harvest Hands Prototyping\Assets\Audio\Build\Desktop\Enviroment.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     filename = C:\Users\nicholas.byrne\Documents\HHMaster\Harvest Hands Prototyping\Assets\Audio\Build\Desktop\Enviroment.bank : mode 02010082
+[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSound                     :     setdata soundi = 000000005C320F58 : node = 000000006A2F66F0
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 5420928
+[LOG] SystemI::createSound                     :     add node to async list : head = 000000006A4F9D88.  list count = 0
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 30976
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000006A2F6958
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Format has 1 subsounds.
+[LOG] SystemI::createSoundInternal             :     Create as FMOD_CREATESTREAM
+[LOG] System::createSoundInternal              :     decode buffersize = 19200 : blocksize = 256 : format = 2
+[LOG] SystemI::createSample                    :     mode 02010082 length 19200 samples, lengthbytes 1012896
+[LOG] SystemI::createSample                    :     channels = 2
+[LOG] SystemI::createSample                    :     output = 000000005BF7B728
+[LOG] OutputSoftware::createSample             :     lengthpcm 19200, lengthbytes 1012896, channels 2, format 2, freq 48000, mode 0201008a
+[LOG] System::createSoundInternal              :     1 subsounds detected.
+[LOG] System::createSoundInternal              :     Seek stream to start
+[LOG] System::createSoundInternal              :     flush stream buffer
+[LOG] System::createSoundInternal              :     flush successful.
+[LOG] System::createSoundInternal              :     switch file handle from small blocking single buffered to large nonblocking doublebuffered.
+[LOG] SystemI::createSoundInternal             :     done.  OpenState now = FMOD_OPENSTATE_READY.
+
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000005C320A78
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000000005C320F58
+[LOG] SystemI::createSoundInternal             :     filename = C:\Users\nicholas.byrne\Documents\HHMaster\Harvest Hands Prototyping\Assets\Audio\Build\Desktop\Enviroment.bank : mode 02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 5420928
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 30976
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000000006A2F6808
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Format has 1 subsounds.
+[LOG] SystemI::createSoundInternal             :     Create as FMOD_CREATESTREAM
+[LOG] System::createSoundInternal              :     decode buffersize = 19200 : blocksize = 256 : format = 2
+[LOG] SystemI::createSample                    :     mode 02010082 length 19200 samples, lengthbytes 1055328
+[LOG] SystemI::createSample                    :     channels = 2
+[LOG] SystemI::createSample                    :     output = 000000005BF7B728
+[LOG] OutputSoftware::createSample             :     lengthpcm 19200, lengthbytes 1055328, channels 2, format 2, freq 48000, mode 0201008a
+[LOG] System::createSoundInternal              :     1 subsounds detected.
+[LOG] System::createSoundInternal              :     Seek stream to start
+[LOG] System::createSoundInternal              :     flush stream buffer
+[LOG] System::createSoundInternal              :     flush successful.
+[LOG] System::createSoundInternal              :     switch file handle from small blocking single buffered to large nonblocking doublebuffered.
+[LOG] SystemI::createSoundInternal             :     done.  OpenState now = FMOD_OPENSTATE_READY.
+
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000000005C320F58
+[LOG] SoundI::getSubSound                      : sound 000000005C320A78.  Subsound index 0 / 1
+[LOG] SoundI::getSubSound                      : sound 000000005C320F58.  Subsound index 0 / 1
+[LOG] SystemI::createSoundInternal             : filename =  : mode 02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 96416
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 5920
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000001C46FB38
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 000007FECAB44C00
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 000007FECAB44BD0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 000007FECAB44CD0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 000007FECAB44D80
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000000006A009BF8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             : Format has 1 subsounds.
+[LOG] SystemI::createSoundInternal             : Create as FMOD_CREATESAMPLE
+[LOG] SystemI::createSoundInternal             : Multi-sample sound (1 subsounds), create a sample container.
+[LOG] SystemI::createSoundInternal             : creating subsound 0/1
+[LOG] SystemI::createSample                    : mode 02000202 length 192000 samples, lengthbytes 39872
+[LOG] SystemI::createSample                    : channels = 2
+[LOG] SystemI::createSample                    : output = 000000005BF7BA78
+[LOG] OutputSoftware::createSample             : lengthpcm 192000, lengthbytes 39872, channels 2, format 2, freq 48000, mode 0200020a
+[LOG] SystemI::createSoundInternal             : No name found in file, use filename.
+[LOG] SystemI::createSoundInternal             : done.  OpenState now = FMOD_OPENSTATE_READY.
+
 [ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
 [ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
+[LOG] Thread::callback                         : * FMOD mixer thread finished
+[LOG] Thread::close                            : FMOD mixer thread thread destroyed
+[LOG] OutputNoSound::init                      : Initializing.
+[LOG] OutputNoSound::init                      : Done.
+[LOG] Output::start                            : Starting thread that automatically wakes up every 10 ms
+[LOG] Thread::initThread                       : Initializing FMOD mixer thread.  priority 3
+[LOG] Thread::initThread                       : - Stacksize 49152.  Stack pointer 0000000000000000 : usesemaphore = 0 : sleeptime = 10
+[LOG] Thread::callback                         : * FMOD mixer thread started
 [ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[LOG] SoundI::release                          :  (0000000012FF5978)
-[LOG] SoundI::release                          : release subsounds. (0000000012FF5978)
-[LOG] SoundI::release                          :     Death sounds Death sound-1 (0000000067F15928)
-[LOG] SoundI::release                          : release codec. (0000000012FF5978)
-[LOG] SoundI::release                          :  (0000000064F4F8C8)
-[LOG] SoundI::release                          : release subsounds. (0000000064F4F8C8)
-[LOG] SoundI::release                          :     Death sounds Death sound-2 (0000000067F15C48)
-[LOG] SoundI::release                          : release codec. (0000000064F4F8C8)
-[LOG] SoundI::release                          :  (0000000064F4F758)
-[LOG] SoundI::release                          : release subsounds. (0000000064F4F758)
-[LOG] SoundI::release                          :     Death sounds Death sound-3 (0000000067F15AB8)
-[LOG] SoundI::release                          : release codec. (0000000064F4F758)
-[LOG] SoundI::release                          :  (0000000064F4FA38)
-[LOG] SoundI::release                          : release subsounds. (0000000064F4FA38)
-[LOG] SoundI::release                          :     Death sounds Death sound-4 (0000000067F15DD8)
-[LOG] SoundI::release                          : release codec. (0000000064F4FA38)
-[LOG] SoundI::release                          :  (000000005FD1EE88)
-[LOG] SoundI::release                          : release subsounds. (000000005FD1EE88)
-[LOG] SoundI::release                          :     Death sounds Death sound-5 (0000000067F152E8)
-[LOG] SoundI::release                          : release codec. (000000005FD1EE88)
-[LOG] SoundI::release                          :  (0000000012FF67D8)
-[LOG] SoundI::release                          : release subsounds. (0000000012FF67D8)
-[LOG] SoundI::release                          :     Death sounds Death sound-6 (0000000067F14FC8)
-[LOG] SoundI::release                          : release codec. (0000000012FF67D8)
-[LOG] SoundI::release                          :  (0000000012FF6948)
-[LOG] SoundI::release                          : release subsounds. (0000000012FF6948)
-[LOG] SoundI::release                          :     Death sounds Death sound-7 (0000000067F15158)
-[LOG] SoundI::release                          : release codec. (0000000012FF6948)
-[LOG] SoundI::release                          :  (000000005FD1E8C8)
-[LOG] SoundI::release                          : release subsounds. (000000005FD1E8C8)
-[LOG] SoundI::release                          :     Death sounds Death sound (0000000067F15798)
-[LOG] SoundI::release                          : release codec. (000000005FD1E8C8)
-[LOG] SoundI::release                          :  (0000000064F4FBA8)
-[LOG] SoundI::release                          : release subsounds. (0000000064F4FBA8)
-[LOG] SoundI::release                          :     Put down (0000000020456968)
-[LOG] SoundI::release                          : release codec. (0000000064F4FBA8)
+[LOG] Thread::callback                         : * FMOD mixer thread finished
+[LOG] Thread::close                            : FMOD mixer thread thread destroyed
+[LOG] SoundI::release                          :  (000000006ABA7EB8)
+[LOG] SoundI::release                          : release subsounds. (000000006ABA7EB8)
+[LOG] SoundI::release                          :     Wolf Howl (0000000040CED6E8)
+[LOG] SoundI::release                          : release codec. (000000006ABA7EB8)
+[LOG] SoundI::release                          :  (0000000063BED3C8)
+[LOG] SoundI::release                          : release subsounds. (0000000063BED3C8)
+[LOG] SoundI::release                          :     Planting plant 1-Audio (000000004107C618)
+[LOG] SoundI::release                          : release codec. (0000000063BED3C8)
+[LOG] SoundI::release                          :  (0000000063BED538)
+[LOG] SoundI::release                          : release subsounds. (0000000063BED538)
+[LOG] SoundI::release                          :     Planting plant 2-Audio (000000004107C7A8)
+[LOG] SoundI::release                          : release codec. (0000000063BED538)
+[LOG] SoundI::release                          :  (0000000063BED0E8)
+[LOG] SoundI::release                          : release subsounds. (0000000063BED0E8)
+[LOG] SoundI::release                          :     Planting plant 3-Audio (0000000040C510D8)
+[LOG] SoundI::release                          : release codec. (0000000063BED0E8)
+[LOG] SoundI::release                          :  (0000000063BED258)
+[LOG] SoundI::release                          : release subsounds. (0000000063BED258)
+[LOG] SoundI::release                          :     Planting plant 4-Audio (0000000040C51588)
+[LOG] SoundI::release                          : release codec. (0000000063BED258)
+[LOG] SoundI::release                          :  (0000000063BED6A8)
+[LOG] SoundI::release                          : release subsounds. (0000000063BED6A8)
+[LOG] SoundI::release                          :     Planting plant 5-Audio (000000004107C938)
+[LOG] SoundI::release                          : release codec. (0000000063BED6A8)
+[LOG] SoundI::release                          :  (0000000063BED988)
+[LOG] SoundI::release                          : release subsounds. (0000000063BED988)
+[LOG] SoundI::release                          :     Watering can empty (000000006FB7D218)
+[LOG] SoundI::release                          : release codec. (0000000063BED988)
+[LOG] SoundI::release                          :  (0000000063BED818)
+[LOG] SoundI::release                          : release subsounds. (0000000063BED818)
+[LOG] SoundI::release                          :     Watering plant (000000004107CAC8)
+[LOG] SoundI::release                          : release codec. (0000000063BED818)
+[LOG] SoundI::release                          :  (0000000063BECF78)
+[LOG] SoundI::release                          : release subsounds. (0000000063BECF78)
+[LOG] SoundI::release                          :     Pick up (0000000040C51268)
+[LOG] SoundI::release                          : release codec. (0000000063BECF78)
+[LOG] SoundI::release                          :  (0000000063BEDAF8)
+[LOG] SoundI::release                          : release subsounds. (0000000063BEDAF8)
+[LOG] SoundI::release                          :     catapult (0000000040CED3C8)
+[LOG] SoundI::release                          : release codec. (0000000063BEDAF8)
+[LOG] SoundI::release                          :  (0000000063826F98)
+[LOG] SoundI::release                          : release subsounds. (0000000063826F98)
+[LOG] SoundI::release                          :     Put down (0000000040C513F8)
+[LOG] SoundI::release                          : release codec. (0000000063826F98)
 [LOG] Thread::callback                         : * FMOD Studio update thread finished
 [LOG] Thread::close                            : FMOD Studio update thread thread destroyed
 [LOG] Thread::callback                         : * FMOD Studio bank load thread finished
@@ -138,1007 +381,3 @@
 [LOG] SystemI::close                           : Free channel pool.
 [LOG] SystemI::close                           : done.
 
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.
-[ERR] OutputWASAPI::mixerThread                : GetCurrentPadding returned 88890004.

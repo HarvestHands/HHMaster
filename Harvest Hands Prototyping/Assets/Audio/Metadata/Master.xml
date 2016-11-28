@@ -16,9 +16,131 @@
     </object>
     <object class="MixerBusEffectChain" id="{c323b39e-3d82-421c-bfa7-4ec0f6118650}">
         <relationship name="effects">
+            <destination>{64fbc725-44eb-41bf-9120-48cb2d133e25}</destination>
+            <destination>{022cbe33-fa92-46e7-8bfa-49016790cadb}</destination>
+            <destination>{98330385-e7bb-468d-ba31-3f94b21ddb6b}</destination>
             <destination>{22e5603d-50c2-4291-b5d1-643627b71a91}</destination>
         </relationship>
     </object>
     <object class="MixerBusPanner" id="{b11b6aa8-3d15-400d-a969-5b3c1850efec}"/>
+    <object class="CompressorEffect" id="{64fbc725-44eb-41bf-9120-48cb2d133e25}">
+        <property name="threshold">
+            <value>-9</value>
+        </property>
+        <property name="attackTime">
+            <value>34</value>
+        </property>
+        <property name="releaseTime">
+            <value>80</value>
+        </property>
+    </object>
+    <object class="PluginEffect" id="{022cbe33-fa92-46e7-8bfa-49016790cadb}">
+        <relationship name="plugin">
+            <destination>{c968eb83-6440-4a4f-8476-0d3f61035a7f}</destination>
+        </relationship>
+    </object>
+    <object class="LimiterEffect" id="{98330385-e7bb-468d-ba31-3f94b21ddb6b}">
+        <property name="ceiling">
+            <value>-2.89999986</value>
+        </property>
+    </object>
     <object class="MixerBusFader" id="{22e5603d-50c2-4291-b5d1-643627b71a91}"/>
+    <object class="Plugin" id="{c968eb83-6440-4a4f-8476-0d3f61035a7f}">
+        <property name="identifier">
+            <value>FMOD Transceiver</value>
+        </property>
+        <property name="uiName">
+            <value>Transceiver</value>
+        </property>
+        <relationship name="pluginParameters">
+            <destination>{979b5cf6-fa17-424b-92e1-745c35cec1bb}</destination>
+            <destination>{4a7a44ad-82c7-4251-bbe6-6d05f1fca309}</destination>
+            <destination>{115a3219-d993-4b2c-a986-33d0f55a407e}</destination>
+            <destination>{5a7ffee2-2156-409f-8fae-f247dde39093}</destination>
+            <destination>{afe31ad3-73e7-4fcd-a15b-736029ce27c4}</destination>
+        </relationship>
+    </object>
+    <object class="BoolPluginParameter" id="{979b5cf6-fa17-424b-92e1-745c35cec1bb}">
+        <property name="name">
+            <value>Transmit mode</value>
+        </property>
+        <property name="units"/>
+        <property name="defaultValue">
+            <value>false</value>
+        </property>
+        <property name="value">
+            <value>false</value>
+        </property>
+    </object>
+    <object class="FloatPluginParameter" id="{4a7a44ad-82c7-4251-bbe6-6d05f1fca309}">
+        <property name="name">
+            <value>Level</value>
+        </property>
+        <property name="units">
+            <value>dB</value>
+        </property>
+        <property name="curve">
+            <value>LinearPiecewiseCurveStrategy{(-42.000000,-80.000000)(-39.000000,-60.000000)(-36.000000,-50.000000)(-32.000000,-40.000000)(-27.000000,-30.000000)(-20.000000,-20.000000)(-10.000000,-10.000000)(0.000000,0.000000)(10.000000,10.000000)}</value>
+        </property>
+        <property name="defaultValue">
+            <value>0</value>
+        </property>
+        <property name="value">
+            <value>0</value>
+        </property>
+    </object>
+    <object class="IntPluginParameter" id="{115a3219-d993-4b2c-a986-33d0f55a407e}">
+        <property name="name">
+            <value>Channel</value>
+        </property>
+        <property name="units"/>
+        <property name="minimumValue">
+            <value>0</value>
+        </property>
+        <property name="maximumValue">
+            <value>31</value>
+        </property>
+        <property name="defaultValue">
+            <value>0</value>
+        </property>
+        <property name="value">
+            <value>0</value>
+        </property>
+        <property name="valueNames"/>
+    </object>
+    <object class="IntPluginParameter" id="{5a7ffee2-2156-409f-8fae-f247dde39093}">
+        <property name="name">
+            <value>Speaker Mode</value>
+        </property>
+        <property name="units"/>
+        <property name="minimumValue">
+            <value>-1</value>
+        </property>
+        <property name="maximumValue">
+            <value>2</value>
+        </property>
+        <property name="defaultValue">
+            <value>-1</value>
+        </property>
+        <property name="value">
+            <value>-1</value>
+        </property>
+        <property name="valueNames">
+            <value>Auto</value>
+            <value>Mono</value>
+            <value>Stereo</value>
+            <value>Surround</value>
+        </property>
+    </object>
+    <object class="DataPluginParameter" id="{afe31ad3-73e7-4fcd-a15b-736029ce27c4}">
+        <property name="name">
+            <value>Overall Gain</value>
+        </property>
+        <property name="units"/>
+        <property name="dataType">
+            <value>-1</value>
+        </property>
+        <property name="defaultValue"/>
+        <property name="value"/>
+    </object>
 </objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{c5a3db92-07ed-49fb-8a6e-c4d5520d5aa6}">
+        <property name="assetPath">
+            <value>Rooster Call.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>2.1250113378684805</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{336d1a56-541b-496c-86dd-50450524a222}</destination>
+        </relationship>
+    </object>
+</objects>

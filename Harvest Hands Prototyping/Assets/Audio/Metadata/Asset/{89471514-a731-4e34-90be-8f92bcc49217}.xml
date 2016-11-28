@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="EncodableAsset" id="{89471514-a731-4e34-90be-8f92bcc49217}">
+        <property name="assetPath">
+            <value>Hurt sounds/</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{336d1a56-541b-496c-86dd-50450524a222}</destination>
+        </relationship>
+    </object>
+</objects>
