@@ -38,10 +38,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public List<string> footstepSounds;
         private int lastPlayedFootstep = 0;
 
-        FMOD.Studio.ParameterInstance walking;
+        [FMODUnity.EventRef]
+        public string footstepFMODSound;
         FMOD.Studio.EventInstance footsteps;
+        FMOD.Studio.ParameterInstance walkingSpeedParam;
 
-		public GameObject gameManager;
+        [FMODUnity.EventRef]
+        public string LandingSoundFMOD;
+
+        public GameObject gameManager;
 		public bool allowInput = true;
 
         private Camera m_Camera;
@@ -49,7 +54,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         private float m_YRotation;
         private Vector2 m_Input;
         private Vector3 m_MoveDir = Vector3.zero;
-        private CharacterController m_CharacterController;
+        public CharacterController m_CharacterController;
         private CollisionFlags m_CollisionFlags;
         private bool m_PreviouslyGrounded;
         private Vector3 m_OriginalCameraPosition;
@@ -77,10 +82,14 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
-            
+
+            footsteps = FMODUnity.RuntimeManager.CreateInstance(footstepFMODSound);
+            footsteps.getParameter("speed", out walkingSpeedParam);
+            footsteps.start();
+
             //walking = FMOD.Studio.
 
-            if(!isLocalPlayer)
+            if (!isLocalPlayer)
             {
                 m_Camera.enabled = false;
             }
@@ -95,6 +104,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
+            //walkingSpeedParam.setValue(m_CharacterController.velocity.magnitude);
             if (!isLocalPlayer)
             {
                 return;
@@ -137,8 +147,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void PlayLandingSound()
         {
-            m_AudioSource.clip = m_LandSound;
-            m_AudioSource.Play();
+            //m_AudioSource.clip = m_LandSound;
+            //m_AudioSource.Play();
+            FMODUnity.RuntimeManager.PlayOneShot(LandingSoundFMOD, transform.position);
             m_NextStep = m_StepCycle + .5f;
         }
 
@@ -257,26 +268,27 @@ namespace UnityStandardAssets.Characters.FirstPerson
             {
                 return;
             }
-            // pick & play a random footstep sound from the array,
-            // excluding sound at index 0
-            int n = Random.Range(1, m_FootstepSounds.Length);
-            m_AudioSource.clip = m_FootstepSounds[n];
-            m_AudioSource.PlayOneShot(m_AudioSource.clip);
-            // move picked sound to index 0 so it's not picked next time
-            m_FootstepSounds[n] = m_FootstepSounds[0];
-            m_FootstepSounds[0] = m_AudioSource.clip;
+
+            //// pick & play a random footstep sound from the array,
+            //// excluding sound at index 0
+            //int n = Random.Range(1, m_FootstepSounds.Length);
+            //m_AudioSource.clip = m_FootstepSounds[n];
+            //m_AudioSource.PlayOneShot(m_AudioSource.clip);
+            //// move picked sound to index 0 so it's not picked next time
+            //m_FootstepSounds[n] = m_FootstepSounds[0];
+            //m_FootstepSounds[0] = m_AudioSource.clip;
 
             //if there is sound     //TO FIX TOFIX
-            if (footstepSounds.Count > 0)
-            {
-                int i = Random.Range(0, footstepSounds.Count - 1);
-                //attempt to not repeat same footstep
-                if (i == lastPlayedFootstep)
-                    i = Random.Range(0, footstepSounds.Count - 1);
-            
-                //Play Sound
-                FMODUnity.RuntimeManager.PlayOneShot(footstepSounds[i], transform.position);
-            }
+            //if (footstepSounds.Count > 0)
+            //{
+            //    int i = Random.Range(0, footstepSounds.Count - 1);
+            //    //attempt to not repeat same footstep
+            //    if (i == lastPlayedFootstep)
+            //        i = Random.Range(0, footstepSounds.Count - 1);
+            //
+            //    //Play Sound
+            //    FMODUnity.RuntimeManager.PlayOneShot(footstepSounds[i], transform.position);
+            //}
             
 
         }
